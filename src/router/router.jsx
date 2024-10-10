@@ -15,7 +15,7 @@ import RequestDetailPage from "../pages/RequestDetailPage";
 import RequestsPage from "../pages/RequestsPage";
 
 const userLoggedIn = true;
-const userHasAvatar = true;
+
 
 const router = createBrowserRouter([
 	{
