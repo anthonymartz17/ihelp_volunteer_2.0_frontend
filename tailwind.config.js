@@ -8,7 +8,11 @@ export default {
 				secondary: "#FF715B",
 				tertiary: "#523F38",
 				dark: "#4C5454",
-				light: "#FFFFFF",
+				light: "#edeeee",
+				lightest: "#FFFFFF",
+			},
+			shadow: {
+				input: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
 			},
 		},
 	},
