@@ -16,7 +16,7 @@ export default function Login() {
 				>
 					<path
 						d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-						class="shape-fill"
+						className="shape-fill"
 					></path>
 				</svg>
 			</div>
@@ -31,7 +31,7 @@ export default function Login() {
 							type="email"
 							name="email"
 							id="email"
-							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2"
+							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2 input-shadow"
 						/>
 					</div>
 					<div>
@@ -42,7 +42,7 @@ export default function Login() {
 							type="password"
 							name="password"
 							id="password"
-							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2 shadow-input"
+							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2 input-shadow"
 						/>
 					</div>
 					<button className="label-text bg-secondary w-full rounded py-3 text-lightest">

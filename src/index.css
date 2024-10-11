@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 #root {
-	--primary: "#1EA896";
-	--secondary: "#FF715B";
-	--tertiary: "#523F38";
-	--dark: "#4C5454";
-	--light: "#FFFFFF";
+	--primary: #1ea896;
+	--secondary: #ff715b;
+	--tertiary: #523f38;
+	--dark: #4c5454;
+	--light: #ffffff;
 }
 * {
 	font-family: "Poppins", sans-serif;
@@ -31,12 +31,23 @@
 	font-style: normal;
 }
 
-/* .wave{
-	position: absolute;
-	bottom: 0px;
- margin-bottom: -1px;
-	left: 0;
-	width: 100%;
-	overflow: hidden;
+.input-shadow {
+	box-shadow: #523f387a 1.95px 2.5px 0px;
+}
 
-} */
+
+.mobile_menu_backdrop {
+	backdrop-filter: blur(2px);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 150ms ease-in-out;
+}
+.mobile_menu_backdrop.open {
+	visibility: visible;
+	opacity: 1;
+}
