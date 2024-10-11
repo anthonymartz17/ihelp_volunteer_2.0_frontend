@@ -13,14 +13,14 @@ import LeaderboardPage from "../pages//LeaderboardPage";
 import QuestPage from "../pages/QuestPage";
 import RequestDetailPage from "../pages/RequestDetailPage";
 import RequestsPage from "../pages/RequestsPage";
+import AccountPage from "../pages/AccountPage";
 
-const userLoggedIn = false;
-
+const userLoggedIn = true;
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Navigate to={userLoggedIn ? "/requests" : "/login"} />,
+		element: <Navigate to={userLoggedIn ? "/account" : "/login"} />,
 	},
 
 	{
@@ -28,36 +28,42 @@ const router = createBrowserRouter([
 		element: <LoginPage />,
 	},
 	{
-		path: "/requests",
-		element: userLoggedIn ? <RequestsPage /> : <LoginPage />,
-	},
-	{
-		path: "/requests/:id",
-		element: userLoggedIn ? <RequestDetailPage /> : <LoginPage />,
-	},
-	{
-		path: "/quest/request/:id/task/:id",
-		element: userLoggedIn ? <QuestPage /> : <LoginPage />,
-	},
-	{
-		path: "/avatar-gallery",
-		element: <AvatarGalleryPage />,
-	},
-	{
-		path: "/profile",
-		element: userLoggedIn ? <ProfilePage /> : <LoginPage />,
-	},
-	{
-		path: "/commitments",
-		element: userLoggedIn ? <Commitments /> : <LoginPage />,
-	},
-	{
-		path: "/leaderboard",
-		element: userLoggedIn ? <LeaderboardPage /> : <LoginPage />,
-	},
-	{
-		path: "/help",
-		element: userLoggedIn ? <HelpPage /> : <LoginPage />,
+		path: "/account",
+		element: <AccountPage />,
+		children: [
+			{
+				path: "",
+				element: userLoggedIn ? <RequestsPage /> : <LoginPage />,
+			},
+			{
+				path: "requests/:id",
+				element: userLoggedIn ? <RequestDetailPage /> : <LoginPage />,
+			},
+			{
+				path: "quest/request/:id/task/:id",
+				element: userLoggedIn ? <QuestPage /> : <LoginPage />,
+			},
+			{
+				path: "avatar-gallery",
+				element: <AvatarGalleryPage />,
+			},
+			{
+				path: "profile",
+				element: userLoggedIn ? <ProfilePage /> : <LoginPage />,
+			},
+			{
+				path: "commitments",
+				element: userLoggedIn ? <Commitments /> : <LoginPage />,
+			},
+			{
+				path: "leaderboard",
+				element: userLoggedIn ? <LeaderboardPage /> : <LoginPage />,
+			},
+			{
+				path: "help",
+				element: userLoggedIn ? <HelpPage /> : <LoginPage />,
+			},
+		],
 	},
 	{
 		path: "*",
