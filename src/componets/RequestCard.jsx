@@ -7,6 +7,7 @@ import petCareIcon from "../assets/icons/pet_care_icon.svg";
 import variousIcon from "../assets/icons/various_icon.svg";
 import calendar from "../assets/icons/calendar.svg";
 import coin from "../assets/icons/coin.svg";
+import mealPrep from "../assets/icons/mealprep_icon.svg";
 
 const categoryIcons = {
 	1: errandIcon,
@@ -14,13 +15,14 @@ const categoryIcons = {
 	3: technologyIcon,
 	4: petCareIcon,
 	5: variousIcon,
+	6: mealPrep,
 };
 
 const cardColors = ["tertiary", "secondary", "dark"];
 
 export default function Request({ request, index }) {
 	return (
-		<Link>
+		<Link to={`/account/requests/${request.id}`}>
 			<div
 				className={`bg-${
 					cardColors[index % cardColors.length]

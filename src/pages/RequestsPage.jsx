@@ -1,5 +1,7 @@
-import RequestCard from "../componets/RequestCard";
+import { useState, useEffect } from "react";
 
+import RequestCard from "../componets/RequestCard";
+import FiltersMenu from "../componets/FiltersMenu";
 /*
 task status:
 1. open
@@ -95,13 +97,16 @@ const requests = [
 ];
 
 export default function RequestsPage() {
+	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div className="mt-10 ">
-			<div className="flex justify-between items-center mb-4 p-4 ">
-				<h1 className="subtitle-heading text-lightest mb-6">Requests</h1>
+			<div className="flex justify-between items-center  px-4 pb-2 ">
+				<h1 className="subtitle-heading text-lightest ">Requests</h1>
 				<div className=" text-dark flex justify-between items-center bg-light w-[100px] rounded-lg p-3 input-shadow">
-					<span class="material-symbols-outlined">tune</span>
-					<span className="label-text">Filters</span>
+					<span className="material-symbols-outlined">tune</span>
+					<span onClick={() => setIsOpen(true)} className="label-text">
+						Filters
+					</span>
 				</div>
 			</div>
 
@@ -112,6 +117,7 @@ export default function RequestsPage() {
 					</li>
 				))}
 			</ul>
+			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
 		</div>
 	);
 }

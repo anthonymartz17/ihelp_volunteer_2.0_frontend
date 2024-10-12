@@ -37,9 +37,9 @@
 .card-shadow {
 	box-shadow: #523f387a 3px 4px 0px;
 }
-
-
-
+.numbers-shadow {
+	text-shadow: rgba(64, 64, 64, 0.5) 4px 4px 3px;
+}
 .mobile_menu_backdrop {
 	backdrop-filter: blur(2px);
 	position: fixed;
@@ -54,4 +54,56 @@
 .mobile_menu_backdrop.open {
 	visibility: visible;
 	opacity: 1;
+}
+
+.slider-container {
+	width: 300px;
+	margin: 20px;
+}
+
+.slider-values {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.slider {
+	position: relative;
+	width: 100%;
+}
+
+input[type="range"] {
+	position: absolute;
+	width: 100%;
+	pointer-events: none;
+	appearance: none;
+	background: transparent;
+}
+
+.thumb {
+	pointer-events: all;
+}
+
+.thumb::-webkit-slider-thumb {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background-color: #007bff;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.slider-track {
+	position: absolute;
+	height: 6px;
+	background-color: #ddd;
+	width: 100%;
+	z-index: 1;
+}
+
+.slider-range {
+	position: absolute;
+	height: 6px;
+	background-color: #007bff;
+	z-index: 2;
 }
