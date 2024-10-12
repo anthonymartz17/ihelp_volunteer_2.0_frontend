@@ -102,15 +102,15 @@ export default function RequestsPage() {
 		<div className="mt-10 ">
 			<div className="flex justify-between items-center  px-4 pb-2 ">
 				<h1 className="subtitle-heading text-lightest ">Requests</h1>
-				<div className=" text-dark flex justify-between items-center bg-light w-[100px] rounded-lg p-3 input-shadow">
+				<div className=" text-dark flex justify-between items-center bg-light w-[100px] rounded-lg p-3 input-shadow cursor-pointer">
 					<span className="material-symbols-outlined">tune</span>
-					<span onClick={() => setIsOpen(true)} className="label-text">
+					<span onClick={() => setIsOpen(true)} className="label-text ">
 						Filters
 					</span>
 				</div>
 			</div>
 
-			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto h-[71.5vh] rounded-lg p-1 no-scrollbar p-4 ">
+			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto h-[71.5vh] rounded-lg p-4 no-scrollbar">
 				{requests.map((request, index) => (
 					<li key={request.id}>
 						<RequestCard request={request} index={index} />

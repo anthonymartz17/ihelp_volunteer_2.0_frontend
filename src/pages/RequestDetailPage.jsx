@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
 import cleaningIcon from "../assets/icons/cleaning_icon_dark.svg";
@@ -11,13 +12,20 @@ import calendar from "../assets/icons/calendar_primary.svg";
 import clock from "../assets/icons/clock.svg";
 import location from "../assets/icons/location.svg";
 
+const currentUser = {
+	id: 10,
+	username: "user123",
+	avatar_url:
+		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
+};
+
 const request = {
 	id: 1,
 	category: "errands",
 	category_id: 1,
 	date: "2023-06-01",
 	time: "10:00 AM",
-	points: 30,
+	points: 130,
 	address: {
 		street: "123 Main St",
 		city: "Amityville",
@@ -32,27 +40,42 @@ const request = {
 			description: "Pick up groceries from the supermarket.",
 			status: "assigned",
 			status_id: 2,
-			points: 10,
+			volunteer_id: 1,
+			volunteer_username: "Incognito23",
+			volunteer_avatar_url:
+				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+			points: 55,
 		},
 		{
 			id: 2,
 			description: "Return a package to the post office.",
 			status: "open",
-			points: 10,
+			points: 25,
+			volunteer_id: null,
+
+			volunteer_avatar_url: null,
+			status_id: 1,
 		},
 		{
 			id: 3,
 			description: "Pick up dry cleaning from the local shop.",
 			status: "open",
+			volunteer_id: null,
+			volunteer_username: null,
+			volunteer_avatar_url: null,
 			status_id: 1,
-			points: 5,
+			points: 25,
 		},
 		{
 			id: 4,
 			description: "Buy flowers from the florist for a special occasion.",
 			status: "assigned",
+			volunteer_id: 2,
+			volunteer_username: "cloud99",
+			volunteer_avatar_url:
+				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
 			status_id: 2,
-			points: 7,
+			points: 25,
 		},
 	],
 };
@@ -66,6 +89,21 @@ const categoryIcons = {
 };
 
 export default function RequestDetailPage() {
+	const [wasTaskSelected, setWasTaskSelected] = useState(false);
+	// const [selectedTask, setSelectedTask] = useState(null);
+
+	function selectTask(task_idx) {
+		setWasTaskSelected((prev) => !prev);
+
+		if (request.tasks[task_idx].volunteer_id) {
+			request.tasks[task_idx].volunteer_id = null;
+			request.tasks[task_idx].volunteer_avatar_url = null;
+		} else {
+			request.tasks[task_idx].volunteer_id = currentUser.id;
+			request.tasks[task_idx].volunteer_avatar_url = currentUser.avatar_url;
+		}
+	}
+
 	return (
 		<div className=" text-dark">
 			<div className="flex items-center text-light gap-3 mb-10 p-4">
@@ -87,7 +125,7 @@ export default function RequestDetailPage() {
 						</p>
 					</div>
 					<p className="body-text flex items-center gap-">
-						<img className="w-6" src={coin} alt="coin" />
+						<img className="w-8" src={coin} alt="coin" />
 						<span className="title-heading">{request.points} Pts</span>
 					</p>
 				</div>
@@ -113,16 +151,70 @@ export default function RequestDetailPage() {
 				</div>
 			</div>
 			<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
-			<ul className=" h-96 max-h-96 overflow-y-auto px-4 ">
+			<ul className=" h-96  px-4 ">
 				{request.tasks.map((task, idx) => {
 					return (
-						<li key={task.id} className="mb-4">
-							<div className="flex justify-between items-center gap-2">
-								<p className="text-3xl label-text  numbers-shadow">{idx + 1}</p>
-								<p className="bg-light card-shadow rounded-lg p-2 flex flex-col gap-6 body-text flex-1 ">
-									{task.description}
-								</p>
-							</div>
+						<li key={task.id} className="mb-4 relative ">
+							{task.volunteer_avatar_url && (
+								<img
+									src={task.volunteer_avatar_url}
+									alt=""
+									className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"
+								/>
+							)}
+							{task.volunteer_id === currentUser.id ? (
+								<div
+									onClick={() => {
+										selectTask(idx);
+									}}
+									className="flex cursor-pointer items-center gap-2 "
+								>
+									<p className="text-3xl label-text  numbers-shadow">
+										{idx + 1}
+									</p>
+									<div
+										className={`card-shadow rounded-lg p-2 flex  gap-1 body-text w-[100%] ${
+											task.volunteer_id === currentUser.id
+												? "bg-dark text-lightest"
+												: "bg-light text-dark"
+										}`}
+									>
+										<p className="">{task.description}</p>
+										<p className="body-text flex items-center gap-1  w-[20%]">
+											<img className="w-4" src={coin} alt="coin" />
+
+											<span className="body-text text-sm label-text">
+												{task.points} Pts
+											</span>
+										</p>
+									</div>
+								</div>
+							) : (
+								<div
+									onClick={() => {
+										selectTask(idx);
+									}}
+									className={`flex cursor-pointer items-center gap-2 ${
+										task.status_id !== 1 || wasTaskSelected
+											? "opacity-40 pointer-events-none"
+											: ""
+									}`}
+								>
+									<p className="text-3xl label-text  numbers-shadow">
+										{idx + 1}
+									</p>
+									<div className="bg-light card-shadow rounded-lg p-2 flex  gap-1 body-text w-[100%]">
+										<p className="">{task.description}</p>
+										<p className="body-text flex items-center gap-1  w-[20%]">
+											<img className="w-4" src={coin} alt="coin" />
+
+											<span className="body-text text-sm label-text">
+												{task.points} Pts
+											</span>
+										</p>
+									</div>
+								</div>
+							)}
 						</li>
 					);
 				})}
