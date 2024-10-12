@@ -34,6 +34,10 @@
 .input-shadow {
 	box-shadow: #523f387a 1.95px 2.5px 0px;
 }
+.card-shadow {
+	box-shadow: #523f387a 3px 4px 0px;
+}
+
 
 
 .mobile_menu_backdrop {
