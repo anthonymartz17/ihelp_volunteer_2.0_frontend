@@ -71,7 +71,7 @@ export default function ProfilePage() {
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 		total_points: 100,
 		start_date: "jun, 2023",
-		badges: [1, 4, 5], //array of badge ids
+		badges: [1, 4, 5], //array of earned badge ids
 		rewards: [
 			{
 				id: 1,
@@ -95,7 +95,7 @@ export default function ProfilePage() {
 		],
 	};
 	return (
-		<div className="p-4 mt-10 grid gap-8">
+		<div className="p-4 mt-5 grid gap-8">
 			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
 			<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-55 border-lightest   border-[1px] rounded-2xl p-4 ">
 				<div className="flex items-center gap-4">
@@ -121,6 +121,7 @@ export default function ProfilePage() {
 					{badgelist.map((badge) => {
 						return (
 							<li
+								key={badge.id}
 								className={`flex items-center gap-4 ${
 									!userBadges[badge.id] ? "opacity-25" : ""
 								}`}
@@ -147,12 +148,12 @@ export default function ProfilePage() {
 								return (
 									<li className="flex flex-col items-center gap-2 relative">
 										<img
-											className="w-24"
+											className="w-28"
 											src={rewardShape}
 											alt={`${reward.reward_name} reward`}
 										/>
 										<img
-											className="w-26 h-24 object-contain absolute -top-3 -left-2" // Adjust the size here
+											className="w-26 h-24 object-contain absolute top-0 -left-2" // Adjust the size here
 											src={reward.reward_icon_url}
 											alt={`${reward.reward_name} reward`}
 										/>

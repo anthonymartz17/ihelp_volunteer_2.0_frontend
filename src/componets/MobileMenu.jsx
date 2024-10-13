@@ -40,7 +40,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 	return (
 		<>
 			<nav
-				className={`z-20 bg-tertiary md:hidden flex flex-col fixed top-0 right-0  h-full duration-300 z-10 w-3/4 transform ${
+				className={`z-20 bg-tertiary md:hidden flex flex-col fixed top-0 right-0  h-full duration-300  w-3/4 transform ${
 					isOpen ? "translate-x-0 shadow-left" : "translate-x-full"
 				} transition-transform`}
 			>
@@ -82,7 +82,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 			</nav>
 			<div
 				onClick={() => onSetIsOpen(false)}
-				className={`md:hidden mobile_menu_backdrop ${isOpen ? "open" : ""}`}
+				className={`md:hidden mobile_menu_backdrop z-10 ${isOpen ? "open" : ""}`}
 			></div>
 		</>
 	);

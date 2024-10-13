@@ -25,6 +25,7 @@ const router = createBrowserRouter([
 
 	{
 		path: "/login",
+		meta: { name: "Login" },
 		element: <LoginPage />,
 	},
 	{
@@ -33,40 +34,49 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "",
+				meta: { name: "Requests" },
 				element: userLoggedIn ? <RequestsPage /> : <LoginPage />,
 			},
 			{
 				path: "requests/:id",
+				name: "Request Detail",
 				element: userLoggedIn ? <RequestDetailPage /> : <LoginPage />,
 			},
 			{
 				path: "quest/request/:id/task/:id",
+				name: "Quest",
 				element: userLoggedIn ? <QuestPage /> : <LoginPage />,
 			},
 			{
 				path: "avatar-gallery",
+				name: "Avatar Gallery",
 				element: <AvatarGalleryPage />,
 			},
 			{
 				path: "profile",
+				name: "Profile",
 				element: userLoggedIn ? <ProfilePage /> : <LoginPage />,
 			},
 			{
 				path: "commitments",
+				name: "Commitments",
 				element: userLoggedIn ? <Commitments /> : <LoginPage />,
 			},
 			{
 				path: "leaderboard",
+				name: "Leaderboard",
 				element: userLoggedIn ? <LeaderboardPage /> : <LoginPage />,
 			},
 			{
 				path: "help",
+				name: "Help",
 				element: userLoggedIn ? <HelpPage /> : <LoginPage />,
 			},
 		],
 	},
 	{
 		path: "*",
+		name: "Not Found",
 		element: <NotFound />,
 	},
 ]);
