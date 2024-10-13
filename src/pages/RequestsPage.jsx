@@ -110,7 +110,7 @@ export default function RequestsPage() {
 				</div>
 			</div>
 
-			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto h-[71.5vh] rounded-lg p-4 no-scrollbar">
+			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto h-[80vh] rounded-lg p-4 no-scrollbar">
 				{requests.map((request, index) => (
 					<li key={request.id}>
 						<RequestCard request={request} index={index} />

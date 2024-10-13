@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
 import cleaningIcon from "../assets/icons/cleaning_icon_dark.svg";
@@ -19,66 +19,6 @@ const currentUser = {
 		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 };
 
-const request = {
-	id: 1,
-	category: "errands",
-	category_id: 1,
-	date: "2023-06-01",
-	time: "10:00 AM",
-	points: 130,
-	address: {
-		street: "123 Main St",
-		city: "Amityville",
-		state: "NY",
-		zip: "11701",
-	},
-	description: "Need someone to pick up groceries and drop them off at home.",
-
-	tasks: [
-		{
-			id: 1,
-			description: "Pick up groceries from the supermarket.",
-			status: "assigned",
-			status_id: 2,
-			volunteer_id: 1,
-			volunteer_username: "Incognito23",
-			volunteer_avatar_url:
-				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
-			points: 55,
-		},
-		{
-			id: 2,
-			description: "Return a package to the post office.",
-			status: "open",
-			points: 25,
-			volunteer_id: null,
-
-			volunteer_avatar_url: null,
-			status_id: 1,
-		},
-		{
-			id: 3,
-			description: "Pick up dry cleaning from the local shop.",
-			status: "open",
-			volunteer_id: null,
-			volunteer_username: null,
-			volunteer_avatar_url: null,
-			status_id: 1,
-			points: 25,
-		},
-		{
-			id: 4,
-			description: "Buy flowers from the florist for a special occasion.",
-			status: "assigned",
-			volunteer_id: 2,
-			volunteer_username: "cloud99",
-			volunteer_avatar_url:
-				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-			status_id: 2,
-			points: 25,
-		},
-	],
-};
 const categoryIcons = {
 	1: errandIcon,
 	2: cleaningIcon,
@@ -90,7 +30,72 @@ const categoryIcons = {
 
 export default function RequestDetailPage() {
 	const [wasTaskSelected, setWasTaskSelected] = useState(false);
-	// const [selectedTask, setSelectedTask] = useState(null);
+	const [request, setRequest] = useState({
+		id: 1,
+		category: "errands",
+		category_id: 1,
+		date: "2023-06-01",
+		time: "10:00 AM",
+		points: 130,
+		address: {
+			street: "123 Main St",
+			city: "Amityville",
+			state: "NY",
+			zip: "11701",
+		},
+		description: "Need someone to pick up groceries and drop them off at home.",
+
+		tasks: [
+			{
+				id: 1,
+				description: "Pick up groceries from the supermarket.",
+				status: "assigned",
+				status_id: 2,
+				volunteer_id: 1,
+				volunteer_username: "Incognito23",
+				volunteer_avatar_url:
+					"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+				points: 55,
+			},
+			{
+				id: 2,
+				description: "Return a package to the post office.",
+				status: "open",
+				points: 25,
+				volunteer_id: null,
+
+				volunteer_avatar_url: null,
+				status_id: 1,
+			},
+			{
+				id: 3,
+				description: "Pick up dry cleaning from the local shop.",
+				status: "open",
+				volunteer_id: null,
+				volunteer_username: null,
+				volunteer_avatar_url: null,
+				status_id: 1,
+				points: 25,
+			},
+			{
+				id: 4,
+				description: "Buy flowers from the florist for a special occasion.",
+				status: "assigned",
+				volunteer_id: 2,
+				volunteer_username: "cloud99",
+				volunteer_avatar_url:
+					"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
+				status_id: 2,
+				points: 25,
+			},
+		],
+	});
+	const [showUsername, setShowUsername] = useState(false);
+	const [selectedAvatarId, setSelectedAvatarId] = useState(null);
+
+	function toggleUsername(id) {
+		setSelectedAvatarId((prevId) => (prevId ? null : id));
+	}
 
 	function selectTask(task_idx) {
 		setWasTaskSelected((prev) => !prev);
@@ -155,8 +160,21 @@ export default function RequestDetailPage() {
 				{request.tasks.map((task, idx) => {
 					return (
 						<li key={task.id} className="mb-4 relative ">
+							{selectedAvatarId && selectedAvatarId === task.id && (
+								<div
+									onClick={() => toggleUsername()}
+									className="absolute -top-8 flex  gap-2 pl-2 right-6 bg-dark  rounded-lg border-2 border-lightest "
+								>
+									<p className="text-lightest">{task.volunteer_username}</p>
+									<span className="material-symbols-outlined bg-light   text-dark">
+										cancel
+									</span>
+								</div>
+							)}
 							{task.volunteer_avatar_url && (
 								<img
+									id={task.id}
+									onClick={() => toggleUsername(task.id)}
 									src={task.volunteer_avatar_url}
 									alt=""
 									className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"

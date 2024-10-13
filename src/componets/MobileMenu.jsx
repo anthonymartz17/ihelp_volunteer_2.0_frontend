@@ -40,7 +40,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 	return (
 		<>
 			<nav
-				className={`bg-tertiary md:hidden flex flex-col fixed top-0 right-0  h-full duration-300 z-10 w-3/4 transform ${
+				className={`z-20 bg-tertiary md:hidden flex flex-col fixed top-0 right-0  h-full duration-300 z-10 w-3/4 transform ${
 					isOpen ? "translate-x-0 shadow-left" : "translate-x-full"
 				} transition-transform`}
 			>
@@ -58,7 +58,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 						<li key={index}>
 							<Link
 								to={item.link}
-								className="flex items-baseline py-3 gap-1 mb-1 body-text"
+								className="flex items-center py-3 gap-3 mb-3 label-text"
 								onClick={() => onSetIsOpen(false)}
 							>
 								<img className="w-6" src={item.icon} alt={item.title} />
