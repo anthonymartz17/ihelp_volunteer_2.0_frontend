@@ -7,7 +7,7 @@ export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<header className="text-light p-4 flex justify-between items-center">
+		<header className="text-light p-4 flex justify-between items-center ">
 			{/* <img src={saamLogo} alt="app logo" className="w-20" /> */}{" "}
 			<p className="subtitle-heading">LOGO</p>
 			<span
