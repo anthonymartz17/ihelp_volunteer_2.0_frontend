@@ -7,7 +7,7 @@ export default function ConfirmationAlert({
 	onSetIsAlertOpen,
 }) {
 	return (
-		<div className="z-20 fixed bottom-0 left-0  top-0 right-0 bg-black  bg-opacity-75 p-2 flex items-center justify-center">
+		<div className="z-20  fixed bottom-0 left-0  top-0 right-0 bg-black  bg-opacity-75 p-4 flex items-center justify-center">
 			<div className="card-shadow bg-lightest rounded-lg p-4 w-full max-w-md mx-auto">
 				<img
 					src={commitIcon}

@@ -120,10 +120,6 @@ export default function RequestDetailPage() {
 		} else {
 			setIsError(true);
 			setAlertMessage("Oops! A task must be selected first.");
-
-			// setTimeout(() => {
-			// 	setIsError(false);
-			// }, 5000);
 		}
 	}
 	function handleCommitToTask() {
@@ -139,7 +135,7 @@ export default function RequestDetailPage() {
 				</Link>
 				<h2 className="subtitle-heading text-lightest ">Request</h2>
 			</div>
-			<div className="bg-light card-shadow rounded-lg p-4 mx-4 flex flex-col gap-6 mb-10">
+			<div className="bg-light card-shadow rounded-lg p-3 mx-4 flex flex-col gap-6 mb-10">
 				<div className="flex justify-between items-center rounded-lg ">
 					<div className="flex justify-center items-center gap-2 ">
 						<img
@@ -156,16 +152,16 @@ export default function RequestDetailPage() {
 						<span className="title-heading">{request.points} Pts</span>
 					</p>
 				</div>
-				<div className="flex  justify-between">
+				<div className="flex gap-1  justify-between">
 					<p className="flex items-center gap-1">
 						<img src={calendar} alt="" className="w-6" />
 						<span className="pt-1">{request.date}</span>
 					</p>
-					<p className="flex items-center gap-1">
+					<p className="flex items-center ">
 						<img src={clock} alt="" className="w-6" />
 						<span className="pt-1">{request.time}</span>
 					</p>
-					<p className="flex items-center gap-1">
+					<p className="flex items-center ">
 						<img src={location} alt="" className="w-6" />
 						<span className="pt-1">
 							{request.address.city}, {request.address.state}
