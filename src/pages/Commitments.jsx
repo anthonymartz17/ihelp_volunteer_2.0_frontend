@@ -6,6 +6,7 @@ import variousIcon from "../assets/icons/various_icon.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
 import coins from "../assets/icons/coin.svg";
 import SwitchToggleButton from "../componets/UI/switchTogglerButton";
+import BottomBlopShape from "../assets/graphics/bottom_blop_shape.svg";
 
 const tasks = [
 	{
@@ -59,7 +60,7 @@ const categoryIcons = {
 };
 export default function Commitments() {
 	return (
-		<div className="p-4 mt-10">
+		<div className="p-4 mt-10 relative  h-[87%]">
 			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
 
 			<div className="mb-4">
@@ -107,6 +108,11 @@ export default function Commitments() {
 					</tbody>
 				</table>
 			</div>
+			<img
+				src={BottomBlopShape}
+				alt="blop shape"
+				className="absolute -bottom-20 left-0 right-0"
+			/>
 		</div>
 	);
 }

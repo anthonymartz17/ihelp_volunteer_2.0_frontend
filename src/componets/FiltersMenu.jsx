@@ -8,8 +8,9 @@ import commitmentsIcon from "../assets/icons/commitments.svg";
 import helpIcon from "../assets/icons/help.svg";
 import leaderboardIcon from "../assets/icons/leaderboard.svg";
 import RangeSlider from "./UI/RangeSlider";
+import BottomBlopShape from "../assets/graphics/bottom_blop_shape.svg";
 
-export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
+export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 	const navigate = useNavigate();
 
 	return (
@@ -21,28 +22,32 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 			>
 				<div className="flex justify-end items-center py-4 mt-2 mb-4">
 					<button
-						onClick={() => setIsOpen(true)}
+						onClick={() => onSetIsOpen(false)}
 						className=" text-dark flex justify-center items-center bg-light w-[100px] rounded-lg p-3 input-shadow label-text"
 					>
 						Apply
 					</button>
 				</div>
-				<div>
+
+				<div className="flex flex-col gap-4">
 					<SwitchToggleButton
 						option1={"Single task"}
 						option2={"Multiple tasks"}
 					/>
-				</div>
 
-				<div>
-					<div></div>
-					<RangeSlider min={10} max={200} step={40} />
+					<div>{/* <RangeSlider min={10} max={200} step={40} /> */}</div>
+					<div>
+						<p className="text-center label-text mb-2">Category</p>
+						<CheckboxStyleList />
+					</div>
 				</div>
-				<div>
-					<p className="text-center label-text">Category</p>
-					<CheckboxStyleList />
-				</div>
+				<img
+					src={BottomBlopShape}
+					alt="blop shape"
+					className="absolute bottom-10 left-0 right-0"
+				/>
 			</div>
+
 			{/* backdrop   */}
 			<div
 				onClick={() => onSetIsOpen(false)}

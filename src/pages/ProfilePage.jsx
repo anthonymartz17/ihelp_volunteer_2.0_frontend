@@ -5,6 +5,7 @@ import punctualityBadge from "../assets/badges/badge_punctuality.svg";
 import fiveTaskStreakBadge from "../assets/badges/badge_five_task_streak.svg";
 import fifteenTaskStreakBadge from "../assets/badges/badge_fifteen_task_streak.svg";
 import rewardShape from "../assets/graphics/reward_shape.svg";
+import BottomBlopShape from "../assets/graphics/blop_no_backdrop.svg";
 
 const userBadges = {
 	1: true,
@@ -136,7 +137,7 @@ export default function ProfilePage() {
 					})}
 				</ul>
 			</div>
-			<div>
+			<div className="z-10">
 				<div className="flex justify-between items-center">
 					<h2 className="subtitle-heading text-lightest mb-4">Rewards</h2>
 					<span className="text-lightest ">See All</span>
@@ -169,6 +170,11 @@ export default function ProfilePage() {
 					)}
 				</div>
 			</div>
+			<img
+				src={BottomBlopShape}
+				alt="blop shape"
+				className="absolute -bottom-28  left-0 right-0"
+			/>
 		</div>
 	);
 }

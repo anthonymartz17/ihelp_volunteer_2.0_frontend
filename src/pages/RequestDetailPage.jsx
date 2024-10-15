@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
@@ -11,6 +11,8 @@ import coin from "../assets/icons/coin.svg";
 import calendar from "../assets/icons/calendar_primary.svg";
 import clock from "../assets/icons/clock.svg";
 import location from "../assets/icons/location.svg";
+import ConfirmationAlert from "../componets/UI/ConfirmationAlert";
+import AlertMessage from "../componets/UI/AlertMessage";
 
 const currentUser = {
 	id: 10,
@@ -29,7 +31,13 @@ const categoryIcons = {
 };
 
 export default function RequestDetailPage() {
-	const [wasTaskSelected, setWasTaskSelected] = useState(false);
+	const navigate = useNavigate();
+
+	const [selectedTask, setSelectedTask] = useState(null);
+	const [isAlertOpen, setIsAlertOpen] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+	const [selectedAvatarId, setSelectedAvatarId] = useState(null);
 	const [request, setRequest] = useState({
 		id: 1,
 		category: "errands",
@@ -63,7 +71,6 @@ export default function RequestDetailPage() {
 				status: "open",
 				points: 25,
 				volunteer_id: null,
-
 				volunteer_avatar_url: null,
 				status_id: 1,
 			},
@@ -90,23 +97,38 @@ export default function RequestDetailPage() {
 			},
 		],
 	});
-	const [showUsername, setShowUsername] = useState(false);
-	const [selectedAvatarId, setSelectedAvatarId] = useState(null);
 
 	function toggleUsername(id) {
 		setSelectedAvatarId((prevId) => (prevId ? null : id));
 	}
 
 	function selectTask(task_idx) {
-		setWasTaskSelected((prev) => !prev);
-
 		if (request.tasks[task_idx].volunteer_id) {
 			request.tasks[task_idx].volunteer_id = null;
 			request.tasks[task_idx].volunteer_avatar_url = null;
+			setSelectedTask(null);
 		} else {
 			request.tasks[task_idx].volunteer_id = currentUser.id;
 			request.tasks[task_idx].volunteer_avatar_url = currentUser.avatar_url;
+			setSelectedTask(request.tasks[task_idx]);
 		}
+	}
+
+	function tryCommitToTask() {
+		if (selectedTask) {
+			setIsAlertOpen(true);
+		} else {
+			setIsError(true);
+			setAlertMessage("Oops! A task must be selected first.");
+
+			// setTimeout(() => {
+			// 	setIsError(false);
+			// }, 5000);
+		}
+	}
+	function handleCommitToTask() {
+		// Update the task status to "assigned"
+		navigate(`"quest/request/${request.id}/task/:id"`);
 	}
 
 	return (
@@ -213,7 +235,7 @@ export default function RequestDetailPage() {
 										selectTask(idx);
 									}}
 									className={`flex cursor-pointer items-center gap-2 ${
-										task.status_id !== 1 || wasTaskSelected
+										task.status_id !== 1 || selectedTask
 											? "opacity-40 pointer-events-none"
 											: ""
 									}`}
@@ -238,10 +260,22 @@ export default function RequestDetailPage() {
 				})}
 			</ul>
 			<div className="fixed bottom-8 left-2 right-2">
-				<button className="label-text bg-secondary w-full rounded py-3 text-lightest ">
+				<button
+					onClick={() => tryCommitToTask()}
+					className="label-text bg-secondary w-full rounded py-3 text-lightest "
+				>
 					Commit
 				</button>
 			</div>
+			{isAlertOpen && (
+				<ConfirmationAlert
+					onHandleCommitToTask={handleCommitToTask}
+					onSetIsAlertOpen={setIsAlertOpen}
+				/>
+			)}
+			{isError && (
+				<AlertMessage alertMessage={alertMessage} setIsError={setIsError} />
+			)}
 		</div>
 	);
 }
