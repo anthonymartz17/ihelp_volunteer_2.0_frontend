@@ -97,10 +97,10 @@ export default function ProfilePage() {
 	return (
 		<div className="p-4 mt-5 grid gap-8">
 			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
-			<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-55 border-lightest   border-[1px] rounded-2xl p-4 ">
+			<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
 				<div className="flex items-center gap-4">
 					<img
-						className="bg-dark rounded-full   p-2 w-24"
+						className="bg-dark rounded-full border-2  border-lightest   p-2 w-24"
 						src={currentUser.avatar_url}
 						alt={`${currentUser.username}'avatar picture`}
 					/>
@@ -146,7 +146,10 @@ export default function ProfilePage() {
 						<ul className="grid grid-cols-3 gap-4">
 							{currentUser.rewards.map((reward) => {
 								return (
-									<li className="flex flex-col items-center gap-2 relative">
+									<li
+										key={reward.id}
+										className="flex flex-col items-center gap-2 relative"
+									>
 										<img
 											className="w-28"
 											src={rewardShape}

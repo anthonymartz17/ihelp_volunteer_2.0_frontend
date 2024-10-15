@@ -1,59 +1,59 @@
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function RangeSlider({ min, max, step }) {
-	const [minValue, setMinValue] = useState(min);
-	const [maxValue, setMaxValue] = useState(max);
+export default function MultiRangeSlider() {
+	const [minValue, setMinValue] = useState(25);
+	const [maxValue, setMaxValue] = useState(75);
 
-	function handleMinChange(event) {
-		const value = Math.min(Number(event.target.value), maxValue - step);
-		setMinValue(value);
-	}
+	const inputLeftRef = useRef(null);
+	const inputRightRef = useRef(null);
+	const thumbLeftRef = useRef(null);
+	const thumbRightRef = useRef(null);
+	const rangeRef = useRef(null);
 
-	function handleMaxChange(event) {
-		const value = Math.max(Number(event.target.value), minValue + step);
-		setMaxValue(value);
-	}
+	const min = 0;
+	const max = 100;
+
+	const setLeftValue = () => {
+		const newValue = Math.min(
+			parseInt(inputLeftRef.current.value),
+			parseInt(inputRightRef.current.value) - 1
+		);
+		setMinValue(newValue);
+		const percent = ((newValue - min) / (max - min)) * 100;
+
+		thumbLeftRef.current.style.left = `${percent}%`;
+		rangeRef.current.style.left = `${percent}%`;
+	};
+
+	const setRightValue = () => {
+		const newValue = Math.max(
+			parseInt(inputRightRef.current.value),
+			parseInt(inputLeftRef.current.value) + 1
+		);
+		setMaxValue(newValue);
+		const percent = ((newValue - min) / (max - min)) * 100;
+
+		thumbRightRef.current.style.right = `${100 - percent}%`;
+		rangeRef.current.style.right = `${100 - percent}%`;
+	};
+
+	// useEffect(() => {
+	// 	setLeftValue();
+	// 	setRightValue();
+	// }, []);
 
 	return (
-		<div className="w-80 mx-auto my-8">
-			{/* Display Min and Max Values */}
-			<div className="flex justify-between mb-4">
-				<span>Min: {minValue}</span>
-				<span>Max: {maxValue}</span>
-			</div>
+		<div>
+			<div>
+				<input type="range" id="input-left" min="0" max="100"  />
+				<input type="range" id="input-right" min="0" max="100"  />
 
-			{/* Slider */}
-			<div className="relative w-full">
-				<input
-					type="range"
-					min={min}
-					max={max}
-					step={step}
-					value={minValue}
-					onChange={handleMinChange}
-					className="absolute w-full h-1 bg-transparent pointer-events-auto appearance-none z-30"
-				/>
-				<input
-					type="range"
-					min={min}
-					max={max}
-					step={step}
-					value={maxValue}
-					onChange={handleMaxChange}
-					className="absolute w-full h-1 bg-transparent pointer-events-auto appearance-none z-30"
-				/>
-
-				{/* Track */}
-				<div className="absolute top-1/2 h-1 w-full bg-gray-300 -translate-y-1/2 z-10"></div>
-
-				{/* Range Highlight */}
-				<div
-					className="absolute top-1/2 h-1 bg-blue-500 -translate-y-1/2 z-20"
-					style={{
-						left: `${(minValue / max) * 100}%`,
-						width: `${((maxValue - minValue) / max) * 100}%`,
-					}}
-				></div>
+				<div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
 			</div>
 		</div>
 	);

@@ -5,6 +5,7 @@ import petCareIcon from "../assets/icons/pet_care_icon.svg";
 import variousIcon from "../assets/icons/various_icon.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
 import coins from "../assets/icons/coin.svg";
+import SwitchToggleButton from "../componets/UI/switchTogglerButton";
 
 const tasks = [
 	{
@@ -60,6 +61,10 @@ export default function Commitments() {
 	return (
 		<div className="p-4 mt-10">
 			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
+
+			<div className="mb-4">
+				<SwitchToggleButton option1={"Upcoming"} option2={"Completed"} />
+			</div>
 
 			<div className="relative overflow-x-auto">
 				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
