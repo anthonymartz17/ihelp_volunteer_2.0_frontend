@@ -37,6 +37,9 @@
 .card-shadow {
 	box-shadow: #523f387a 3px 4px 0px;
 }
+.cilinder-shadow {
+	box-shadow: #B24F3F 0px 8px 0px;
+}
 .numbers-shadow {
 	text-shadow: rgba(64, 64, 64, 0.5) 4px 4px 3px;
 }

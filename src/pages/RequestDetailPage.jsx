@@ -124,7 +124,8 @@ export default function RequestDetailPage() {
 	}
 	function handleCommitToTask() {
 		// Update the task status to "assigned"
-		navigate(`"quest/request/${request.id}/task/:id"`);
+
+		navigate(`/account/quest/request/${request.id}/task/:id`);
 	}
 
 	return (

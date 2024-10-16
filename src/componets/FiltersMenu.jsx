@@ -8,7 +8,7 @@ import commitmentsIcon from "../assets/icons/commitments.svg";
 import helpIcon from "../assets/icons/help.svg";
 import leaderboardIcon from "../assets/icons/leaderboard.svg";
 import RangeSlider from "./UI/RangeSlider";
-import BottomBlopShape from "../assets/graphics/bottom_blop_shape.svg";
+import BottomBlopShape from "../assets/graphics/bottom_blob_shape.svg";
 
 export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 	const navigate = useNavigate();

@@ -6,7 +6,7 @@ import variousIcon from "../assets/icons/various_icon.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
 import coins from "../assets/icons/coin.svg";
 import SwitchToggleButton from "../componets/UI/switchTogglerButton";
-import BottomBlopShape from "../assets/graphics/bottom_blop_shape.svg";
+import BottomBlopShape from "../assets/graphics/bottom_blob_shape.svg";
 
 const tasks = [
 	{
