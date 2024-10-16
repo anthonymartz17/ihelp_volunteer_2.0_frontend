@@ -12,7 +12,6 @@ const taskProgress = [
 	{
 		id: 1,
 		icon: startIcon,
-		title: "Start",
 	},
 	{
 		id: 2,
@@ -32,7 +31,6 @@ const taskProgress = [
 	{
 		id: 5,
 		icon: completeIcon,
-		title: "Task Completed",
 	},
 ];
 
@@ -69,7 +67,7 @@ export default function QuestPage() {
 
 	return (
 		<div className="flex flex-col relative">
-			<div className="flex justify-between mx-4 my-4">
+			<div className="flex justify-between mx-4 mt-8">
 				<h1 className="subtitle-heading text-lightest">Quest</h1>
 				<p className="body-text flex items-center gap-">
 					<img className="w-6" src={coin} alt="coin" />
@@ -78,12 +76,12 @@ export default function QuestPage() {
 			</div>
 
 			<div className="flex justify-center item-center h-[75vh] z-10">
-				<div className="w-[45%] flex flex-col items-center justify-center gap-4">
-					{/* <img
+				<div className="pl-3 flex flex-col items-center justify-center">
+					<img
 						src={currentUser.avatar_url}
 						alt=""
-						className="w-36 h-36 rounded-full"
-					/> */}
+						className="w-48 h-48  p-4 rounded-full card-shadow  bg-primarylight"
+					/>
 				</div>
 				<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center">
 					{taskProgress.map((task) => (
@@ -92,12 +90,18 @@ export default function QuestPage() {
 							className={`bg-secondary ${
 								task.id > currentStep && "opacity-30 "
 							} rounded-full p-4 mb-4 w-24 h-24 flex cilinder-shadow flex-col items-center justify-center relative
-            ${task.id === 2 && "translate-x-20"}
-            ${task.id === 4 && "translate-x-20"}
-            ${task.id === 3 && "translate-x-28"}
+            ${task.id === 2 && "translate-x-16"}
+            ${task.id === 4 && "translate-x-16"}
+            ${task.id === 3 && "translate-x-24"}
             
             `}
 						>
+							{currentStep === task.id && task.title && (
+								<div className="absolute   -top-14 -left-24 px-1 py-3 w-40 text-center bg-lightest input-shadow rounded-md body-text text-dark z-50 ">
+									
+									{task.title}
+								</div>
+							)}
 							<img
 								src={task.icon}
 								alt=""
@@ -118,9 +122,6 @@ export default function QuestPage() {
 						</button>
 					</div>
 				)}
-			</div>
-			<div className="w-52 h-52  p-4 rounded-full card-shadow  bg-primarylight absolute top-[36%] left-5  ">
-				<img src={currentUser.avatar_url} alt="" className="" />
 			</div>
 		</div>
 	);
