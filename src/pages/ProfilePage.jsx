@@ -5,7 +5,7 @@ import punctualityBadge from "../assets/badges/badge_punctuality.svg";
 import fiveTaskStreakBadge from "../assets/badges/badge_five_task_streak.svg";
 import fifteenTaskStreakBadge from "../assets/badges/badge_fifteen_task_streak.svg";
 import rewardShape from "../assets/graphics/reward_shape.svg";
-import BottomBlopShape from "../assets/graphics/blop_no_backdrop.svg";
+import BottomBlopShape from "../assets/graphics/blob_no_backdrop.svg";
 
 const userBadges = {
 	1: true,

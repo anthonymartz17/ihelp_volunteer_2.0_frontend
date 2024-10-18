@@ -24,9 +24,7 @@ export default function Request({ request, index }) {
 	return (
 		<Link to={`/account/requests/${request.id}`}>
 			<div
-				className={`bg-${
-					cardColors[index % cardColors.length]
-				} p-4 rounded-lg text-lightest card-shadow`}
+				className={`bg-primarylight p-4 rounded-lg text-lightest card-shadow-primary relative`}
 			>
 				<div className="flex justify-between items-center gap-6 relative  rounded-lg px-1 text-lightest mb-8">
 					<div className="flex justify-center items-center gap-2 ">
@@ -46,7 +44,7 @@ export default function Request({ request, index }) {
 									<img
 										src={volunteer.avatar_url}
 										alt=""
-										className="min-w-10 w-4 rounded-full bg-dark p-1 border-2 border-lightest"
+										className="min-w-10 w-4 rounded-full bg-primarydark p-1 border-2 border-lightest"
 									/>
 								</li>
 							))}

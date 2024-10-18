@@ -18,8 +18,12 @@ export default function AccountPage() {
 
 	return (
 		<div className="bg-primary h-screen">
-			<Header />
-			<Outlet />
+			<header className="h-[10%] mb-2">
+				<Header />
+			</header>
+			<main className="">
+				<Outlet />
+			</main>
 		</div>
 	);
 }

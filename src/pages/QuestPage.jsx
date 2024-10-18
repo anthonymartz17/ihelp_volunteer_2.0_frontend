@@ -75,12 +75,12 @@ export default function QuestPage() {
 				</p>
 			</div>
 
-			<div className="flex justify-center item-center h-[75vh] z-10">
+			<div className="flex justify-center item-center h-[75vh]">
 				<div className="pl-3 flex flex-col items-center justify-center">
 					<img
 						src={currentUser.avatar_url}
 						alt=""
-						className="w-48 h-48  p-4 rounded-full card-shadow  bg-primarylight"
+						className="w-40 h-40  p-4 rounded-full card-shadow  bg-primarylight"
 					/>
 				</div>
 				<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center">
@@ -89,7 +89,7 @@ export default function QuestPage() {
 							key={task.id}
 							className={`bg-secondary ${
 								task.id > currentStep && "opacity-30 "
-							} rounded-full p-4 mb-4 w-24 h-24 flex cilinder-shadow flex-col items-center justify-center relative
+							} rounded-full p-4 mb-4 w-20 h-20 flex cilinder-shadow flex-col items-center justify-center relative
             ${task.id === 2 && "translate-x-16"}
             ${task.id === 4 && "translate-x-16"}
             ${task.id === 3 && "translate-x-24"}
@@ -97,15 +97,14 @@ export default function QuestPage() {
             `}
 						>
 							{currentStep === task.id && task.title && (
-								<div className="absolute   -top-14 -left-24 px-1 py-3 w-40 text-center bg-lightest input-shadow rounded-md body-text text-dark z-50 ">
-									
+								<div className="absolute -top-14  px-1 py-3 w-40 text-center bg-lightest input-shadow rounded-md body-text text-dark z-50 after:absolute after:left-1/2 after:top-full after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-lightest after:-translate-x-1/2  after:input-shadow">
 									{task.title}
 								</div>
 							)}
 							<img
 								src={task.icon}
 								alt=""
-								className={`absolute -top-2 left-3 w-16 object-cover ${
+								className={`absolute -top-0 left-3 w-12 object-cover ${
 									task.id > currentStep ? "opacity-50 " : ""
 								}`}
 							/>

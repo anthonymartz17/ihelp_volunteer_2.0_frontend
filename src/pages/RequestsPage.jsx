@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import RequestCard from "../componets/RequestCard";
 import FiltersMenu from "../componets/FiltersMenu";
+import blobShape from "../assets/graphics/blob_no_backdrop.svg";
 /*
 task status:
 1. open
@@ -99,7 +100,7 @@ const requests = [
 export default function RequestsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<div className="mt-10 ">
+		<div className=" relative bg-primary">
 			<div className="flex justify-between items-center  px-4 pb-2 ">
 				<h1 className="subtitle-heading text-lightest ">Requests</h1>
 				<div className=" text-dark flex justify-between items-center bg-light w-[100px] rounded-lg p-3 input-shadow cursor-pointer">
@@ -110,7 +111,7 @@ export default function RequestsPage() {
 				</div>
 			</div>
 
-			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto h-[80vh] rounded-lg p-4 no-scrollbar">
+			<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto rounded-lg p-4 h-[80vh] ">
 				{requests.map((request, index) => (
 					<li key={request.id}>
 						<RequestCard request={request} index={index} />
@@ -118,6 +119,11 @@ export default function RequestsPage() {
 				))}
 			</ul>
 			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
+			{/* <img
+				src={blobShape}
+				alt="graphic blob"
+				className="absolute bottom-0 left-0 w-full"
+			/> */}
 		</div>
 	);
 }

@@ -13,6 +13,7 @@ import clock from "../assets/icons/clock.svg";
 import location from "../assets/icons/location.svg";
 import ConfirmationAlert from "../componets/UI/ConfirmationAlert";
 import AlertMessage from "../componets/UI/AlertMessage";
+// import Blob from "../componets/UI/blob";
 
 const currentUser = {
 	id: 10,
@@ -129,7 +130,8 @@ export default function RequestDetailPage() {
 	}
 
 	return (
-		<div className=" text-dark">
+		<div className=" text-dark relative">
+			{/* <Blob  /> */}
 			<div className="flex items-center text-light gap-3 mb-10 p-4">
 				<Link to="/account" className="mt-2">
 					<span className="material-symbols-outlined ">arrow_back_ios</span>
@@ -175,7 +177,7 @@ export default function RequestDetailPage() {
 				</div>
 			</div>
 			<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
-			<ul className=" h-96  px-4 ">
+			<ul className="px-4 ">
 				{request.tasks.map((task, idx) => {
 					return (
 						<li key={task.id} className="mb-4 relative ">
@@ -256,7 +258,7 @@ export default function RequestDetailPage() {
 					);
 				})}
 			</ul>
-			<div className="fixed bottom-8 left-2 right-2">
+			<div className="m-4">
 				<button
 					onClick={() => tryCommitToTask()}
 					className="label-text bg-secondary w-full rounded py-3 text-lightest "
