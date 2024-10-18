@@ -12,10 +12,10 @@ export default function Header() {
 	return (
 		<header className="text-light py-4 px-2  flex justify-between items-center  ">
 			{/* <img src={saamLogo} alt="app logo" className="w-20" /> */}{" "}
-			<img src={primarybgLogo} alt="ihelp logo" className="w-36" />
+			<img src={primarybgLogo} alt="ihelp logo" className="w-24" />
 			<span
 				onClick={() => setIsOpen(!isOpen)}
-				className="material-symbols-outlined text-5xl cursor-pointer font-bold"
+				className="material-symbols-outlined text-4xl cursor-pointer font-bold"
 			>
 				menu
 			</span>

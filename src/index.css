@@ -15,18 +15,20 @@
 .body-text {
 	font-weight: 300;
 	font-style: normal;
+	font-size: 13px;
 }
 .label-text {
+	font-size: 13px;
 	font-weight: 600;
 	font-style: normal;
 }
 .subtitle-heading {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 700;
 	font-style: normal;
 }
 .title-heading {
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: 600;
 	font-style: normal;
 }
@@ -41,7 +43,7 @@
 	box-shadow: #157569 3px 4px 0px;
 }
 .cilinder-shadow {
-	box-shadow: #B24F3F 0px 8px 0px;
+	box-shadow: #b24f3f 0px 8px 0px;
 }
 .numbers-shadow {
 	text-shadow: rgba(64, 64, 64, 0.5) 4px 4px 3px;

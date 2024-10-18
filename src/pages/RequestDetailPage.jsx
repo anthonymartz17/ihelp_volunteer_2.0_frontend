@@ -132,13 +132,13 @@ export default function RequestDetailPage() {
 	return (
 		<div className=" text-dark relative">
 			{/* <Blob  /> */}
-			<div className="flex items-center text-light gap-3 mb-10 p-4">
+			<div className="flex items-center text-light gap-3 mb-8 px-4">
 				<Link to="/account" className="mt-2">
 					<span className="material-symbols-outlined ">arrow_back_ios</span>
 				</Link>
-				<h2 className="subtitle-heading text-lightest ">Request</h2>
+				<h2 className="subtitle-heading text-lightest ">Request Details</h2>
 			</div>
-			<div className="bg-light card-shadow rounded-lg p-3 mx-4 flex flex-col gap-6 mb-10">
+			<div className="bg-light card-shadow rounded-lg p-3 mx-4 flex flex-col gap-5 mb-6">
 				<div className="flex justify-between items-center rounded-lg ">
 					<div className="flex justify-center items-center gap-2 ">
 						<img
@@ -151,11 +151,11 @@ export default function RequestDetailPage() {
 						</p>
 					</div>
 					<p className="body-text flex items-center gap-">
-						<img className="w-8" src={coin} alt="coin" />
-						<span className="title-heading">{request.points} Pts</span>
+						<img className="w-6" src={coin} alt="coin" />
+						<span className="subtitle-heading">{request.points} Pts</span>
 					</p>
 				</div>
-				<div className="flex gap-1  justify-between">
+				<div className="flex gap-1  justify-between body-text ">
 					<p className="flex items-center gap-1">
 						<img src={calendar} alt="" className="w-6" />
 						<span className="pt-1">{request.date}</span>
@@ -173,7 +173,7 @@ export default function RequestDetailPage() {
 				</div>
 				<div>
 					<h2 className="label-text">Description:</h2>
-					<p>{request.description}</p>
+					<p className="body-text">{request.description}</p>
 				</div>
 			</div>
 			<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>

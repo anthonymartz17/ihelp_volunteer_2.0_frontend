@@ -103,11 +103,12 @@ export default function RequestsPage() {
 		<div className=" relative bg-primary">
 			<div className="flex justify-between items-center  px-4 pb-2 ">
 				<h1 className="subtitle-heading text-lightest ">Requests</h1>
-				<div className=" text-dark flex justify-between items-center bg-light w-[100px] rounded-lg p-3 input-shadow cursor-pointer">
-					<span className="material-symbols-outlined">tune</span>
-					<span onClick={() => setIsOpen(true)} className="label-text ">
-						Filters
-					</span>
+				<div
+					onClick={() => setIsOpen(true)}
+					className=" text-dark flex  gap-1 items-center bg-light w-[6em] rounded-lg p-2 input-shadow cursor-pointer"
+				>
+					<span className="material-symbols-outlined ">tune</span>
+					<span className="label-text ">Filters</span>
 				</div>
 			</div>
 
