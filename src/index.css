@@ -17,6 +17,11 @@
 	font-style: normal;
 	font-size: 13px;
 }
+.body-text-regular {
+	font-weight: 500;
+	font-style: normal;
+	font-size: 13px;
+}
 .label-text {
 	font-size: 13px;
 	font-weight: 600;

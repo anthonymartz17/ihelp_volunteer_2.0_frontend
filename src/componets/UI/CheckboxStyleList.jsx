@@ -76,7 +76,7 @@ export default function CheckboxStyleList() {
 							alt={`${category.name} icon`}
 							className="w-8"
 						/>
-						<span>{category.name}</span>
+						<span className="body-text-regular">{category.name}</span>
 
 						<input
 							onChange={() => handleCategoryChange(category.category_id)}

@@ -8,6 +8,7 @@ import petCareIcon from "../assets/icons/pet_care_icon_dark.svg";
 import variousIcon from "../assets/icons/various_icon_dark.svg";
 import mealPrep from "../assets/icons/mealprep_icon_dark.svg";
 import coin from "../assets/icons/coin.svg";
+import timeIcon from "../assets/icons/time_icon.svg";
 import calendar from "../assets/icons/calendar_primary.svg";
 import clock from "../assets/icons/clock.svg";
 import location from "../assets/icons/location.svg";
@@ -46,6 +47,7 @@ export default function RequestDetailPage() {
 		date: "2023-06-01",
 		time: "10:00 AM",
 		points: 130,
+		hours: 2,
 		address: {
 			street: "123 Main St",
 			city: "Amityville",
@@ -151,8 +153,10 @@ export default function RequestDetailPage() {
 						</p>
 					</div>
 					<p className="body-text flex items-center gap-">
-						<img className="w-6" src={coin} alt="coin" />
-						<span className="subtitle-heading">{request.points} Pts</span>
+						<img className="w-5" src={timeIcon} alt="coin" />
+						<span className="subtitle-heading">
+							{request.hours} {request.hours > 1 ? "Hours" : "Hour"}
+						</span>
 					</p>
 				</div>
 				<div className="flex gap-1  justify-between body-text ">
@@ -261,7 +265,7 @@ export default function RequestDetailPage() {
 			<div className="m-4">
 				<button
 					onClick={() => tryCommitToTask()}
-					className="label-text bg-secondary w-full rounded py-3 text-lightest "
+					className="title-heading bg-secondary w-full rounded py-3 text-lightest "
 				>
 					Commit
 				</button>

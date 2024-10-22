@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import oopsIcon from "../../assets/icons/oops_icon1.svg";
+import triangle_danger_icon from "../../assets/icons/triangle_danger_icon_dark.svg";
 
 export default function AlertMessage({ setIsError, alertMessage }) {
-	const [countDown, setCountDown] = useState(5);
+	const [countDown, setCountDown] = useState(10);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -29,12 +29,12 @@ export default function AlertMessage({ setIsError, alertMessage }) {
 					</span>
 				</div>
 				<img
-					src={oopsIcon}
+					src={triangle_danger_icon}
 					alt="commitment icon"
 					className="w-20 text-center mx-auto"
 				/>
 				<h3
-					className={`subtitle-heading text-center border-b-2 border-opacity-35 border-dark pb-3 mb-4 text-red-600`}
+					className={`subtitle-heading text-center border-b-2 border-opacity-35 border-dark pb-3 mb-4`}
 				>
 					Alert
 				</h3>

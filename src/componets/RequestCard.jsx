@@ -8,6 +8,7 @@ import variousIcon from "../assets/icons/various_icon.svg";
 import calendar from "../assets/icons/calendar.svg";
 import coin from "../assets/icons/coin.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
+import timeIcon from "../assets/icons/time_icon_light.svg";
 
 const categoryIcons = {
 	1: errandIcon,
@@ -60,9 +61,11 @@ export default function Request({ request, index }) {
 						<img className="w-6 " src={calendar} alt="calendar" />
 						<span>{request.date}</span>
 					</p>
-					<p className="body-text flex items-center gap-2">
-						<img className="w-6" src={coin} alt="coin" />
-						<span className="title-heading">{request.points} Pts</span>
+					<p className="body-text flex items-center gap-1">
+						<img className="w-5" src={timeIcon} alt="coin" />
+						<span className="title-heading">
+							{request.hours} {request.hours > 1 ? "Hours" : "Hour"}
+						</span>
 					</p>
 				</div>
 			</div>

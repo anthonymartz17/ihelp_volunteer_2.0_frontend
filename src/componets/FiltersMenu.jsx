@@ -37,7 +37,7 @@ export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 
 					<div>{/* <RangeSlider min={10} max={200} step={40} /> */}</div>
 					<div>
-						<p className="text-center label-text mb-2">Category</p>
+						<p className="text-center subtitle-heading mb-2">Category</p>
 						<CheckboxStyleList />
 					</div>
 				</div>

@@ -96,7 +96,7 @@ export default function ProfilePage() {
 		],
 	};
 	return (
-		<div className="p-4 mt-5 grid gap-8">
+		<div className="p-4 mt-5 grid gap-8 bg-primary">
 			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
 			<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
 				<div className="flex items-center gap-4">
@@ -170,11 +170,11 @@ export default function ProfilePage() {
 					)}
 				</div>
 			</div>
-			<img
+			{/* <img
 				src={BottomBlopShape}
 				alt="blop shape"
 				className="absolute -bottom-28  left-0 right-0"
-			/>
+			/> */}
 		</div>
 	);
 }

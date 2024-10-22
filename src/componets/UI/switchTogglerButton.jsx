@@ -12,8 +12,8 @@ export default function switchToggleButton({ option1, option2 }) {
 			></div>
 
 			<button
-				className={` z-10 px-4 py-2 rounded-lg transition duration-300 ${
-					selected === option1 ? "text-lightest" : "text-dark"
+				className={`body-text-regular z-10 px-4 py-2 rounded-lg transition duration-300 ${
+					selected === option1 ? "text-lightest" : "text-dark "
 				}`}
 				onClick={() => setSelected(option1)}
 			>
@@ -21,7 +21,7 @@ export default function switchToggleButton({ option1, option2 }) {
 			</button>
 
 			<button
-				className={`z-10 px-4 py-2 rounded-lg transition duration-300 text-center ${
+				className={`body-text-regular z-10 px-4 py-2 rounded-lg transition duration-300 text-center ${
 					selected === option2 ? "text-lightest" : "text-dark"
 				}`}
 				onClick={() => setSelected(option2)}
