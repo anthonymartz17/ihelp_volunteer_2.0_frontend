@@ -42,12 +42,12 @@ export default function RequestDetailPage() {
 	const [selectedAvatarId, setSelectedAvatarId] = useState(null);
 	const [request, setRequest] = useState({
 		id: 1,
-		category: "errands",
-		category_id: 1,
+		category: "Pet Care",
+		category_id: 4,
 		date: "2023-06-01",
 		time: "10:00 AM",
 		points: 130,
-		hours: 2,
+		hours: 1,
 		address: {
 			street: "123 Main St",
 			city: "Amityville",
