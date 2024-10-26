@@ -13,7 +13,7 @@ const currentUser = {
 		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 };
 
-export default function CelebrationModal({ hours = 2, points = 55 }) {
+export default function CelebrationModal({ hours = 1, points = 55 }) {
 	const celebration = useRef(null);
 
 	useEffect(() => {
