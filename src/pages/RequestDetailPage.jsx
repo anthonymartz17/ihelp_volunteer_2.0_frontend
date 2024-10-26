@@ -14,7 +14,7 @@ import clock from "../assets/icons/clock.svg";
 import location from "../assets/icons/location.svg";
 import ConfirmationAlert from "../componets/UI/ConfirmationAlert";
 import AlertMessage from "../componets/UI/AlertMessage";
-// import Blob from "../componets/UI/blob";
+import blobShape from "../assets/graphics/blop_no_backdrop.svg";
 
 const currentUser = {
 	id: 10,
@@ -54,52 +54,82 @@ export default function RequestDetailPage() {
 			state: "NY",
 			zip: "11701",
 		},
-		description: "Need someone to pick up groceries and drop them off at home.",
+		description:
+			"Walk the dog around the neighborhood, allowing time for exercise, sniffing, and bathroom breaks.",
 
 		tasks: [
 			{
 				id: 1,
-				description: "Pick up groceries from the supermarket.",
-				status: "assigned",
-				status_id: 2,
+				description: "Walk the dog.",
+				status: "open",
+				status_id: 1,
 				volunteer_id: 1,
-				volunteer_username: "Incognito23",
-				volunteer_avatar_url:
-					"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+				volunteer_username: "",
+				volunteer_avatar_url: null,
 				points: 55,
-			},
-			{
-				id: 2,
-				description: "Return a package to the post office.",
-				status: "open",
-				points: 25,
-				volunteer_id: null,
-				volunteer_avatar_url: null,
-				status_id: 1,
-			},
-			{
-				id: 3,
-				description: "Pick up dry cleaning from the local shop.",
-				status: "open",
-				volunteer_id: null,
-				volunteer_username: null,
-				volunteer_avatar_url: null,
-				status_id: 1,
-				points: 25,
-			},
-			{
-				id: 4,
-				description: "Buy flowers from the florist for a special occasion.",
-				status: "assigned",
-				volunteer_id: 2,
-				volunteer_username: "cloud99",
-				volunteer_avatar_url:
-					"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-				status_id: 2,
-				points: 25,
 			},
 		],
 	});
+	// const [request, setRequest] = useState({
+	// 	id: 1,
+	// 	category: "errands",
+	// 	category_id: 1,
+	// 	date: "2023-06-01",
+	// 	time: "10:00 AM",
+	// 	points: 130,
+	// 	hours: 2,
+	// 	address: {
+	// 		street: "123 Main St",
+	// 		city: "Amityville",
+	// 		state: "NY",
+	// 		zip: "11701",
+	// 	},
+	// 	description: "Need someone to pick up groceries and drop them off at home.",
+
+	// 	tasks: [
+	// 		{
+	// 			id: 1,
+	// 			description: "Pick up groceries from the supermarket.",
+	// 			status: "assigned",
+	// 			status_id: 2,
+	// 			volunteer_id: 1,
+	// 			volunteer_username: "Incognito23",
+	// 			volunteer_avatar_url:
+	// 				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+	// 			points: 55,
+	// 		},
+	// 		{
+	// 			id: 2,
+	// 			description: "Return a package to the post office.",
+	// 			status: "open",
+	// 			points: 25,
+	// 			volunteer_id: null,
+	// 			volunteer_avatar_url: null,
+	// 			status_id: 1,
+	// 		},
+	// 		{
+	// 			id: 3,
+	// 			description: "Pick up dry cleaning from the local shop.",
+	// 			status: "open",
+	// 			volunteer_id: null,
+	// 			volunteer_username: null,
+	// 			volunteer_avatar_url: null,
+	// 			status_id: 1,
+	// 			points: 25,
+	// 		},
+	// 		{
+	// 			id: 4,
+	// 			description: "Buy flowers from the florist for a special occasion.",
+	// 			status: "assigned",
+	// 			volunteer_id: 2,
+	// 			volunteer_username: "cloud99",
+	// 			volunteer_avatar_url:
+	// 				"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
+	// 			status_id: 2,
+	// 			points: 25,
+	// 		},
+	// 	],
+	// });
 
 	function toggleUsername(id) {
 		setSelectedAvatarId((prevId) => (prevId ? null : id));
@@ -132,15 +162,15 @@ export default function RequestDetailPage() {
 	}
 
 	return (
-		<div className=" text-dark relative">
+		<div className=" text-dark  bg-secondary overflow-y-hidden">
 			{/* <Blob  /> */}
 			<div className="flex items-center text-light gap-3 mb-8 px-4">
 				<Link to="/account" className="mt-2">
 					<span className="material-symbols-outlined ">arrow_back_ios</span>
 				</Link>
-				<h2 className="subtitle-heading text-lightest ">Request Details</h2>
+				<h2 className="title-heading text-lightest ">Request Details</h2>
 			</div>
-			<div className="bg-light card-shadow rounded-lg p-3 mx-4 flex flex-col gap-5 mb-6">
+			<div className="bg-light  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
 				<div className="flex justify-between items-center rounded-lg ">
 					<div className="flex justify-center items-center gap-2 ">
 						<img
@@ -148,11 +178,11 @@ export default function RequestDetailPage() {
 							src={categoryIcons[request.category_id]}
 							alt={request.category}
 						/>
-						<p className="subtitle-heading">
+						<p className="title-heading">
 							{request.category[0].toUpperCase() + request.category.slice(1)}
 						</p>
 					</div>
-					<p className="body-text flex items-center gap-">
+					<p className="body-text flex items-center gap-1">
 						<img className="w-5" src={timeIcon} alt="coin" />
 						<span className="subtitle-heading">
 							{request.hours} {request.hours > 1 ? "Hours" : "Hour"}
@@ -216,7 +246,7 @@ export default function RequestDetailPage() {
 										{idx + 1}
 									</p>
 									<div
-										className={`card-shadow rounded-lg p-2 flex  gap-1 body-text w-[100%] ${
+										className={`card-shadow rounded-lg p-2 flex   gap-1 body-text w-[100%] ${
 											task.volunteer_id === currentUser.id
 												? "bg-dark text-lightest"
 												: "bg-light text-dark"
@@ -246,7 +276,7 @@ export default function RequestDetailPage() {
 									<p className="text-3xl label-text  numbers-shadow">
 										{idx + 1}
 									</p>
-									<div className="bg-light card-shadow rounded-lg p-2 flex  gap-1 body-text w-[100%]">
+									<div className="bg-light card-shadow rounded-lg p-2 flex justify-between  gap-1 body-text w-[100%]">
 										<p className="">{task.description}</p>
 										<p className="body-text flex items-center gap-1  w-[20%]">
 											<img className="w-4" src={coin} alt="coin" />
@@ -262,10 +292,14 @@ export default function RequestDetailPage() {
 					);
 				})}
 			</ul>
-			<div className="m-4">
+			<div className="mx-4">
 				<button
 					onClick={() => tryCommitToTask()}
-					className="title-heading bg-secondary w-full rounded py-3 text-lightest "
+					className={`subtitle-heading  w-full card-shadow rounded-lg py-3 text-lightest ${
+						!selectedTask
+							? "opacity-40 pointer-events-none bg-dark"
+							: "bg-primary"
+					} `}
 				>
 					Commit
 				</button>
@@ -279,6 +313,11 @@ export default function RequestDetailPage() {
 			{isError && (
 				<AlertMessage alertMessage={alertMessage} setIsError={setIsError} />
 			)}
+			<img
+				src={blobShape}
+				alt="graphic blob"
+				className=" w-full translate-y-20 absolute bottom-0 left-0"
+			/>
 		</div>
 	);
 }

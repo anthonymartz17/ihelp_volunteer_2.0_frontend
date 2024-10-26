@@ -86,7 +86,7 @@ export default function Commitments() {
 						{tasks.map((task) => (
 							<tr
 								key={task.id}
-								className=" odd:bg-red even:bg-lightest even:bg-opacity-20"
+								className=" odd:bg-red even:bg-lightest even:bg-opacity-20 "
 							>
 								<td className="p-2 flex items-center gap-2">
 									<img
@@ -102,7 +102,7 @@ export default function Commitments() {
 										<span>{task.points}</span>
 									</div>
 								</td>
-								<td className="p-2 flex">{task.date}</td>
+								<td className="p-2 flex items-center">{task.date}</td>
 							</tr>
 						))}
 					</tbody>

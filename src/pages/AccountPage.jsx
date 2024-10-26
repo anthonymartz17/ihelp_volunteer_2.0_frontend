@@ -14,10 +14,22 @@ const bgColors = {
 
 export default function AccountPage() {
 	const location = useLocation();
-	console.log(location, "location.pathname");
+
+	function getBgColor() {
+		if (
+			location.pathname === "/account" ||
+			location.pathname === "/account/profile" ||
+			location.pathname === "/account/help" ||
+			location.pathname.startsWith("/account/quest")
+		) {
+			return "bg-primary";
+		} else {
+			return "bg-secondary";
+		}
+	}
 
 	return (
-		<div className="bg-primary h-screen">
+		<div className={`${getBgColor()} h-screen w-screen overflow-y-scroll`}>
 			<header className="h-[10%] mb-2">
 				<Header />
 			</header>

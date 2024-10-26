@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import SwitchToggleButton from "../componets/UI/switchTogglerButton";
+import blobShape from "../assets/graphics/blop_no_backdrop.svg";
+import AvatarFrame from "../componets/UI/AvatarFrame";
 const leaderboardData = [
 	{
 		volunteer_id: 1,
@@ -12,7 +14,7 @@ const leaderboardData = [
 		volunteer_id: 2,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Karen Doe",
+		username: "Kevin Smith",
 		points: 90,
 	},
 	{
@@ -33,14 +35,14 @@ const leaderboardData = [
 		volunteer_id: 5,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Karen Doe",
+		username: "Kevin Davis",
 		points: 90,
 	},
 	{
 		volunteer_id: 6,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "Bob Smith",
+		username: "David Elm",
 		points: 80,
 	},
 	{
@@ -52,6 +54,33 @@ const leaderboardData = [
 	},
 ];
 
+const topThree = [
+	{
+		volunteer_id: 2,
+		avatar_url:
+			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
+		username: "Karen Julien",
+		points: 90,
+		ranking: 2,
+	},
+	{
+		volunteer_id: 1,
+		avatar_url:
+			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+		username: "John Johnson",
+		points: 100,
+		ranking: 1,
+	},
+	{
+		volunteer_id: 3,
+		avatar_url:
+			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
+		username: "Cristina Rodriguez",
+		points: 80,
+		ranking: 3,
+	},
+];
+
 export default function LeaderboardPage() {
 	const [leaderboard, setLeaderboard] = useState(leaderboardData);
 
@@ -60,84 +89,81 @@ export default function LeaderboardPage() {
 		setLeaderboard(leaderboardData.sort((a, b) => b.points - a.points));
 	}, []);
 	return (
-		<div className="mt-10 h-[80vh] ">
-			<h1 className="subtitle-heading text-lightest px-4">Leaderboard</h1>
-			<div className="flex flex-col ">
-				<div className="h-[10vh] flex items-center px-4">
-					<SwitchToggleButton option1={"Weekly"} option2={"All Time"} />
-				</div>
-				<div className="flex gap-4 items-end justify-between h-[35vh] px-4">
-					<div className="h-[85%] relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center">
-						<img
-							className="bg-dark rounded-full   p-2 w-20 border-[1px]"
-							src={leaderboard[1].avatar_url}
-							alt={`${leaderboard[1].username}'avatar picture`}
-						/>
-						<p className="body-text text-lightest">{leaderboard[1].username}</p>
-						<p className="label-text bg-light rounded-lg px-2 py-1 mb-6 text-dark input-shadow">
-							{leaderboard[1].points} Points
-						</p>
-						<div className="bg-dark w-[100%] h-[50%] bg-opacity-55 text-lightest grid justify-center items-center border-[1px] rounded-t-lg text-2xl">
-							2
-						</div>
-					</div>
-					<div className="h-[90%]  relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center">
-						<img
-							className="bg-dark rounded-full   p-2 w-20 border-[1px] text-center "
-							src={leaderboard[0].avatar_url}
-							alt={`${leaderboard[0].username}'avatar picture`}
-						/>
-						<p className="body-text text-lightest">{leaderboard[1].username}</p>
-						<p className="label-text bg-light rounded-lg px-2 py-1 mb-6 text-dark input-shadow">
-							{leaderboard[1].points} Points
-						</p>
-						<div className="bg-dark h-[60%] w-[100%]   bg-opacity-55 text-lightest grid justify-center items-center border-[1px] rounded-t-lg text-2xl">
-							1
-						</div>
-					</div>
-					<div className="h-[80%]  relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center">
-						<img
-							className="bg-dark rounded-full   p-2 w-20 border-[1px] text-center "
-							src={leaderboard[2].avatar_url}
-							alt={`${leaderboard[2].username}'avatar picture`}
-						/>
-						<p className="body-text text-lightest">{leaderboard[1].username}</p>
-						<p className="label-text bg-light rounded-lg px-2 py-1 mb-6 text-dark input-shadow">
-							{leaderboard[1].points} Points
-						</p>
-						<div className="bg-dark h-[60%] w-[100%]   bg-opacity-55 text-lightest grid justify-center items-center border-[1px] rounded-t-lg text-2xl">
-							3
-						</div>
-					</div>
-				</div>
-				<div className="fixed bottom-0 right-0 left-0 rounded-t-3xl bg-tertiary border-t-[1px] px-4 text-lightest h-[40vh] pt-5">
-					<ul className="h-[100%] overflow-y-scroll flex flex-col gap-4">
-						{leaderboard.map(
-							(leader, idx) =>
-								idx > 2 && (
-									<li
-										key={leader.volunteer_id}
-										className="flex justify-between items-center py-1 border-b-2 border-light border-opacity-50 "
-									>
-										<p className="text-xl label-text  numbers-shadow flex-auto">
-											{idx + 1}
-										</p>
-										<div className="flex justify-between items-center gap-4 w-[90%]">
-											<img
-												className="bg-dark rounded-full   p-2 w-10 border-[1px]"
-												src={leader.avatar_url}
-												alt={`${leader.username}'avatar picture`}
-											/>
-											<p className="body-text text-lightest">
-												{leader.username}
-											</p>
-											<p className="label-text">{leader.points} Pts</p>
-										</div>
-									</li>
-								)
-						)}
-					</ul>
-				</div>
+		<div className="mt-10 h-screen flex flex-col">
+			<h1 className="subtitle-heading text-lightest px-4  mb-4">Leaderboard</h1>
+
+			<div className="flex items-center px-4 mb-6">
+				<SwitchToggleButton option1={"Weekly"} option2={"All Time"} />
+			</div>
+
+			<ul className="flex gap-4 items-end justify-between px-4 h-[30%]">
+				{topThree.map((player) => {
+					const heightClass =
+						player.ranking === 1
+							? "h-[100%]"
+							: player.ranking === 2
+							? "h-[85%]"
+							: "h-[80%]";
+					const customPadding =
+						player.ranking === 1
+							? "pt-0"
+							: player.ranking === 2
+							? "pt-4"
+							: "pt-8";
+
+					return (
+						<li
+							key={player.volunteer_id}
+							className={`relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center gap-1 h-full ${customPadding}`}
+						>
+							<AvatarFrame
+								avatar={player.avatar_url}
+								size={20}
+								bgColor="secondarylight"
+							/>
+							<div>
+								<p className="body-text text-lightest">{player.username}</p>
+								<p className="subtitle-heading text-light px-2">
+									{player.points} Pts
+								</p>
+							</div>
+							<div className="h-full w-[100%] grid relative">
+								<div
+									className={`absolute bottom-0 bg-dark w-[100%] border-light border-[1px] border-opacity-40 bg-opacity-55 text-lightest grid justify-center items-center rounded-t-lg text-2xl ${heightClass}`}
+								>
+									{player.ranking}
+								</div>
+							</div>
+						</li>
+					);
+				})}
+			</ul>
+
+			<div className=" rounded-t-3xl bg-tertiary border-t-[1px] px-4 text-lightest pt-5 h-[50%]">
+				<ul className="overflow-y-scroll flex flex-col gap-4">
+					{leaderboard.map(
+						(leader, idx) =>
+							idx > 2 && (
+								<li
+									key={leader.volunteer_id}
+									className="flex justify-between items-center    border-b-2 border-light border-opacity-50 py-1 pb-3"
+								>
+									<p className="text-xl label-text  numbers-shadow flex-auto">
+										{idx + 1}
+									</p>
+									<div className="flex justify-between items-center gap-4 w-[90%]">
+										<img
+											className="bg-dark rounded-full   p-2 w-10 border-[1px]"
+											src={leader.avatar_url}
+											alt={`${leader.username}'avatar picture`}
+										/>
+										<p className="body-text text-lightest">{leader.username}</p>
+										<p className="label-text">{leader.points} Pts</p>
+									</div>
+								</li>
+							)
+					)}
+				</ul>
 			</div>
 		</div>
 	);

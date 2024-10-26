@@ -9,14 +9,29 @@ export default {
 				primarydark: "#157569",
 				secondary: "#FF715B",
 				secondarylight: "#ff9d8e",
-				secondaryDark: "#B24F3F",
+				secondarydark: "#B24F3F",
 				tertiary: "#523F38",
 				dark: "#4c5454",
 				light: "#edeeee",
 				lightest: "#FFFFFF",
+				
 			},
 			shadow: {
 				input: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
+			},
+			animation: {
+				"bounce-slow": "bounce 3s ease-in-out infinite",
+				"spin-slow": "spin 6s linear infinite",
+			},
+			keyframes: {
+				bounce: {
+					"0%, 100%": { transform: "translateY(0)" },
+					"50%": { transform: "translateY(-15px)" },
+				},
+				spin: {
+					"0%": { transform: "rotate(0deg)" },
+					"100%": { transform: "rotate(360deg)" },
+				},
 			},
 		},
 	},

@@ -19,13 +19,14 @@ const categoryIcons = {
 	6: mealPrep,
 };
 
-const cardColors = ["tertiary", "secondary", "dark"];
+// const cardColors = ["tertiary", "secondary", "dark"];
+const cardColors = ["test1", "test2", "test3"];
 
 export default function Request({ request, index }) {
 	return (
 		<Link to={`/account/requests/${request.id}`}>
 			<div
-				className={`bg-primarylight p-4 rounded-lg text-lightest card-shadow-primary relative`}
+				className={`bg-primarylight p-4 rounded-lg text-lightest card-shadow-primary relative border-secondary`}
 			>
 				<div className="flex justify-between items-center gap-6 relative  rounded-lg px-1 text-lightest mb-8">
 					<div className="flex justify-center items-center gap-2 ">
@@ -34,7 +35,7 @@ export default function Request({ request, index }) {
 							src={categoryIcons[request.category_id]}
 							alt={request.category}
 						/>
-						<p className="subtitle-heading">
+						<p className="title-heading">
 							{request.category[0].toUpperCase() + request.category.slice(1)}
 						</p>
 					</div>
@@ -63,7 +64,7 @@ export default function Request({ request, index }) {
 					</p>
 					<p className="body-text flex items-center gap-1">
 						<img className="w-5" src={timeIcon} alt="coin" />
-						<span className="title-heading">
+						<span className="subtitle-heading">
 							{request.hours} {request.hours > 1 ? "Hours" : "Hour"}
 						</span>
 					</p>

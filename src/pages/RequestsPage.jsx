@@ -18,7 +18,7 @@ const requests = [
 		id: 1,
 		date: "2023-06-01",
 		category: "errands",
-		points: 30,
+		// points: 30,
 		hours: 2,
 		category_id: 1,
 		tasks_total: 4,
@@ -126,14 +126,14 @@ export default function RequestsPage() {
 				))}
 			</ul>
 			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
-			<div className="relative">
+			{/* <div className="relative"> */}
 				<img src={blobShape} alt="graphic blob" className=" w-full" />
-				<img
+				{/* <img
 					src={logo_white}
 					alt="logo"
 					className="w-28 absolute bottom-0 left-[50%] translate-x-[-50%]"
-				/>
-			</div>
+				/> */}
+			{/* </div> */}
 		</div>
 	);
 }
