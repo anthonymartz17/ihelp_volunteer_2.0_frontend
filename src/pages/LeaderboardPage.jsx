@@ -7,49 +7,49 @@ const leaderboardData = [
 		volunteer_id: 1,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
-		username: "John Doe",
+		username: "John",
 		points: 100,
 	},
 	{
 		volunteer_id: 2,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Kevin Smith",
+		username: "Kevin",
 		points: 90,
 	},
 	{
 		volunteer_id: 3,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "Bob Smith",
+		username: "Bob",
 		points: 80,
 	},
 	{
 		volunteer_id: 4,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
-		username: "Alice Johnson",
+		username: "Alice",
 		points: 70,
 	},
 	{
 		volunteer_id: 5,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Kevin Davis",
+		username: "Kevin",
 		points: 90,
 	},
 	{
 		volunteer_id: 6,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "David Elm",
+		username: "David",
 		points: 80,
 	},
 	{
 		volunteer_id: 7,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
-		username: "Alice Johnson",
+		username: "Alice",
 		points: 70,
 	},
 ];
@@ -59,7 +59,7 @@ const topThree = [
 		volunteer_id: 2,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Karen Julien",
+		username: "Karen",
 		points: 90,
 		ranking: 2,
 	},
@@ -67,7 +67,7 @@ const topThree = [
 		volunteer_id: 1,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
-		username: "John Johnson",
+		username: "John",
 		points: 100,
 		ranking: 1,
 	},
@@ -75,7 +75,7 @@ const topThree = [
 		volunteer_id: 3,
 		avatar_url:
 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "Cristina Rodriguez",
+		username: "Cristina",
 		points: 80,
 		ranking: 3,
 	},

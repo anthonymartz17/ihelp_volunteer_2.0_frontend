@@ -13,7 +13,7 @@ const currentUser = {
 		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 };
 
-export default function CelebrationModal({ hours = 2, points = 50 }) {
+export default function CelebrationModal({ hours = 2, points = 55 }) {
 	const celebration = useRef(null);
 
 	useEffect(() => {
@@ -34,10 +34,10 @@ export default function CelebrationModal({ hours = 2, points = 50 }) {
 					Thank you for the help,
 					<span> {currentUser.username}</span>!
 				</p>
-				<p className="mb-10">
+				<p className="my-4 body-text text-dark">
 					Keep up the great work. You've earned the following!
 				</p>
-				<div className="flex  items-center justify-center gap-3 mb-5">
+				<div className="flex w-full   items-center justify-between gap-3 mb-10">
 					<div>
 						<img src={coin} alt="" className="w-8 inline-block mr-2" />
 						<span>{points} points</span>
@@ -51,7 +51,7 @@ export default function CelebrationModal({ hours = 2, points = 50 }) {
 
 				<Link
 					to="/account"
-					className="body-text-regular bg-secondary w-full rounded py-3 text-lightest mb-5 text-center "
+					className="body-text-regular bg-secondary w-full rounded py-3 text-lightest mb-2 text-center "
 				>
 					Find another task
 				</Link>

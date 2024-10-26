@@ -39,7 +39,7 @@ const currentUser = {
 	id: 10,
 	username: "user123",
 	avatar_url:
-		"https://icons.iconarchive.com/icons/hopstarter/bioman/512/Bioman-Avatar-2-Green-icon.png",
+		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 	// avatar_url:
 	// 	"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 };
@@ -117,7 +117,7 @@ export default function QuestPage() {
 				</p>
 			</div>
 
-			<div className="flex justify-center item-center h-[75vh]">
+			<div className="flex mb-5 justify-center item-center">
 				<div className="pl-3 flex flex-col items-center justify-center">
 					<img
 						src={currentUser.avatar_url}
@@ -125,7 +125,7 @@ export default function QuestPage() {
 						className="w-40 h-40  p-4 rounded-full card-shadow  bg-primarylight"
 					/>
 				</div>
-				<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center">
+				<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center ">
 					{taskProgress.map((task) => (
 						<li
 							key={task.id}
@@ -153,17 +153,17 @@ export default function QuestPage() {
 						</li>
 					))}
 				</ul>
-				{currentStep < 5 && (
-					<div className="fixed bottom-8 left-2 right-2">
-						<button
-							onClick={() => handleNextStep()}
-							className="label-text bg-tertiary w-full rounded py-3 text-lightest "
-						>
-							{buttonText[currentStep]}
-						</button>
-					</div>
-				)}
 			</div>
+			{currentStep < 5 && (
+				<div className="m-4">
+					<button
+						onClick={() => handleNextStep()}
+						className="label-text bg-tertiary w-full rounded py-3 text-lightest "
+					>
+						{buttonText[currentStep]}
+					</button>
+				</div>
+			)}
 			{currentStep === 5 && <CelebrationModal />}
 		</div>
 	);
