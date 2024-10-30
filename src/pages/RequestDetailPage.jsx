@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
@@ -15,6 +15,7 @@ import location from "../assets/icons/location.svg";
 import ConfirmationAlert from "../componets/UI/ConfirmationAlert";
 import AlertMessage from "../componets/UI/AlertMessage";
 import blobShape from "../assets/graphics/blop_no_backdrop.svg";
+import { useRequestDetail } from "../hooks/useRequestDetails";
 
 const currentUser = {
 	id: 10,
@@ -34,42 +35,44 @@ const categoryIcons = {
 
 export default function RequestDetailPage() {
 	const navigate = useNavigate();
+	const { id } = useParams();
+
+	const { requestDetail, isLoading, error } = useRequestDetail(id);
 
 	const [selectedTask, setSelectedTask] = useState(null);
 	const [isAlertOpen, setIsAlertOpen] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
 	const [selectedAvatarId, setSelectedAvatarId] = useState(null);
-	const [request, setRequest] = useState({
-		id: 1,
-		category: "Pet Care",
-		category_id: 4,
-		date: "2023-06-01",
-		time: "10:00 AM",
-		points: 130,
-		hours: 1,
-		address: {
-			street: "123 Main St",
-			city: "Amityville",
-			state: "NY",
-			zip: "11701",
-		},
-		description:
-			"Walk the dog around the neighborhood, allowing time for exercise, sniffing, and bathroom breaks.",
+	// const [request, setRequest] = useState({
+	// 	id: 1,
+	// 	category: "Pet Care",
+	// 	category_id: 4,
+	// 	date: "2023-06-01",
+	// 	time: "10:00 AM",
+	// 	hours: 1,
+	// 	address: {
+	// 		street: "123 Main St",
+	// 		city: "Amityville",
+	// 		state: "NY",
+	// 		zip: "11701",
+	// 	},
+	// 	description:
+	// 		"Walk the dog around the neighborhood, allowing time for exercise, sniffing, and bathroom breaks.",
 
-		tasks: [
-			{
-				id: 1,
-				description: "Walk the dog.",
-				status: "open",
-				status_id: 1,
-				volunteer_id: 1,
-				volunteer_username: "",
-				volunteer_avatar_url: null,
-				points: 55,
-			},
-		],
-	});
+	// 	tasks: [
+	// 		{
+	// 			id: 1,
+	// 			description: "Walk the dog.",
+	// 			status: "open",
+	// 			status_id: 1,
+	// 			volunteer_id: 1,
+	// 			volunteer_username: "",
+	// 			volunteer_avatar_url: null,
+	// 			points: 55,
+	// 		},
+	// 	],
+	// });
 	// const [request, setRequest] = useState({
 	// 	id: 1,
 	// 	category: "errands",
@@ -136,14 +139,15 @@ export default function RequestDetailPage() {
 	}
 
 	function selectTask(task_idx) {
-		if (request.tasks[task_idx].volunteer_id) {
-			request.tasks[task_idx].volunteer_id = null;
-			request.tasks[task_idx].volunteer_avatar_url = null;
+		if (requestDetail.tasks[task_idx].volunteer_id) {
+			requestDetail.tasks[task_idx].volunteer_id = null;
+			requestDetail.tasks[task_idx].volunteer_avatar_url = null;
 			setSelectedTask(null);
 		} else {
-			request.tasks[task_idx].volunteer_id = currentUser.id;
-			request.tasks[task_idx].volunteer_avatar_url = currentUser.avatar_url;
-			setSelectedTask(request.tasks[task_idx]);
+			requestDetail.tasks[task_idx].volunteer_id = currentUser.id;
+			requestDetail.tasks[task_idx].volunteer_avatar_url =
+				currentUser.avatar_url;
+			setSelectedTask(requestDetail.tasks[task_idx]);
 		}
 	}
 
@@ -158,7 +162,7 @@ export default function RequestDetailPage() {
 	function handleCommitToTask() {
 		// Update the task status to "assigned"
 
-		navigate(`/account/quest/request/${request.id}/task/:id`);
+		navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
 	}
 
 	return (
@@ -170,140 +174,163 @@ export default function RequestDetailPage() {
 				</Link>
 				<h2 className="title-heading text-lightest ">Request Details</h2>
 			</div>
-			<div className="bg-light  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
-				<div className="flex justify-between items-center rounded-lg ">
-					<div className="flex justify-center items-center gap-2 ">
-						<img
-							className="w-12"
-							src={categoryIcons[request.category_id]}
-							alt={request.category}
-						/>
-						<p className="title-heading">
-							{request.category[0].toUpperCase() + request.category.slice(1)}
+			{isLoading && (
+				<div className="flex justify-center pt-40 h-screen">
+					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
+				</div>
+			)}
+			{error && (
+				<div className="flex justify-center items-center h-screen">
+					<div className="text-center">
+						<p className="text-2xl font-bold mb-4">
+							Oops! Something went wrong.
+						</p>
+						<p className="text-lg">
+							Please try again later or contact support.
 						</p>
 					</div>
-					<p className="body-text flex items-center gap-1">
-						<img className="w-5" src={timeIcon} alt="coin" />
-						<span className="subtitle-heading">
-							{request.hours} {request.hours > 1 ? "Hours" : "Hour"}
-						</span>
-					</p>
 				</div>
-				<div className="flex gap-1  justify-between body-text ">
-					<p className="flex items-center gap-1">
-						<img src={calendar} alt="" className="w-6" />
-						<span className="pt-1">{request.date}</span>
-					</p>
-					<p className="flex items-center ">
-						<img src={clock} alt="" className="w-6" />
-						<span className="pt-1">{request.time}</span>
-					</p>
-					<p className="flex items-center ">
-						<img src={location} alt="" className="w-6" />
-						<span className="pt-1">
-							{request.address.city}, {request.address.state}
-						</span>
-					</p>
-				</div>
+			)}
+			{!isLoading && !error && (
 				<div>
-					<h2 className="label-text">Description:</h2>
-					<p className="body-text">{request.description}</p>
-				</div>
-			</div>
-			<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
-			<ul className="px-4 ">
-				{request.tasks.map((task, idx) => {
-					return (
-						<li key={task.id} className="mb-4 relative ">
-							{selectedAvatarId && selectedAvatarId === task.id && (
-								<div
-									onClick={() => toggleUsername()}
-									className="absolute -top-8 flex  gap-2 pl-2 right-6 bg-dark  rounded-lg border-2 border-lightest "
-								>
-									<p className="text-lightest">{task.volunteer_username}</p>
-									<span className="material-symbols-outlined bg-light   text-dark">
-										cancel
-									</span>
-								</div>
-							)}
-							{task.volunteer_avatar_url && (
+					<div className="bg-light  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
+						<div className="flex justify-between items-center rounded-lg ">
+							<div className="flex justify-center items-center gap-2 ">
 								<img
-									id={task.id}
-									onClick={() => toggleUsername(task.id)}
-									src={task.volunteer_avatar_url}
-									alt=""
-									className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"
+									className="w-12"
+									src={categoryIcons[requestDetail.category_id]}
+									alt={requestDetail.category}
 								/>
-							)}
-							{task.volunteer_id === currentUser.id ? (
-								<div
-									onClick={() => {
-										selectTask(idx);
-									}}
-									className="flex cursor-pointer items-center gap-2 "
-								>
-									<p className="text-3xl label-text  numbers-shadow">
-										{idx + 1}
-									</p>
-									<div
-										className={`card-shadow rounded-lg p-2 flex   gap-1 body-text w-[100%] ${
-											task.volunteer_id === currentUser.id
-												? "bg-dark text-lightest"
-												: "bg-light text-dark"
-										}`}
-									>
-										<p className="">{task.description}</p>
-										<p className="body-text flex items-center gap-1  w-[20%]">
-											<img className="w-4" src={coin} alt="coin" />
-
-											<span className="body-text text-sm label-text">
-												{task.points} Pts
+								<p className="title-heading">
+									{requestDetail.category[0].toUpperCase() +
+										requestDetail.category.slice(1)}
+								</p>
+							</div>
+							<p className="body-text flex items-center gap-1">
+								<img className="w-5" src={timeIcon} alt="coin" />
+								<span className="subtitle-heading">
+									{requestDetail.hours}{" "}
+									{requestDetail.hours > 1 ? "Hours" : "Hour"}
+								</span>
+							</p>
+						</div>
+						<div className="flex gap-1  justify-between body-text ">
+							<p className="flex items-center gap-1">
+								<img src={calendar} alt="" className="w-6" />
+								<span className="pt-1">{requestDetail.date}</span>
+							</p>
+							<p className="flex items-center ">
+								<img src={clock} alt="" className="w-6" />
+								<span className="pt-1">{requestDetail.time}</span>
+							</p>
+							<p className="flex items-center ">
+								<img src={location} alt="" className="w-6" />
+								<span className="pt-1">
+									{requestDetail.address.city}, {requestDetail.address.state}
+								</span>
+							</p>
+						</div>
+						<div>
+							<h2 className="label-text">Description:</h2>
+							<p className="body-text">{requestDetail.description}</p>
+						</div>
+					</div>
+					<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
+					<ul className="px-4 ">
+						{requestDetail.tasks.map((task, idx) => {
+							return (
+								<li key={task.id} className="mb-4 relative ">
+									{selectedAvatarId && selectedAvatarId === task.id && (
+										<div
+											onClick={() => toggleUsername()}
+											className="absolute -top-8 flex  gap-2 pl-2 right-6 bg-dark  rounded-lg border-2 border-lightest "
+										>
+											<p className="text-lightest">{task.volunteer_username}</p>
+											<span className="material-symbols-outlined bg-light   text-dark">
+												cancel
 											</span>
-										</p>
-									</div>
-								</div>
-							) : (
-								<div
-									onClick={() => {
-										selectTask(idx);
-									}}
-									className={`flex cursor-pointer items-center gap-2 ${
-										task.status_id !== 1 || selectedTask
-											? "opacity-40 pointer-events-none"
-											: ""
-									}`}
-								>
-									<p className="text-3xl label-text  numbers-shadow">
-										{idx + 1}
-									</p>
-									<div className="bg-light card-shadow rounded-lg p-2 flex justify-between  gap-1 body-text w-[100%]">
-										<p className="">{task.description}</p>
-										<p className="body-text flex items-center gap-1  w-[20%]">
-											<img className="w-4" src={coin} alt="coin" />
+										</div>
+									)}
+									{task.volunteer_avatar_url && (
+										<img
+											id={task.id}
+											onClick={() => toggleUsername(task.id)}
+											src={task.volunteer_avatar_url}
+											alt=""
+											className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"
+										/>
+									)}
+									{task.volunteer_id === currentUser.id ? (
+										<div
+											onClick={() => {
+												selectTask(idx);
+											}}
+											className="flex cursor-pointer items-center gap-2 "
+										>
+											<p className="text-3xl label-text  numbers-shadow">
+												{idx + 1}
+											</p>
+											<div
+												className={`card-shadow rounded-lg p-2 flex   gap-1 body-text w-[100%] ${
+													task.volunteer_id === currentUser.id
+														? "bg-dark text-lightest"
+														: "bg-light text-dark"
+												}`}
+											>
+												<p className="">{task.description}</p>
+												<p className="body-text flex items-center gap-1  w-[20%]">
+													<img className="w-4" src={coin} alt="coin" />
 
-											<span className="body-text text-sm label-text">
-												{task.points} Pts
-											</span>
-										</p>
-									</div>
-								</div>
-							)}
-						</li>
-					);
-				})}
-			</ul>
-			<div className="mx-4">
-				<button
-					onClick={() => tryCommitToTask()}
-					className={`subtitle-heading  w-full card-shadow rounded-lg py-3 text-lightest ${
-						!selectedTask
-							? "opacity-40 pointer-events-none bg-dark"
-							: "bg-primary"
-					} `}
-				>
-					Commit
-				</button>
-			</div>
+													<span className="body-text text-sm label-text">
+														{task.points} Pts
+													</span>
+												</p>
+											</div>
+										</div>
+									) : (
+										<div
+											onClick={() => {
+												selectTask(idx);
+											}}
+											className={`flex cursor-pointer items-center gap-2 ${
+												task.status_id !== 1 || selectedTask
+													? "opacity-40 pointer-events-none"
+													: ""
+											}`}
+										>
+											<p className="text-3xl label-text  numbers-shadow">
+												{idx + 1}
+											</p>
+											<div className="bg-light card-shadow rounded-lg p-2 flex justify-between  gap-1 body-text w-[100%]">
+												<p className="">{task.description}</p>
+												<p className="body-text flex items-center gap-1  w-[20%]">
+													<img className="w-4" src={coin} alt="coin" />
+
+													<span className="body-text text-sm label-text">
+														{task.points} Pts
+													</span>
+												</p>
+											</div>
+										</div>
+									)}
+								</li>
+							);
+						})}
+					</ul>
+					<div className="mx-4">
+						<button
+							onClick={() => tryCommitToTask()}
+							className={`subtitle-heading  w-full card-shadow rounded-lg py-3 text-lightest ${
+								!selectedTask
+									? "opacity-40 pointer-events-none bg-dark"
+									: "bg-primary"
+							} `}
+						>
+							Commit
+						</button>
+					</div>
+				</div>
+			)}
 			{isAlertOpen && (
 				<ConfirmationAlert
 					onHandleCommitToTask={handleCommitToTask}

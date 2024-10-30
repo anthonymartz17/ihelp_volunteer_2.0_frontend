@@ -10,6 +10,7 @@ import coin from "../assets/icons/coin.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
 import timeIcon from "../assets/icons/time_icon_light.svg";
 import { formatDate } from "../utils/formatters";
+
 const categoryIcons = {
 	1: errandIcon,
 	2: cleaningIcon,
@@ -18,9 +19,6 @@ const categoryIcons = {
 	5: variousIcon,
 	6: mealPrep,
 };
-
-// const cardColors = ["tertiary", "secondary", "dark"];
-const cardColors = ["test1", "test2", "test3"];
 
 export default function Request({ request, index }) {
 	return (
