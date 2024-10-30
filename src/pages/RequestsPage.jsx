@@ -4,7 +4,7 @@ import RequestCard from "../componets/RequestCard";
 import FiltersMenu from "../componets/FiltersMenu";
 import blobShape from "../assets/graphics/bottom_blob_shape.svg";
 import logo_white from "../assets/logo/white_bg_logo.svg";
-
+import ServerError from "../componets/UI/ServerError";
 import { useRequests } from "../hooks/useRequets";
 /*
 task status:
@@ -14,7 +14,6 @@ task status:
 4. completed
 5. cancelled
 */
-
 
 export default function RequestsPage() {
 	const { requests, isLoading, error } = useRequests();
@@ -39,18 +38,7 @@ export default function RequestsPage() {
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
 				</div>
 			)}
-			{error && (
-				<div className="flex justify-center items-center h-screen">
-					<div className="text-center">
-						<p className="text-2xl font-bold mb-4">
-							Oops! Something went wrong.
-						</p>
-						<p className="text-lg">
-							Please try again later or contact support.
-						</p>
-					</div>
-				</div>
-			)}
+			{error && <ServerError />}
 			{!isLoading && !error && (
 				<ul className="grid grid-cols-1 md:grid-cols-2  gap-4 overflow-y-auto rounded-lg p-4 h-[80vh] ">
 					{requests.map((request, index) => (

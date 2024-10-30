@@ -2,7 +2,7 @@ const baseURL = import.meta.env.VITE_IHELP_API_URL;
 
 export async function fetchOpenRequests() {
 	try {
-		const response = await fetch(`${baseURL}/requests`);
+		const response = await fetch(`${baseURL}/open-requests`);
 		if (!response.ok) {
 			throw new Error("Network response was not ok");
 		}
@@ -15,7 +15,7 @@ export async function fetchOpenRequests() {
 
 export async function fetchRequestDetail(requestId) {
 	try {
-		const response = await fetch(`${baseURL}/requests/${requestId}`);
+		const response = await fetch(`${baseURL}/open-requests/${requestId}`);
 		if (!response.ok) {
 			throw new Error("Network response was not ok");
 		}

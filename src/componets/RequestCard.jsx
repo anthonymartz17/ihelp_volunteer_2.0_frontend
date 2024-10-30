@@ -1,23 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import errandIcon from "../assets/icons/errand_icon.svg";
 import cleaningIcon from "../assets/icons/cleaning_icon.svg";
 import technologyIcon from "../assets/icons/technology_icon.svg";
 import petCareIcon from "../assets/icons/pet_care_icon.svg";
 import variousIcon from "../assets/icons/various_icon.svg";
-import calendar from "../assets/icons/calendar.svg";
-import coin from "../assets/icons/coin.svg";
 import mealPrep from "../assets/icons/mealprep_icon.svg";
+import craftIcon from "../assets/icons/craft_icon.svg";
+import eventIcon from "../assets/icons/event_icon.svg";
+import gardeningIcon from "../assets/icons/gardening_icon.svg";
+import officeIcon from "../assets/icons/office_icon.svg";
+import sportCoachingIcon from "../assets/icons/sport_coaching_icon.svg";
+import tutoringIcon from "../assets/icons/tutoring_icon.svg";
+import calendar from "../assets/icons/calendar.svg";
 import timeIcon from "../assets/icons/time_icon_light.svg";
 import { formatDate } from "../utils/formatters";
 
 const categoryIcons = {
-	1: errandIcon,
-	2: cleaningIcon,
+	1: variousIcon,
+	2: errandIcon,
 	3: technologyIcon,
-	4: petCareIcon,
-	5: variousIcon,
-	6: mealPrep,
+	4: cleaningIcon,
+	5: petCareIcon,
+	6: gardeningIcon,
+	7: tutoringIcon,
+	8: mealPrep,
+	9: eventIcon,
+	10: sportCoachingIcon,
+	11: craftIcon,
+	12: officeIcon,
 };
 
 export default function Request({ request, index }) {

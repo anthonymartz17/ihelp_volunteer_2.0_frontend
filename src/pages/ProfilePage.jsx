@@ -9,6 +9,7 @@ import BottomBlopShape from "../assets/graphics/blop_no_backdrop.svg";
 import { formatDate } from "../utils/formatters";
 import { useProfile } from "../hooks/useProfile";
 import { useEffect, useState } from "react";
+import ServerError from "../componets/UI/ServerError";
 
 // const userBadges = {
 // 	1: true,
@@ -84,18 +85,7 @@ export default function ProfilePage() {
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
 				</div>
 			)}
-			{error && (
-				<div className="flex justify-center items-center h-screen">
-					<div className="text-center">
-						<p className="text-2xl font-bold mb-4">
-							Oops! Something went wrong.
-						</p>
-						<p className="text-lg">
-							Please try again later or contact support.
-						</p>
-					</div>
-				</div>
-			)}
+			{error && <ServerError />}
 			{!isLoading && !error && (
 				<div>
 					<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
