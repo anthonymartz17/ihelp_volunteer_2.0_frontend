@@ -25,3 +25,15 @@ export async function fetchRequestDetail(requestId) {
 		throw error;
 	}
 }
+export async function fetchVolunteerProfile(volunteerId) {
+	try {
+		const response = await fetch(`${baseURL}/${volunteerId}/profile`);
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}

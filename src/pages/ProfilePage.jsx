@@ -6,12 +6,15 @@ import fiveTaskStreakBadge from "../assets/badges/badge_five_task_streak.svg";
 import fifteenTaskStreakBadge from "../assets/badges/badge_fifteen_task_streak.svg";
 import rewardShape from "../assets/graphics/reward_shape.svg";
 import BottomBlopShape from "../assets/graphics/blop_no_backdrop.svg";
+import { formatDate } from "../utils/formatters";
+import { useProfile } from "../hooks/useProfile";
+import { useEffect, useState } from "react";
 
-const userBadges = {
-	1: true,
-	4: true,
-	5: true,
-};
+// const userBadges = {
+// 	1: true,
+// 	4: true,
+// 	5: true,
+// };
 
 const badgelist = [
 	{
@@ -65,114 +68,117 @@ const badgelist = [
 ];
 
 export default function ProfilePage() {
-	const currentUser = {
-		id: 10,
-		username: "Christopher",
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		total_points: 90,
-		start_date: "jun, 2023",
-		badges: [1, 4, 5],
-		rewards: [
-			{
-				id: 1,
-				reward_name: "Bike",
-				reward_description: "A new bike",
-				reward_icon_url: "https://pngimg.com/d/bicycle_PNG102562.png",
-			},
-			{
-				id: 2,
-				reward_name: "Book",
-				reward_description: "A stack of books",
-				reward_icon_url: "https://pngimg.com/d/book_PNG51097.png",
-			},
-			{
-				id: 3,
-				reward_name: "Gift Card",
-				reward_description: "A $50 gift card",
-				reward_icon_url:
-					"https://cdn-icons-png.flaticon.com/512/612/612886.png",
-			},
-		],
-	};
+	const { currentUserProfile, isLoading, error } = useProfile(3);
+	const [userBadges, setUserBadges] = useState(null);
+
+	useEffect(() => {
+		setUserBadges(new Set(currentUserProfile.badges));
+	}, [currentUserProfile]);
+
 	return (
 		<div className="p-4 mt-5 grid gap-8 bg-primary">
 			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
-			<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
-				<div className="flex items-center gap-4">
-					<img
-						className="bg-dark rounded-full border-2  border-lightest   p-2 w-24"
-						src={currentUser.avatar_url}
-						alt={`${currentUser.username}'avatar picture`}
-					/>
-					<div>
-						<p className="body-text">{currentUser.username}</p>
-						<p className="label-text">{currentUser.total_points} Points</p>
+
+			{isLoading && (
+				<div className="flex justify-center pt-40 h-screen">
+					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
+				</div>
+			)}
+			{error && (
+				<div className="flex justify-center items-center h-screen">
+					<div className="text-center">
+						<p className="text-2xl font-bold mb-4">
+							Oops! Something went wrong.
+						</p>
+						<p className="text-lg">
+							Please try again later or contact support.
+						</p>
 					</div>
 				</div>
+			)}
+			{!isLoading && !error && (
 				<div>
-					<p className="label-text">Since</p>
-					<p className="body-text">{currentUser.start_date}</p>
-				</div>
-			</div>
-			<div>
-				<div className="flex justify-between items-center">
-					<h2 className="subtitle-heading text-lightest mb-4">Badges</h2>
-					<span className="text-lightest ">See All</span>
-				</div>
+					<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
+						<div className="flex items-center gap-4">
+							<img
+								className="bg-dark rounded-full border-2  border-lightest   p-2 w-24"
+								src={currentUserProfile.avatar_url}
+								alt={`${currentUserProfile.username}'avatar picture`}
+							/>
+							<div>
+								<p className="body-text">{currentUserProfile.username}</p>
+								<p className="label-text">
+									{currentUserProfile.total_points} Points
+								</p>
+							</div>
+						</div>
+						<div>
+							<p className="label-text">Since</p>
+							<p className="body-text">
+								{formatDate(currentUserProfile.start_date)}
+							</p>
+						</div>
+					</div>
+					<div>
+						<div className="flex justify-between items-center">
+							<h2 className="subtitle-heading text-lightest mb-4">Badges</h2>
+							<span className="text-lightest ">See All</span>
+						</div>
 
-				<ul className="grid grid-cols-3 gap-4 justify-between">
-					{badgelist.map((badge) => {
-						return (
-							<li
-								key={badge.id}
-								className={`flex items-center gap-4 ${
-									!userBadges[badge.id] ? "opacity-25" : ""
-								}`}
-							>
-								<img
-									className="w-30"
-									src={badge.badge_icon}
-									alt={`${badge.badge_name} badge`}
-								/>
-							</li>
-						);
-					})}
-				</ul>
-			</div>
-			<div className="z-10">
-				<div className="flex justify-between items-center">
-					<h2 className="subtitle-heading text-lightest mb-4">Rewards</h2>
-					<span className="text-lightest ">See All</span>
-				</div>
-				<div>
-					{currentUser.rewards.length > 0 ? (
-						<ul className="grid grid-cols-3 gap-4">
-							{currentUser.rewards.map((reward) => {
+						<ul className="grid grid-cols-3 gap-4 justify-between">
+							{badgelist.map((badge) => {
 								return (
 									<li
-										key={reward.id}
-										className="flex flex-col items-center gap-2 relative"
+										key={badge.id}
+										className={`flex items-center gap-4 ${
+											!userBadges.has(badge.id) ? "opacity-25" : ""
+										}`}
 									>
 										<img
-											className="w-28"
-											src={rewardShape}
-											alt={`${reward.reward_name} reward`}
-										/>
-										<img
-											className="w-26 h-24 object-contain absolute top-0 -left-2" // Adjust the size here
-											src={reward.reward_icon_url}
-											alt={`${reward.reward_name} reward`}
+											className="w-30"
+											src={badge.badge_icon}
+											alt={`${badge.badge_name} badge`}
 										/>
 									</li>
 								);
 							})}
 						</ul>
-					) : (
-						<p className="body-text">No rewards yet</p>
-					)}
+					</div>
+					<div className="z-10">
+						<div className="flex justify-between items-center">
+							<h2 className="subtitle-heading text-lightest mb-4">Rewards</h2>
+							<span className="text-lightest ">See All</span>
+						</div>
+						<div>
+							{currentUserProfile.rewards.length > 0 ? (
+								<ul className="grid grid-cols-3 gap-4">
+									{currentUserProfile.rewards.map((reward) => {
+										return (
+											<li
+												key={reward.id}
+												className="flex flex-col items-center gap-2 relative"
+											>
+												<img
+													className="w-28"
+													src={rewardShape}
+													alt={`${reward.reward_name} reward`}
+												/>
+												<img
+													className="w-26 h-24 object-contain absolute top-0 -left-2" // Adjust the size here
+													src={reward.reward_icon_url}
+													alt={`${reward.reward_name} reward`}
+												/>
+											</li>
+										);
+									})}
+								</ul>
+							) : (
+								<p className="body-text">No rewards yet</p>
+							)}
+						</div>
+					</div>
 				</div>
-			</div>
+			)}
 			{/* <img
 				src={BottomBlopShape}
 				alt="blop shape"
