@@ -37,3 +37,16 @@ export async function fetchVolunteerProfile(volunteerId) {
 		throw error;
 	}
 }
+
+export async function fetchLeaderboardVolunteers() {
+	try {
+		const response = await fetch(`${baseURL}/leaderboard`);
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}
