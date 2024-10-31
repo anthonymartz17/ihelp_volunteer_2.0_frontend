@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export default function switchToggleButton({ option1, option2 }) {
+export default function switchToggleButton({
+	option1,
+	option2,
+	onSwitchRanking,
+}) {
 	const [selected, setSelected] = useState(option1);
 
 	return (
@@ -15,7 +19,10 @@ export default function switchToggleButton({ option1, option2 }) {
 				className={`body-text-regular z-10 px-4 py-2 rounded-lg transition duration-300 ${
 					selected === option1 ? "text-lightest" : "text-dark "
 				}`}
-				onClick={() => setSelected(option1)}
+				onClick={() => {
+					setSelected(option1);
+					onSwitchRanking("Points");
+				}}
 			>
 				{option1}
 			</button>
@@ -24,7 +31,10 @@ export default function switchToggleButton({ option1, option2 }) {
 				className={`body-text-regular z-10 px-4 py-2 rounded-lg transition duration-300 text-center ${
 					selected === option2 ? "text-lightest" : "text-dark"
 				}`}
-				onClick={() => setSelected(option2)}
+				onClick={() => {
+					setSelected(option2);
+					onSwitchRanking("Hours");
+				}}
 			>
 				{option2}
 			</button>

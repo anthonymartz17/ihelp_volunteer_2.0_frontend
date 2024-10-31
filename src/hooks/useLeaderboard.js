@@ -11,14 +11,20 @@ export function useLeaderboard() {
 			try {
 				setIsLoading(true);
 				const data = await fetchLeaderboardVolunteers();
-				setRequests(data);
+				setLeaderboardVolunteers(
+					data
+						.sort((a, b) => b.points - a.points)
+						.map((volunteer, index) => ({
+							...volunteer,
+							ranking: index + 1,
+						}))
+				);
 			} catch (err) {
 				setError(err);
 			} finally {
 				setIsLoading(false);
 			}
 		}
-
 		loadLeaderboardVolunteers();
 	}, []);
 

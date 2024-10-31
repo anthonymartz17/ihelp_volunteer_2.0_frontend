@@ -4,58 +4,58 @@ import blobShape from "../assets/graphics/blop_no_backdrop.svg";
 import AvatarFrame from "../componets/UI/AvatarFrame";
 
 import { useLeaderboard } from "../hooks/useLeaderboard";
-const leaderboardData = [
-	{
-		volunteer_id: 1,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
-		username: "John",
-		points: 100,
-		hours: 10,
-	},
-	{
-		volunteer_id: 2,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Kevin",
-		points: 90,
-	},
-	{
-		volunteer_id: 3,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "Bob",
-		points: 80,
-	},
-	{
-		volunteer_id: 4,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
-		username: "Alice",
-		points: 70,
-	},
-	{
-		volunteer_id: 5,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-		username: "Kevin",
-		points: 90,
-	},
-	{
-		volunteer_id: 6,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
-		username: "David",
-		points: 80,
-	},
-	{
-		volunteer_id: 7,
-		avatar_url:
-			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
-		username: "Alice",
-		points: 70,
-	},
-];
+// const leaderboardData = [
+// 	{
+// 		volunteer_id: 1,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/White-3-Robot-Avatar-icon.png",
+// 		username: "John",
+// 		points: 100,
+// 		hours: 10,
+// 	},
+// 	{
+// 		volunteer_id: 2,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
+// 		username: "Kevin",
+// 		points: 90,
+// 	},
+// 	{
+// 		volunteer_id: 3,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
+// 		username: "Bob",
+// 		points: 80,
+// 	},
+// 	{
+// 		volunteer_id: 4,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
+// 		username: "Alice",
+// 		points: 70,
+// 	},
+// 	{
+// 		volunteer_id: 5,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
+// 		username: "Kevin",
+// 		points: 90,
+// 	},
+// 	{
+// 		volunteer_id: 6,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Yellow-2-Robot-Avatar-icon.png",
+// 		username: "David",
+// 		points: 80,
+// 	},
+// 	{
+// 		volunteer_id: 7,
+// 		avatar_url:
+// 			"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Red-1-Robot-Avatar-icon.png",
+// 		username: "Alice",
+// 		points: 70,
+// 	},
+// ];
 
 // const topThree = [
 // 	{
@@ -88,20 +88,45 @@ export default function LeaderboardPage() {
 	const { leaderboardVolunteers, isLoading, error, setLeaderboardVolunteers } =
 		useLeaderboard();
 	const [topThree, setTopThree] = useState([]);
+	const [ranking, setRanking] = useState("Points");
+
+	function switchRanking(option) {
+		setRanking(option);
+		if (option === "Points") {
+			setLeaderboardVolunteers((prev) =>
+				[...prev]
+					.sort((a, b) => b.total_points - a.total_points)
+					.map((volunteer, idx) => ({
+						...volunteer,
+						ranking: idx + 1,
+					}))
+			);
+		} else {
+			setLeaderboardVolunteers((prev) =>
+				[...prev]
+					.sort((a, b) => b.total_hours - a.total_hours)
+					.map((volunteer, idx) => ({
+						...volunteer,
+						ranking: idx + 1,
+					}))
+			);
+		}
+		setTopThree([
+			leaderboardVolunteers[1],
+			leaderboardVolunteers[0],
+			leaderboardVolunteers[2],
+		]);
+	}
 
 	useEffect(() => {
-		// fetch leaderboard data from API
-		setLeaderboardVolunteers(
-			leaderboardData
-				.sort((a, b) => b.points - a.points)
-				.map((player, index) => ({
-					...player,
-					ranking: index + 1,
-				}))
-		);
-		const topThree = leaderboardVolunteers.slice(0, 3);
-		setTopThree([topThree[1], topThree[0], topThree[2]]);
-	}, []);
+		if (!isLoading) {
+			setTopThree([
+				leaderboardVolunteers[1],
+				leaderboardVolunteers[0],
+				leaderboardVolunteers[2],
+			]);
+		}
+	}, [leaderboardVolunteers]);
 	return (
 		<div className="mt-10  flex flex-col">
 			<h1 className="subtitle-heading text-lightest px-4  mb-4">
@@ -115,7 +140,11 @@ export default function LeaderboardPage() {
 			)}
 			<div className="h-[81vh] flex flex-col justify-between">
 				<div className="flex items-center px-4 mb-6 ">
-					<SwitchToggleButton option1={"By Points"} option2={"By Hour"} />
+					<SwitchToggleButton
+						option1={"Points"}
+						option2={"Hours"}
+						onSwitchRanking={switchRanking}
+					/>
 				</div>
 
 				<ul className="flex gap-4 items-end justify-between px-4 h-[45%]">
@@ -127,7 +156,7 @@ export default function LeaderboardPage() {
 
 						return (
 							<li
-								key={player.volunteer_id}
+								key={player.id}
 								className={`relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center gap-1 h-full ${customPadding}`}
 							>
 								<AvatarFrame
@@ -138,7 +167,11 @@ export default function LeaderboardPage() {
 								<div>
 									<p className="body-text text-lightest">{player.username}</p>
 									<p className="subtitle-heading text-light px-2">
-										{player.points} Pts
+										{ranking === "Points"
+											? player.total_points
+											: player.total_hours}
+
+										{ranking === "Points" ? " Pts" : " Hrs"}
 									</p>
 								</div>
 								<div className="h-full w-[100%] grid relative">
@@ -153,13 +186,13 @@ export default function LeaderboardPage() {
 					})}
 				</ul>
 
-				<div className=" rounded-t-3xl bg-tertiary border-t-[1px] px-4 text-lightest pt-5 h-[55%]">
-					<ul className="overflow-y-scroll flex flex-col gap-4">
+				<div className=" overflow-y-scroll  rounded-t-3xl bg-tertiary border-t-[1px] px-4 text-lightest pt-5 h-[55%]">
+					<ul className="flex flex-col gap-4">
 						{leaderboardVolunteers.map(
 							(leader, idx) =>
 								idx > 2 && (
 									<li
-										key={leader.volunteer_id}
+										key={leader.id}
 										className="flex justify-between items-center    border-b-2 border-light border-opacity-50 py-1 pb-3"
 									>
 										<p className="text-xl label-text  numbers-shadow flex-auto">
@@ -174,7 +207,13 @@ export default function LeaderboardPage() {
 											<p className="body-text text-lightest">
 												{leader.username}
 											</p>
-											<p className="label-text">{leader.points} Pts</p>
+											<p className="label-text">
+												{ranking === "Points"
+													? leader.total_points
+													: leader.total_hours}
+
+												{ranking === "Points" ? " Pts" : " Hrs"}
+											</p>
 										</div>
 									</li>
 								)
