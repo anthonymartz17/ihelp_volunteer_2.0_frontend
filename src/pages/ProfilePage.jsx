@@ -10,6 +10,7 @@ import { formatDate } from "../utils/formatters";
 import { useProfile } from "../hooks/useProfile";
 import { useEffect, useState } from "react";
 import ServerError from "../componets/UI/ServerError";
+import AvatarFrame from "../componets/UI/AvatarFrame";
 
 // const userBadges = {
 // 	1: true,
@@ -77,7 +78,7 @@ export default function ProfilePage() {
 	}, [currentUserProfile]);
 
 	return (
-		<div className="p-4 mt-5 grid gap-8 bg-primary">
+		<div className="p-4  grid gap-6 bg-primary relative">
 			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
 
 			{isLoading && (
@@ -87,26 +88,44 @@ export default function ProfilePage() {
 			)}
 			{error && <ServerError />}
 			{!isLoading && !error && (
-				<div>
-					<div className="text-lightest flex justify-between items-center bg-dark  bg-opacity-35 border-lightest border-opacity-35   border-[1px] rounded-2xl px-3 py-2">
-						<div className="flex items-center gap-4">
-							<img
-								className="bg-dark rounded-full border-2  border-lightest   p-2 w-24"
-								src={currentUserProfile.avatar_url}
-								alt={`${currentUserProfile.username}'avatar picture`}
-							/>
-							<div>
-								<p className="body-text">{currentUserProfile.username}</p>
-								<p className="label-text">
-									{currentUserProfile.total_points} Points
-								</p>
-							</div>
-						</div>
-						<div>
-							<p className="label-text">Since</p>
+				<>
+					<div className="text-lightest  bg-primarylight  rounded-lg px-2 py-3 relative">
+						<div className="absolute shadow-generic top-0 right-5 bg-primarydark py-1 px-2 rounded-b-lg">
+							<p className="text-light body-text-regular">Since</p>
 							<p className="body-text">
 								{formatDate(currentUserProfile.start_date)}
 							</p>
+						</div>
+						<div className="flex items-center gap-4 border-b-2 border-primary pb-4 border-opacity-50">
+							<AvatarFrame
+								avatar={currentUserProfile.avatar_url}
+								size={24}
+								bgColor="primarylight"
+							/>
+							<p className="label-text">{currentUserProfile.username}</p>
+						</div>
+
+						<div className="flex justify-between py-2">
+							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
+								<p className="body-text">Rank</p>
+								<p className="label-text">{currentUserProfile.total_points}</p>
+							</div>
+							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
+								<p className="body-text">Points</p>
+								<p className="label-text">{currentUserProfile.total_points}</p>
+							</div>
+							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
+								<p className="body-text">Hours</p>
+								<p className="label-text">{currentUserProfile.total_points}</p>
+							</div>
+							<div className=" p-2 flex flex-col items-center flex-1">
+								<p className="body-text">Completed</p>
+
+								<p className="label-text flex items-center gap-1">
+									<span>{currentUserProfile.total_points}</span>
+									<span className="body-text">tasks</span>
+								</p>
+							</div>
 						</div>
 					</div>
 					<div>
@@ -134,7 +153,7 @@ export default function ProfilePage() {
 							})}
 						</ul>
 					</div>
-					<div className="z-10">
+					<div className=" min-h-[300px] mb-[4em]">
 						<div className="flex justify-between items-center">
 							<h2 className="subtitle-heading text-lightest mb-4">Rewards</h2>
 							<span className="text-lightest ">See All</span>
@@ -167,13 +186,13 @@ export default function ProfilePage() {
 							)}
 						</div>
 					</div>
-				</div>
+				</>
 			)}
-			{/* <img
+			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute -bottom-28  left-0 right-0"
-			/> */}
+				className="absolute  bottom-[-10em]  left-0 right-0"
+			/>
 		</div>
 	);
 }
