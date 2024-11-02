@@ -70,8 +70,10 @@ export async function fetchLeaderboardVolunteers(token) {
 export async function commitToTask(taskId, token) {
 	try {
 		const response = await fetch(`${baseURL}/tasks/${taskId}/commit`, {
+			method: "POST",
 			headers: {
 				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
 			},
 		});
 		if (!response.ok) {
