@@ -5,6 +5,7 @@ import requestsIcon from "../assets/icons/requests.svg";
 import commitmentsIcon from "../assets/icons/commitments.svg";
 import helpIcon from "../assets/icons/help.svg";
 import leaderboardIcon from "../assets/icons/leaderboard.svg";
+import { useAuth } from "../context/AuthContext";
 
 const currentUser = true;
 const menuItems = [
@@ -36,6 +37,7 @@ const menuItems = [
 ];
 export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 	const navigate = useNavigate();
+	const { logout } = useAuth();
 
 	return (
 		<>
@@ -69,20 +71,20 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 				</ul>
 
 				<div className="text-center mb-10 px-2">
-					<Link to="/admin/auth">
-						<button
-							onClick={() => signout()}
-							type="button"
-							className="label-text bg-secondary w-full rounded py-3 text-lightest"
-						>
-							Log out
-						</button>
-					</Link>
+					<button
+						onClick={() => logout()}
+						type="button"
+						className="label-text bg-secondary w-full rounded py-3 text-lightest"
+					>
+						Log out
+					</button>
 				</div>
 			</nav>
 			<div
 				onClick={() => onSetIsOpen(false)}
-				className={`md:hidden mobile_menu_backdrop z-20 ${isOpen ? "open" : ""}`}
+				className={`md:hidden mobile_menu_backdrop z-20 ${
+					isOpen ? "open" : ""
+				}`}
 			></div>
 		</>
 	);

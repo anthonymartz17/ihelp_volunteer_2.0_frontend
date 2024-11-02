@@ -86,17 +86,18 @@ export default function RequestDetailPage() {
 	function handleCommitToTask() {
 		// Update the task status to "assigned"
 
-		navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
+		navigate(`/account/commitments`);
 	}
 
 	return (
-		<div className=" text-dark  bg-secondary overflow-y-hidden">
-			{/* <Blob  /> */}
-			<div className="flex items-center text-light gap-3 mb-8 px-4">
+		<div className=" text-dark  bg-secondary  overflow-y-hidden relative min-h-[100vh]  pt-4">
+			<div className="flex items-center  text-light gap-3 mb-12 px-4">
 				<Link to="/account" className="mt-2">
 					<span className="material-symbols-outlined ">arrow_back_ios</span>
 				</Link>
-				<h2 className="title-heading text-lightest ">Request Details</h2>
+				<h2 className="title-heading text-lightest text-center w-full">
+					Request Details
+				</h2>
 			</div>
 			{isLoading && (
 				<div className="flex justify-center pt-40 h-screen">
@@ -235,7 +236,7 @@ export default function RequestDetailPage() {
 					<div className="mx-4">
 						<button
 							onClick={() => tryCommitToTask()}
-							className={`subtitle-heading  w-full card-shadow rounded-lg py-3 text-lightest ${
+							className={`subtitle-heading mb-[15em]  w-full card-shadow rounded-lg py-3 text-lightest ${
 								!selectedTask
 									? "opacity-40 pointer-events-none bg-dark"
 									: "bg-primary"

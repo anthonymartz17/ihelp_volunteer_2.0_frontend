@@ -12,6 +12,16 @@
 * {
 	font-family: "Poppins", sans-serif;
 }
+.title-heading {
+	font-size: 20px;
+	font-weight: 600;
+	font-style: normal;
+}
+.subtitle-heading {
+	font-size: 16px;
+	font-weight: 700;
+	font-style: normal;
+}
 .body-text {
 	font-weight: 300;
 	font-style: normal;
@@ -24,16 +34,6 @@
 }
 .label-text {
 	font-size: 13px;
-	font-weight: 600;
-	font-style: normal;
-}
-.subtitle-heading {
-	font-size: 18px;
-	font-weight: 700;
-	font-style: normal;
-}
-.title-heading {
-	font-size: 22px;
 	font-weight: 600;
 	font-style: normal;
 }
@@ -123,4 +123,14 @@ input[type="range"] {
 	height: 6px;
 	background-color: #007bff;
 	z-index: 2;
+}
+
+.layout-with-header {
+	display: grid;
+	grid-template-rows: 10% 1fr;
+	grid-gap: 20px;
+	height: 100%;
+}
+.layout-no-header {
+	height: 100%;
 }

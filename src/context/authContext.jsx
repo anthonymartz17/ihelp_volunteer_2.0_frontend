@@ -1,21 +1,64 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-const AuthContext = createContext();
+import { auth } from "../../firebase-config";
+import { fetchUser } from "../services/fetch.js";
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	signOut,
+	sendPasswordResetEmail,
+	onAuthStateChanged,
+} from "firebase/auth";
 
-export function AuthProvider({ children }) {
-	const [user, setUser] = useState(null);
+const AuthContext = createContext({
+	currentUser: {},
+	signUp: () => {},
+	login: () => {},
+	logout: () => {},
+	resetPassword: () => {},
+});
 
-	const contexValue = {
+export default function AuthContextProvider({ children }) {
+	const [currentUser, setCurrentUser] = useState({});
+	const [user, setUser] = useState({});
+
+	async function signUp(email, password) {
+		return createUserWithEmailAndPassword(auth, email, password);
+	}
+	async function login(email, password) {
+		const res = await signInWithEmailAndPassword(auth, email, password);
+		// const userData = await fetchUser(res.user.accessToken);
+
+		setUser(userData);
+	}
+	async function logout() {
+		return signOut(auth);
+	}
+	async function resetPassword(email) {
+		return sendPasswordResetEmail(auth, email);
+	}
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			setCurrentUser(user);
+		});
+
+		return () => unsubscribe();
+	}, []);
+
+	const ctxValue = {
+		currentUser,
+		isLoggedIn: !!currentUser,
 		user,
-		setUser,
+		signUp,
+		login,
+		logout,
+		resetPassword,
 	};
 
 	return (
-		<AuthContext.Provider value={contexValue}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>
 	);
 }
 
-
-export function  useAuth() {
-	return useContext(AuthContext);
-} 
+export const useAuth = () => useContext(AuthContext);

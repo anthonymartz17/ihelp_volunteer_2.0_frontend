@@ -43,4 +43,4 @@ export default function ConfirmationAlert({
 		</div>
 	);
 }
-// onClick={() => setIsAlertOpen(false)}
+

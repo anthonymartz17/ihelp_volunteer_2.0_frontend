@@ -59,36 +59,39 @@ const categoryIcons = {
 	6: mealPrep,
 };
 export default function Commitments() {
+	
+		// navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
 	return (
-		<div className="p-4 mt-10 h-[87%] ">
+		<div className="p-4  h-[80vh] relative ">
 			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
 
 			<div className="mb-4">
-				<SwitchToggleButton option1={"Upcoming"} option2={"Completed"} />
+				<SwitchToggleButton option1={"Pending"} option2={"Completed"} />
 			</div>
 
-			<div className="relative overflow-x-auto">
-				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-					<thead className="label-text text-lightest bg-tertiary">
+			<div className="mb-[10em]">
+				<table className="text-sm  text-left rtl:text-right text-gray-500 dark:text-gray-400 w-full">
+					<thead className="label-text text-lightest bg-tertiary sticky top-0">
 						<tr>
-							<th scope="col" className="px-6 py-3">
+							<th scope="col" className="px-6 py-3 w-1/3">
 								Type
 							</th>
-							<th scope="col" className="px-6 py-3">
+							<th scope="col" className="px-6 py-3 w-1/3">
 								Points
 							</th>
-							<th scope="col" className="px-6 py-3">
+							<th scope="col" className="px-6 py-3 w-1/3">
 								Date
 							</th>
 						</tr>
 					</thead>
-					<tbody className="text-lightest body-text">
+					{/* <div className="overflow-y-auto max-h-[40vh] bg-red-700"> */}
+					<tbody className="text-lightest  body-text ">
 						{tasks.map((task) => (
 							<tr
 								key={task.id}
-								className=" odd:bg-red even:bg-lightest even:bg-opacity-20 "
+								className="odd:bg-red even:bg-lightest even:bg-opacity-20  bg-"
 							>
-								<td className="p-2 flex items-center gap-2">
+								<td className="p-2">
 									<img
 										className="w-8"
 										src={categoryIcons[task.category_id]}
@@ -96,22 +99,24 @@ export default function Commitments() {
 									/>
 									<span>{task.category_name}</span>
 								</td>
-								<td className="p-2 ">
+								<td className="p-2">
 									<div className="flex gap-1">
 										<img className="w-5" src={coins} alt="" />
 										<span>{task.points}</span>
 									</div>
 								</td>
-								<td className="p-2 flex items-center">{task.date}</td>
+								<td className="p-2">{task.date}</td>
 							</tr>
 						))}
 					</tbody>
+					{/* </div> */}
 				</table>
 			</div>
+
 			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute -bottom-20 left-0 right-0"
+				className="absolute bottom-[-8em] left-0 right-0"
 			/>
 		</div>
 	);

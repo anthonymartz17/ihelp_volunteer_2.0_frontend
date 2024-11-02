@@ -1,12 +1,13 @@
 import { useState } from "react";
 import AppRoutes from "./router/router";
+import AuthContextProvider from "./context/authContext";	
 import "./App.css";
 
 function App() {
 	return (
-		<div className="h-screen">
+		<AuthContextProvider>
 			<AppRoutes />
-		</div>
+		</AuthContextProvider>
 	);
 }
 

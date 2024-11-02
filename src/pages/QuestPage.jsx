@@ -8,6 +8,7 @@ import onMyWayIcon from "../assets/icons/onmyway_icon.svg";
 import coin from "../assets/icons/coin.svg";
 import blopShape from "../assets/graphics/bottom_blob_shape.svg";
 import CelebrationModal from "../componets/UI/CelebrationModal";
+import AvatarFrame from "../componets/UI/AvatarFrame";
 
 const taskProgress = [
 	{
@@ -67,7 +68,7 @@ export default function QuestPage() {
 	}
 
 	return (
-		<div className="flex flex-col relative">
+		<div className="flex flex-col relative bg-primary h-[100%]">
 			<div className="flex justify-between mx-4 mt-8">
 				<h1 className="subtitle-heading text-lightest">Quest</h1>
 				<p className="body-text flex items-center gap-">
@@ -78,10 +79,10 @@ export default function QuestPage() {
 
 			<div className="flex mb-5 justify-center item-center">
 				<div className="pl-3 flex flex-col items-center justify-center">
-					<img
-						src={currentUser.avatar_url}
-						alt=""
-						className="w-40 h-40  p-4 rounded-full card-shadow  bg-primarylight"
+					<AvatarFrame
+						bgColor="primarylight"
+						avatar={currentUser.avatar_url}
+						size="40"
 					/>
 				</div>
 				<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center ">

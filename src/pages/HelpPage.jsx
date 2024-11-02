@@ -50,7 +50,7 @@ export default function HelpPage() {
 	}
 
 	return (
-		<div className="p-4 mt-5">
+		<div className="p-4 mt-5 min-h-[85vh]">
 			<h1 className="subtitle-heading text-lightest mb-5">Safety Toolkit</h1>
 			<ul>
 				{links.map((link) => (

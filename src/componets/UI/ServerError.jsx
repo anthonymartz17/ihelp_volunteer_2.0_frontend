@@ -8,7 +8,7 @@ export default function ServerError() {
 				src={serverErrorGraphic}
 				alt="server error graphic"
 			/>
-			<p className="text-2xl text-light font-bold mb-4">
+			<p className="title-heading text-light font-bold mb-4">
 				Oops! Something went wrong.
 			</p>
 			<p className="body-text text-light">

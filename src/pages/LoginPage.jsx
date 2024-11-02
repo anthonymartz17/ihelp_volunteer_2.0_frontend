@@ -1,9 +1,36 @@
+import Logo from "../assets/logo/logo_white.svg";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 export default function Login() {
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("amartinez@pursuit.org");
+	const [password, setPassword] = useState("@Bc12345");
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const { login } = useAuth();
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		setIsLoading(true);
+		try {
+			await login(email, password);
+			navigate("/account");
+		} catch (error) {
+			setError(error.message);
+		} finally {
+			setIsLoading(false);
+		}
+	}
+
 	return (
 		<div className="bg-lightest h-screen">
-			<div className="p-4 h-[30%] bg-primary relative">
-				<div className="text-lightest subtitle-heading">LOGO</div>
-				<p className="title-heading text-center text-lightest h-full mt-16">
+			<div className="px-4  h-[30%] bg-primary relative">
+				<div className="pt-4">
+					<img src={Logo} alt="logo" className="w-24" />
+				</div>
+				<p className="title-heading text-center text-lightest h-full mt-12">
 					Let's get ready to help your community
 				</p>
 
@@ -22,12 +49,14 @@ export default function Login() {
 			</div>
 
 			<section className="h-[70%] mt-4 relative">
-				<form className="p-4 flex flex-col gap-4">
+				<form className="p-4 flex flex-col gap-4" onSubmit={handleSubmit}>
 					<div>
 						<label className="label-text text-dark" htmlFor="email">
 							Email
 						</label>
 						<input
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
 							type="email"
 							name="email"
 							id="email"
@@ -39,14 +68,41 @@ export default function Login() {
 							Password
 						</label>
 						<input
+							onChange={(e) => setPassword(e.target.value)}
+							value={password}
 							type="password"
 							name="password"
 							id="password"
 							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2 input-shadow"
 						/>
 					</div>
-					<button className="label-text bg-secondary w-full rounded py-3 text-lightest">
-						Login
+					<button className="label-text bg-secondary w-full rounded-lg py-3 text-lightest">
+						{isLoading ? (
+							<span className="flex justify-center items-center">
+								<svg
+									className="animate-spin h-5 w-5"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+								>
+									<circle
+										className="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										strokeWidth="4"
+									></circle>
+									<path
+										className="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									></path>
+								</svg>
+							</span>
+						) : (
+							<span>Login</span>
+						)}
 					</button>
 				</form>
 			</section>

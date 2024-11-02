@@ -78,15 +78,15 @@ export default function ProfilePage() {
 	}, [currentUserProfile]);
 
 	return (
-		<div className="p-4  grid gap-6 bg-primary relative">
-			<h2 className="subtitle-heading text-lightest">ProfilePage</h2>
+		<div className="p-4  grid gap-6 bg-primary relative min-h-[80vh]">
+			<h2 className="title-heading text-lightest">ProfilePage</h2>
 
 			{isLoading && (
 				<div className="flex justify-center pt-40 h-screen">
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
 				</div>
 			)}
-			{error && <ServerError />}
+			<div className="mb-20">{error && <ServerError />}</div>
 			{!isLoading && !error && (
 				<>
 					<div className="text-lightest  bg-primarylight  rounded-lg px-2 py-3 relative">
@@ -191,7 +191,7 @@ export default function ProfilePage() {
 			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute  bottom-[-10em]  left-0 right-0"
+				className="absolute  bottom-[-5em]  left-0 right-0"
 			/>
 		</div>
 	);
