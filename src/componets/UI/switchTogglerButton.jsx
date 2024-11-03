@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function switchToggleButton({
 	option1,
 	option2,
-	onSwitchRanking,
+	onSwitchBtn,
 }) {
 	const [selected, setSelected] = useState(option1);
 
@@ -21,7 +21,7 @@ export default function switchToggleButton({
 				}`}
 				onClick={() => {
 					setSelected(option1);
-					onSwitchRanking("Points");
+					onSwitchBtn(option1);
 				}}
 			>
 				{option1}
@@ -33,7 +33,7 @@ export default function switchToggleButton({
 				}`}
 				onClick={() => {
 					setSelected(option2);
-					onSwitchRanking("Hours");
+					onSwitchBtn(option2);
 				}}
 			>
 				{option2}

@@ -32,7 +32,7 @@ export async function fetchRequestDetail(requestId, token) {
 }
 export async function fetchVolunteerProfile(volunteerId, token) {
 	try {
-		const response = await fetch(`${baseURL}/${volunteerId}/profile`, {
+		const response = await fetch(`${baseURL}/profile`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

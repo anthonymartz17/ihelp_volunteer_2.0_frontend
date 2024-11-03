@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 //icons
 import variousIcon from "../assets/icons/various_icon.svg";
 import errandIcon from "../assets/icons/errand_icon.svg";
@@ -41,10 +42,33 @@ const categoryIcons = {
 };
 export default function Commitments() {
 	const { currentUser } = useAuth();
-	const { tasks, isLoading, error, setTasks } = useTasksByVolunteer(
+	const [filteredTasks, setFilteredTasks] = useState([]);
+	const { tasks, isLoading, error } = useTasksByVolunteer(
 		currentUser.accessToken
 	);
+	const [isPending, setIsPending] = useState(true);
 
+	function swithBtn(option) {
+		if (option === "Pending") {
+			setIsPending(true);
+		} else {
+			setIsPending(false);
+		}
+	}
+	useEffect(() => {
+		const CompletedStatus = 4;
+		if (tasks) {
+			setFilteredTasks(
+				tasks.filter((task) => {
+					if (isPending) {
+						return task.status_id !== CompletedStatus;
+					} else {
+						return task.status_id === CompletedStatus;
+					}
+				})
+			);
+		}
+	}, [isPending]);
 	// navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
 	return (
 		<div className="p-4  min-h-[90vh] relative">
@@ -58,7 +82,11 @@ export default function Commitments() {
 			{!isLoading && !error && (
 				<>
 					<div className="mb-4">
-						<SwitchToggleButton option1={"Pending"} option2={"Completed"} />
+						<SwitchToggleButton
+							option1={"Pending"}
+							option2={"Completed"}
+							onSwitchBtn={swithBtn}
+						/>
 					</div>
 
 					<div className="mb-[10em]">
@@ -78,7 +106,7 @@ export default function Commitments() {
 							</thead>
 							{/* <div className="overflow-y-auto max-h-[40vh] bg-red-700"> */}
 							<tbody className="text-lightest  body-text ">
-								{tasks.map((task) => (
+								{filteredTasks.map((task) => (
 									<tr
 										key={task.id}
 										className="odd:bg-red even:bg-lightest even:bg-opacity-20  bg-"

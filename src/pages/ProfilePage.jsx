@@ -86,7 +86,7 @@ export default function ProfilePage() {
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
 				</div>
 			)}
-			<div className="mb-20">{error && <ServerError />}</div>
+			{error && <ServerError />}
 			{!isLoading && !error && (
 				<>
 					<div className="text-lightest  bg-primarylight  rounded-lg px-2 py-3 relative">
@@ -108,7 +108,7 @@ export default function ProfilePage() {
 						<div className="flex justify-between py-2">
 							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
 								<p className="body-text">Rank</p>
-								<p className="label-text">{currentUserProfile.total_points}</p>
+								<p className="label-text">{currentUserProfile.points_rank}</p>
 							</div>
 							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
 								<p className="body-text">Points</p>
@@ -116,13 +116,13 @@ export default function ProfilePage() {
 							</div>
 							<div className="border-r-2 border-primary border-opacity-50 p-2 flex flex-col items-center flex-1">
 								<p className="body-text">Hours</p>
-								<p className="label-text">{currentUserProfile.total_points}</p>
+								<p className="label-text">{currentUserProfile.total_hours}</p>
 							</div>
 							<div className=" p-2 flex flex-col items-center flex-1">
 								<p className="body-text">Completed</p>
 
 								<p className="label-text flex items-center gap-1">
-									<span>{currentUserProfile.total_points}</span>
+									<span>{currentUserProfile.completed_tasks}</span>
 									<span className="body-text">tasks</span>
 								</p>
 							</div>

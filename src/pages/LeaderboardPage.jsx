@@ -90,7 +90,7 @@ export default function LeaderboardPage() {
 	const [topThree, setTopThree] = useState([]);
 	const [ranking, setRanking] = useState("Points");
 
-	function switchRanking(option) {
+	function switchBtn(option) {
 		setRanking(option);
 		if (option === "Points") {
 			setLeaderboardVolunteers((prev) =>
@@ -144,7 +144,7 @@ export default function LeaderboardPage() {
 						<SwitchToggleButton
 							option1={"Points"}
 							option2={"Hours"}
-							onSwitchRanking={switchRanking}
+							onSwitchBtn={switchBtn}
 						/>
 					</div>
 
