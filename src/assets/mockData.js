@@ -178,3 +178,46 @@ const currentUserProfile = {
 		},
 	],
 };
+
+const tasks = [
+	{
+		id: 1,
+		request_id: 1,
+		category_id: 1,
+		category_name: "errands",
+		points: 10,
+		date: "june 1, 2023",
+		status: "completed",
+		status_id: 4,
+	},
+	{
+		id: 2,
+		request_id: 1,
+		category_id: 2,
+		category_name: "cleaning",
+		points: 10,
+		date: "june 1, 2023",
+		status: "completed",
+		status_id: 4,
+	},
+	{
+		id: 3,
+		request_id: 1,
+		category_id: 3,
+		category_name: "technology",
+		points: 10,
+		date: "june 1, 2023",
+		status: "assigned",
+		status_id: 2,
+	},
+	{
+		id: 4,
+		request_id: 1,
+		category_id: 4,
+		category_name: "pet care",
+		points: 10,
+		date: "june 1, 2023",
+		status: "completed",
+		status_id: 4,
+	},
+];

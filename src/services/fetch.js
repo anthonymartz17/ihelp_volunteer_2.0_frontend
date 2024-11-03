@@ -1,12 +1,9 @@
 const baseURL = import.meta.env.VITE_IHELP_API_URL;
 
 export async function fetchOpenRequests(token) {
+	console.log(token, "token");
 	try {
-		const response = await fetch(`${baseURL}/open-requests`, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
+		const response = await fetch(`${baseURL}/open-requests`);
 		if (!response.ok) {
 			throw new Error("Network response was not ok");
 		}
@@ -88,6 +85,22 @@ export async function commitToTask(taskId, token) {
 export async function unCommitToTask(taskId, token) {
 	try {
 		const response = await fetch(`${baseURL}/tasks/${taskId}/uncommit`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}
+export async function fetchTasksByVolunteer(token) {
+	try {
+		const response = await fetch(`${baseURL}/volunteerTasks`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
