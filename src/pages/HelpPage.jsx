@@ -3,6 +3,7 @@ import { useState } from "react";
 import helpIcon from "../assets/icons/help.svg";
 import faqIcon from "../assets/icons/faq_icon.svg";
 import triangleIcon from "../assets/icons/triangle_danger_icon.svg";
+import blobShape from "../assets/graphics/bottom_blob_shape.svg";
 
 const reportCategories = [
 	{ id: 1, category: "Technical Issues" },
@@ -50,7 +51,7 @@ export default function HelpPage() {
 	}
 
 	return (
-		<div className="p-4 mt-5 min-h-[85vh]">
+		<div className="p-4 mt-5 h-[100%]  min-h-[80vh] relative">
 			<h1 className="subtitle-heading text-lightest mb-5">Safety Toolkit</h1>
 			<ul>
 				{links.map((link) => (
@@ -72,6 +73,11 @@ export default function HelpPage() {
 					</li>
 				))}
 			</ul>
+			<img
+				src={blobShape}
+				alt="blop shape"
+				className="absolute  bottom-[-2em]  left-0 right-0"
+			/>
 		</div>
 	);
 }

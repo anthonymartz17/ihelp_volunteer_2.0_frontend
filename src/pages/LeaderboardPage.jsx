@@ -128,7 +128,7 @@ export default function LeaderboardPage() {
 		}
 	}, [leaderboardVolunteers]);
 	return (
-		<div className="mt-10  flex flex-col min-h-[85vh]">
+		<div className="mt-10 h-[100%]  flex flex-col ">
 			<h1 className="title-heading text-lightest px-4  mb-4">Leaderboard </h1>
 
 			{isLoading && (
@@ -139,8 +139,8 @@ export default function LeaderboardPage() {
 			{error && <ServerError />}
 
 			{!isLoading && !error && (
-				<div className="h-[81vh] flex flex-col justify-between">
-					<div className="flex items-center px-4 mb-6 ">
+				<div className="leaderboard-container">
+					<div className="flex items-center px-4 mb-3">
 						<SwitchToggleButton
 							option1={"Points"}
 							option2={"Hours"}
@@ -148,7 +148,7 @@ export default function LeaderboardPage() {
 						/>
 					</div>
 
-					<ul className="flex gap-4 items-end justify-between px-4 h-[45%]">
+					<ul className="flex gap-4 items-end justify-between px-4 min-h-[15em] ">
 						{topThree.map((player, idx) => {
 							const heightClass =
 								idx === 1 ? "h-[100%]" : idx === 2 ? "h-[85%]" : "h-[80%]";
@@ -187,7 +187,7 @@ export default function LeaderboardPage() {
 						})}
 					</ul>
 
-					<div className=" overflow-y-scroll  rounded-t-3xl bg-tertiary border-t-[1px] px-6 text-lightest pt-5 h-[55%]">
+					<div className=" overflow-y-scroll max-h-[40vh]  rounded-t-3xl bg-tertiary border-t-[1px] px-6 text-lightest pt-5 ">
 						<ul className="flex flex-col gap-4">
 							{leaderboardVolunteers.map(
 								(leader, idx) =>

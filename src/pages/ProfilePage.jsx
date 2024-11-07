@@ -72,13 +72,15 @@ const badgelist = [
 export default function ProfilePage() {
 	const { currentUserProfile, isLoading, error } = useProfile(3);
 	const [userBadges, setUserBadges] = useState(null);
+	const [showAllBadges, setShowAllBadges] = useState(false);
+	const [showAllRewards, setShowAllRewards] = useState(false);
 
 	useEffect(() => {
 		setUserBadges(new Set(currentUserProfile.badges));
 	}, [currentUserProfile]);
 
 	return (
-		<div className="p-4  grid gap-6 bg-primary relative min-h-[80vh]">
+		<div className="p-4  grid gap-6 relative bg-primary  min-h-[90vh]">
 			<h2 className="title-heading text-lightest">ProfilePage</h2>
 
 			{isLoading && (
@@ -131,10 +133,21 @@ export default function ProfilePage() {
 					<div>
 						<div className="flex justify-between items-center">
 							<h2 className="subtitle-heading text-lightest mb-4">Badges</h2>
-							<span className="text-lightest ">See All</span>
+							<button
+								className="text-lightest hover:text-light"
+								onClick={() => setShowAllBadges(!showAllBadges)}
+							>
+								{showAllBadges ? "See Less" : "See All"}
+							</button>
 						</div>
 
-						<ul className="grid grid-cols-3 gap-4 justify-between">
+						<ul
+							className={` mb-3 grid grid-cols-3 gap-4 justify-between ${
+								!showAllBadges
+									? "max-h-[100px] overflow-hidden"
+									: "max-h-[220px] overflow-y-auto"
+							}`}
+						>
 							{badgelist.map((badge) => {
 								return (
 									<li
@@ -156,11 +169,22 @@ export default function ProfilePage() {
 					<div className=" min-h-[300px] mb-[4em]">
 						<div className="flex justify-between items-center">
 							<h2 className="subtitle-heading text-lightest mb-4">Rewards</h2>
-							<span className="text-lightest ">See All</span>
+							<button
+								className="text-lightest hover:text-light"
+								onClick={() => setShowAllRewards(!showAllRewards)}
+							>
+								{showAllRewards ? "See Less" : "See All"}
+							</button>
 						</div>
-						<div>
+						<div className="pt-2">
 							{currentUserProfile.rewards.length > 0 ? (
-								<ul className="grid grid-cols-3 gap-4">
+								<ul
+									className={`grid grid-cols-3 gap-4 justify-between px-2 ${
+										!showAllRewards
+											? "max-h-[110px] overflow-hidden"
+											: "max-h-[225px] overflow-y-auto"
+									}`}
+								>
 									{currentUserProfile.rewards.map((reward) => {
 										return (
 											<li
@@ -191,7 +215,7 @@ export default function ProfilePage() {
 			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute  bottom-[-5em]  left-0 right-0"
+				className="absolute  bottom-[-10em]  left-0 right-0"
 			/>
 		</div>
 	);

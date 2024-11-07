@@ -127,10 +127,16 @@ input[type="range"] {
 
 .layout-with-header {
 	display: grid;
-	grid-template-rows: 10% 1fr;
+	grid-template-rows: 5% 1fr;
 	grid-gap: 20px;
 	height: 100%;
 }
 .layout-no-header {
 	height: 100%;
+}
+
+.leaderboard-container {
+	display: grid;
+	height: 100%;
+	
 }

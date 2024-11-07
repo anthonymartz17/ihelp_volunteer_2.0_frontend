@@ -68,11 +68,12 @@ export default function Commitments() {
 				})
 			);
 		}
-	}, [isPending]);
+	}, [isPending, tasks]);
 	// navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
 	return (
-		<div className="p-4  min-h-[90vh] relative">
+		<div className="p-4  h-[100%] min-h-[80vh] relative mt-8">
 			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
+
 			{isLoading && (
 				<div className="flex justify-center pt-40 h-screen">
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
@@ -109,7 +110,9 @@ export default function Commitments() {
 								{filteredTasks.map((task) => (
 									<tr
 										key={task.id}
-										className="odd:bg-red even:bg-lightest even:bg-opacity-20  bg-"
+										className={`odd:bg-lightest odd:bg-opacity-20 ${
+											task.status_id !== 4 ? "animate-pulse" : ""
+										}`}
 									>
 										<td className="p-2">
 											<img
@@ -138,7 +141,7 @@ export default function Commitments() {
 			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute bottom-0 left-0 right-0"
+				className="absolute bottom-[-10px] left-0 right-0"
 			/>
 		</div>
 	);

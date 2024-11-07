@@ -27,8 +27,8 @@ import { useRequestDetail } from "../hooks/useRequestDetails";
 import { useCommitTask } from "../hooks/useCommitTask";
 
 const currentUser = {
-	id: 10,
-	username: "user123",
+	id: 4,
+	username: "Kevin",
 	avatar_url:
 		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
 };
@@ -100,12 +100,23 @@ export default function RequestDetailPage() {
 			await commit(selectedTask.id, currentUser.accessToken);
 			setAlertMessage("Task committed successfully!");
 			setIsAlertOpen(true);
-			navigate(`/account/commitments`);
+			// navigate(`/account/commitments`);
+			navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
 		} catch (error) {
 			setAlertMessage("Error committing task. Please try again.");
 			setIsAlertOpen(true);
 		}
 	}
+	useEffect(() => {
+		if (requestDetail?.tasks) {
+			const taskSelected = requestDetail.tasks.find(
+				(task) => task.volunteer_id === currentUser.id
+			);
+			if (taskSelected) {
+				setSelectedTask(taskSelected);
+			}
+		}
+	}, [requestDetail?.tasks]);
 
 	return (
 		<div className=" text-dark  bg-secondary  overflow-y-hidden relative min-h-[100vh]  pt-4">

@@ -68,7 +68,7 @@ export default function QuestPage() {
 	}
 
 	return (
-		<div className="flex flex-col relative bg-primary h-[100%]">
+		<div className="flex flex-col relative bg-primary h-[100vh]">
 			<div className="flex justify-between mx-4 mt-8">
 				<h1 className="subtitle-heading text-lightest">Quest</h1>
 				<p className="body-text flex items-center gap-">
