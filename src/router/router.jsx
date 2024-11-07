@@ -16,7 +16,7 @@ import RequestsPage from "../pages/RequestsPage";
 import AccountPage from "../pages/AccountPage";
 import WithHeaderLayout from "../layouts/WithHeaderLayout";
 import SimpleLayout from "../layouts/SimpleLayout";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 
 // const isLoggedIn = true;
 

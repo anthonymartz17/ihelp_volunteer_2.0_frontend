@@ -1,5 +1,5 @@
 import Logo from "../assets/logo/logo_white.svg";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

@@ -5,7 +5,7 @@ import requestsIcon from "../assets/icons/requests.svg";
 import commitmentsIcon from "../assets/icons/commitments.svg";
 import helpIcon from "../assets/icons/help.svg";
 import leaderboardIcon from "../assets/icons/leaderboard.svg";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 
 const currentUser = true;
 const menuItems = [
