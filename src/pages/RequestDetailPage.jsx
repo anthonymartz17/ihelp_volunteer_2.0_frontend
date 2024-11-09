@@ -1,4 +1,9 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+	Link,
+	useNavigate,
+	useParams,
+	useSearchParams,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { formatDate, formatMilitaryToStandardTime } from "../utils/formatters";
 
@@ -51,6 +56,9 @@ const categoryIcons = {
 export default function RequestDetailPage() {
 	const navigate = useNavigate();
 	const { id } = useParams();
+	const [searchParams] = useSearchParams();
+	const isCommitted = searchParams.get("committed");
+	
 
 	const {
 		commit,
@@ -217,7 +225,7 @@ export default function RequestDetailPage() {
 											</p>
 											<div
 												className={`card-shadow rounded-lg p-2 flex   gap-1 body-text w-[100%] ${
-													task.volunteer_id === currentUser.id
+													task.volunteer_id === currentUser.id && !isCommitted
 														? "bg-dark text-lightest"
 														: "bg-light text-dark"
 												}`}
@@ -238,7 +246,7 @@ export default function RequestDetailPage() {
 												selectTask(idx);
 											}}
 											className={`flex cursor-pointer items-center gap-2 ${
-												task.status_id !== 1 || selectedTask
+												task.task_status_id !== 1 || selectedTask
 													? "opacity-40 pointer-events-none"
 													: ""
 											}`}

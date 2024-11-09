@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 //icons
 import variousIcon from "../assets/icons/various_icon.svg";
 import errandIcon from "../assets/icons/errand_icon.svg";
@@ -41,6 +42,7 @@ const categoryIcons = {
 	12: officeIcon,
 };
 export default function Commitments() {
+	const navigate = useNavigate();
 	const { currentUser } = useAuth();
 	const [filteredTasks, setFilteredTasks] = useState([]);
 	const { tasks, isLoading, error } = useTasksByVolunteer(
@@ -55,21 +57,22 @@ export default function Commitments() {
 			setIsPending(false);
 		}
 	}
+
 	useEffect(() => {
 		const CompletedStatus = 4;
 		if (tasks) {
 			setFilteredTasks(
 				tasks.filter((task) => {
 					if (isPending) {
-						return task.status_id !== CompletedStatus;
+						return task.task_status_id !== CompletedStatus;
 					} else {
-						return task.status_id === CompletedStatus;
+						return task.task_status_id === CompletedStatus;
 					}
 				})
 			);
 		}
 	}, [isPending, tasks]);
-	// navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
+
 	return (
 		<div className="p-4  h-[100%] min-h-[80vh] relative mt-8">
 			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
@@ -109,11 +112,17 @@ export default function Commitments() {
 							<tbody className="text-lightest  body-text ">
 								{filteredTasks.map((task) => (
 									<tr
-										key={task.id}
-										className={`odd:bg-lightest odd:bg-opacity-20 ${
-											task.status_id !== 4 ? "animate-pulse" : ""
+										onClick={() =>
+											navigate(
+												`/account/requests/${task.request_id}?committed=${true}`
+											)
+										}
+										key={task.task_id}
+										className={`even:bg-lightest even:bg-opacity-20 ${
+											task.task_status_id === 3 ? "animate-pulse" : ""
 										}`}
 									>
+									
 										<td className="p-2">
 											<img
 												className="w-8"
@@ -128,7 +137,7 @@ export default function Commitments() {
 												<span>{task.points}</span>
 											</div>
 										</td>
-										<td className="p-2">{formatDate(task.date)}</td>
+										<td className="p-2">{formatDate(task.due_date)}</td>
 									</tr>
 								))}
 							</tbody>
