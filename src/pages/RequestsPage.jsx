@@ -40,16 +40,16 @@ export default function RequestsPage() {
 			)}
 			{error && <ServerError />}
 			{!isLoading && !error && (
-				<ul className="grid grid-cols-1 md:grid-cols-2 mb-[10em]  gap-4 overflow-y-auto rounded-lg p-4 h-[80vh] ">
+				<ul className="mb-[10em]   overflow-y-auto rounded-lg p-4 h-[80vh] ">
 					{requests.map((request, index) => (
-						<li key={request.id}>
+						<li key={request.id} className="mb-4">
 							<RequestCard request={request} index={index} />
 						</li>
 					))}
 				</ul>
 			)}
 			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
-			{/* <div className="relative"> */}
+
 			<img
 				src={blobShape}
 				alt="graphic blob"

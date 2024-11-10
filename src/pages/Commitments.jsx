@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 //icons
 import variousIcon from "../assets/icons/various_icon.svg";
 import errandIcon from "../assets/icons/errand_icon.svg";
@@ -76,7 +76,15 @@ export default function Commitments() {
 
 	return (
 		<div className="p-4  h-[100%] min-h-[80vh] relative mt-8">
-			<h1 className="subtitle-heading text-lightest mb-10">Commitments</h1>
+			<div className="mb-10 flex justify-between items-center">
+				<h1 className="subtitle-heading text-lightest">Commitments</h1>
+				<Link
+					to="/account"
+					className="label-text mb-2  bg-secondarylight  px-4 card-shadow rounded-lg py-2 text-lightest"
+				>
+					Find tasks
+				</Link>
+			</div>
 
 			{isLoading && (
 				<div className="flex justify-center pt-40 h-screen">

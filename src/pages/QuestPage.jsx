@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import startIcon from "../assets/icons/start_icon.svg";
 import workingIcon from "../assets/icons/working_icon.svg";
 import completeIcon from "../assets/icons/completed_icon.svg";
@@ -68,13 +68,21 @@ export default function QuestPage() {
 	}
 
 	return (
-		<div className="flex flex-col relative bg-primary h-[100vh]">
-			<div className="flex justify-between mx-4 mt-8">
+		<div className="flex flex-col relative bg-primary h-[100vh] pt-5">
+			{/* <div className="flex justify-between mx-4 mt-8">
 				<h1 className="subtitle-heading text-lightest">Quest</h1>
 				<p className="body-text flex items-center gap-">
 					<img className="w-6" src={coin} alt="coin" />
 					<span className="label-text text-lightest">{task.points} Pts</span>
 				</p>
+			</div> */}
+			<div className="flex items-center  text-light gap-3 mb-12 px-4">
+				<Link to="/account/commitments" className="mt-2">
+					<span className="material-symbols-outlined ">arrow_back_ios</span>
+				</Link>
+				<h2 className="title-heading text-lightest text-center w-full">
+					Quest
+				</h2>
 			</div>
 
 			<div className="flex mb-5 justify-center item-center">
@@ -89,17 +97,21 @@ export default function QuestPage() {
 					{taskProgress.map((task) => (
 						<li
 							key={task.id}
-							className={`bg-secondary ${
+							className={`bg-secondary  ${
 								task.id > currentStep && "opacity-30 "
 							} rounded-full p-4 mb-4 w-20 h-20 flex cilinder-shadow flex-col items-center justify-center relative
             ${task.id === 2 && "translate-x-16"}
             ${task.id === 4 && "translate-x-16"}
             ${task.id === 3 && "translate-x-24"}
+						${currentStep === task.id && "active-step "}
             
             `}
 						>
 							{currentStep === task.id && task.title && (
-								<div className="absolute -top-14  px-1 py-3 w-40 text-center bg-lightest input-shadow rounded-md body-text text-dark z-50 after:absolute after:left-1/2 after:top-full after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-lightest after:-translate-x-1/2  after:input-shadow">
+								<div
+									onClick={() => console.log("clickable")}
+									className=" -top-14 px-1 py-3 w-40 text-center bg-light input-shadow rounded-md body-text text-dark z-[9999] fixed left-[-90%] after:absolute after:right-1/4 after:top-full after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-lightest after:-translate-x-1/2 after:input-shadow"
+								>
 									{task.title}
 								</div>
 							)}
@@ -118,7 +130,7 @@ export default function QuestPage() {
 				<div className="m-4">
 					<button
 						onClick={() => handleNextStep()}
-						className="label-text bg-tertiary w-full rounded py-3 text-lightest "
+						className="label-text bg-tertiary w-full rounded py-3 text-lightest card-shadow "
 					>
 						{buttonText[currentStep]}
 					</button>
