@@ -34,7 +34,7 @@ export default function ConfirmationAlert({
 						type="button"
 						className="label-text  bg-secondary w-full rounded py-3 text-lightest "
 					>
-						Commit
+						Confirm
 					</button>
 				</div>
 			</div>
