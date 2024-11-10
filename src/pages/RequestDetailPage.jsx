@@ -7,6 +7,7 @@ import {
 import { useState, useEffect } from "react";
 import { formatDate, formatMilitaryToStandardTime } from "../utils/formatters";
 
+//icons and graphics
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
 import cleaningIcon from "../assets/icons/cleaning_icon_dark.svg";
 import technologyIcon from "../assets/icons/technology_icon_dark.svg";
@@ -14,7 +15,7 @@ import petCareIcon from "../assets/icons/pet_care_icon_dark.svg";
 import variousIcon from "../assets/icons/various_icon_dark.svg";
 import mealPrep from "../assets/icons/mealprep_icon_dark.svg";
 import coin from "../assets/icons/coin.svg";
-import timeIcon from "../assets/icons/time_icon.svg";
+import hoursIcon from "../assets/icons/hours_icon_dark.svg";
 import calendar from "../assets/icons/calendar_primary.svg";
 import clock from "../assets/icons/clock.svg";
 import craftIcon from "../assets/icons/craft_icon_dark.svg";
@@ -27,6 +28,8 @@ import location from "../assets/icons/location.svg";
 import ConfirmationAlert from "../componets/UI/ConfirmationAlert";
 import AlertMessage from "../componets/UI/AlertMessage";
 import blobShape from "../assets/graphics/blop_no_backdrop.svg";
+//
+
 import ServerError from "../componets/UI/ServerError";
 import { useRequestDetail } from "../hooks/useRequestDetails";
 import { useCommitTask } from "../hooks/useCommitTask";
@@ -57,11 +60,11 @@ export default function RequestDetailPage() {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const [searchParams] = useSearchParams();
-	const isCommitted = searchParams.get("committed");
-	
+	const isPendingCommitment = searchParams.get("committed");
 
 	const {
 		commit,
+		uncommit,
 		isLoading: isLoadingCommit,
 		error: errorCommit,
 	} = useCommitTask();
@@ -98,18 +101,30 @@ export default function RequestDetailPage() {
 	function tryCommitToTask() {
 		if (selectedTask) {
 			setIsAlertOpen(true);
+			setAlertMessage("Once confirmed, this task will be assigned to you.");
 		} else {
 			setIsError(true);
 			setAlertMessage("Oops! A task must be selected first.");
 		}
 	}
-	async function handleCommitToTask() {
-		try {
-			await commit(selectedTask.id, currentUser.accessToken);
-			setAlertMessage("Task committed successfully!");
+	function tryUncommitTask() {
+		if (selectedTask) {
 			setIsAlertOpen(true);
-			// navigate(`/account/commitments`);
-			navigate(`/account/quest/request/${requestDetail.id}/task/:id`);
+			setAlertMessage("Are you sure you want to quit this task?");
+		}
+	}
+	async function handleTaskCommitment() {
+		try {
+			if (isPendingCommitment) {
+				await uncommit(selectedTask.id, currentUser.accessToken);
+				// setAlertMessage("Task committed successfully!");
+			} else {
+				await commit(selectedTask.id, currentUser.accessToken);
+				// setAlertMessage("Task committed successfully!");
+			}
+
+			// setIsAlertOpen(true);
+			navigate(`/account/commitments`);
 		} catch (error) {
 			setAlertMessage("Error committing task. Please try again.");
 			setIsAlertOpen(true);
@@ -122,6 +137,7 @@ export default function RequestDetailPage() {
 			);
 			if (taskSelected) {
 				setSelectedTask(taskSelected);
+				console.log(selectedTask, "selectedTask");
 			}
 		}
 	}, [requestDetail?.tasks]);
@@ -158,7 +174,7 @@ export default function RequestDetailPage() {
 								</p>
 							</div>
 							<p className="body-text flex items-center gap-1">
-								<img className="w-5" src={timeIcon} alt="coin" />
+								<img className="w-5" src={hoursIcon} alt="coin" />
 								<span className="subtitle-heading">
 									{requestDetail.hours}{" "}
 									{requestDetail.hours > 1 ? "Hours" : "Hour"}
@@ -189,6 +205,7 @@ export default function RequestDetailPage() {
 						</div>
 					</div>
 					<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
+
 					<ul className="px-4 ">
 						{requestDetail.tasks.map((task, idx) => {
 							return (
@@ -216,7 +233,7 @@ export default function RequestDetailPage() {
 									{task.volunteer_id === currentUser.id ? (
 										<div
 											onClick={() => {
-												selectTask(idx);
+												if (!isPendingCommitment) selectTask(idx);
 											}}
 											className="flex cursor-pointer items-center gap-2 "
 										>
@@ -224,8 +241,8 @@ export default function RequestDetailPage() {
 												{idx + 1}
 											</p>
 											<div
-												className={`card-shadow rounded-lg p-2 flex   gap-1 body-text w-[100%] ${
-													task.volunteer_id === currentUser.id && !isCommitted
+												className={`card-shadow rounded-lg p-2 flex justify-between   gap-1 body-text w-[100%] ${
+													task.volunteer_id === currentUser.id
 														? "bg-dark text-lightest"
 														: "bg-light text-dark"
 												}`}
@@ -243,7 +260,7 @@ export default function RequestDetailPage() {
 									) : (
 										<div
 											onClick={() => {
-												selectTask(idx);
+												if (!isPendingCommitment) selectTask(idx);
 											}}
 											className={`flex cursor-pointer items-center gap-2 ${
 												task.task_status_id !== 1 || selectedTask
@@ -270,24 +287,48 @@ export default function RequestDetailPage() {
 							);
 						})}
 					</ul>
-					<div className="mx-4">
-						<button
-							onClick={() => tryCommitToTask()}
-							className={`subtitle-heading mb-[15em]  w-full card-shadow rounded-lg py-3 text-lightest ${
-								!selectedTask
-									? "opacity-40 pointer-events-none bg-dark"
-									: "bg-primary"
-							} `}
-						>
-							Commit
-						</button>
+
+					<div className="mx-4 ">
+						{isPendingCommitment ? (
+							<div className="mb-[15em] mt-10">
+								<button
+									onClick={() =>
+										navigate(
+											`/account/quest/request/${requestDetail.id}/task/${selectedTask.id}`
+										)
+									}
+									className="subtitle-heading mb-2  bg-primary  w-full card-shadow rounded-lg py-3 text-lightest"
+								>
+									Start Quest
+								</button>
+
+								<button
+									onClick={() => tryUncommitTask()}
+									className="subtitle-heading bg-dark bg-opacity-70 w-full card-shadow rounded-lg py-3 text-lightest"
+								>
+									Uncommit
+								</button>
+							</div>
+						) : (
+							<button
+								onClick={() => tryCommitToTask()}
+								className={`subtitle-heading mb-[15em]  w-full card-shadow rounded-lg py-3 text-lightest ${
+									!selectedTask
+										? "opacity-40 pointer-events-none bg-dark"
+										: "bg-primary"
+								} `}
+							>
+								Commit
+							</button>
+						)}
 					</div>
 				</div>
 			)}
 			{isAlertOpen && (
 				<ConfirmationAlert
-					onHandleCommitToTask={handleCommitToTask}
+					onHandleTaskCommitment={handleTaskCommitment}
 					onSetIsAlertOpen={setIsAlertOpen}
+					alertMessage={alertMessage}
 				/>
 			)}
 			{isError && (

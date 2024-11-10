@@ -1,7 +1,6 @@
 const baseURL = import.meta.env.VITE_IHELP_API_URL;
 
 export async function fetchOpenRequests(token) {
-	console.log(token, "token");
 	try {
 		const response = await fetch(`${baseURL}/open-requests`);
 		if (!response.ok) {
@@ -85,6 +84,7 @@ export async function commitToTask(taskId, token) {
 export async function unCommitToTask(taskId, token) {
 	try {
 		const response = await fetch(`${baseURL}/tasks/${taskId}/uncommit`, {
+			method: "POST",
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

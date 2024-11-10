@@ -14,6 +14,7 @@ import sportCoachingIcon from "../assets/icons/sport_coaching_icon.svg";
 import craftIcon from "../assets/icons/craft_icon.svg";
 import officeIcon from "../assets/icons/office_icon.svg";
 import coins from "../assets/icons/coin.svg";
+import hoursIcon from "../assets/icons/hours_icon_light.svg";
 //end icons
 
 //components
@@ -25,7 +26,7 @@ import ServerError from "../componets/UI/ServerError";
 import BottomBlopShape from "../assets/graphics/bottom_blob_shape.svg";
 import { useTasksByVolunteer } from "../hooks/useTasksByVolunteer";
 import { useAuth } from "../context/authContext";
-import { formatDate } from "../utils/formatters";
+import { formatShortDate } from "../utils/formatters";
 
 const categoryIcons = {
 	1: variousIcon,
@@ -104,12 +105,15 @@ export default function Commitments() {
 										Points
 									</th>
 									<th scope="col" className="px-6 py-3 w-1/3">
+										Hours
+									</th>
+									<th scope="col" className="px-6 py-3 w-1/3">
 										Date
 									</th>
 								</tr>
 							</thead>
-							{/* <div className="overflow-y-auto max-h-[40vh] bg-red-700"> */}
-							<tbody className="text-lightest  body-text ">
+
+							<tbody className="text-lightest  body-text">
 								{filteredTasks.map((task) => (
 									<tr
 										onClick={() =>
@@ -122,7 +126,6 @@ export default function Commitments() {
 											task.task_status_id === 3 ? "animate-pulse" : ""
 										}`}
 									>
-									
 										<td className="p-2">
 											<img
 												className="w-8"
@@ -137,12 +140,22 @@ export default function Commitments() {
 												<span>{task.points}</span>
 											</div>
 										</td>
-										<td className="p-2">{formatDate(task.due_date)}</td>
+										<td className="p-2">
+											<div className="flex gap-1">
+												<img className="w-5" src={hoursIcon} alt="" />
+												<span>{task.hours_needed}</span>
+											</div>
+										</td>
+										<td className="p-2">{formatShortDate(task.due_date)}</td>
 									</tr>
 								))}
 							</tbody>
-							{/* </div> */}
 						</table>
+						{filteredTasks.length === 0 && (
+							<div className="w-full text-light title-heading opacity-30 text-center py-10">
+								No tasks
+							</div>
+						)}
 					</div>
 				</>
 			)}

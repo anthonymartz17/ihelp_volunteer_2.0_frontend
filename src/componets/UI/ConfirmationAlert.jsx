@@ -1,10 +1,10 @@
 import React from "react";
 import commitIcon from "../../assets/icons/commit_icon.svg";
 
-
 export default function ConfirmationAlert({
-	onHandleCommitToTask,
+	onHandleTaskCommitment,
 	onSetIsAlertOpen,
+	alertMessage,
 }) {
 	return (
 		<div className="z-20  fixed bottom-0 left-0  top-0 right-0 bg-black  bg-opacity-75 p-4 flex items-center justify-center">
@@ -15,11 +15,9 @@ export default function ConfirmationAlert({
 					className="w-20 text-center mx-auto"
 				/>
 				<h3 className="subtitle-heading text-center border-b-2 border-opacity-35 border-dark pb-3 mb-4">
-					Confirm Task Commitment
+					Please Confirm Decision
 				</h3>
-				<p className="mb-10">
-					Once confirmed, this task will be assigned to you.
-				</p>
+				<p className="mb-10 text-center">{alertMessage}</p>
 				<div className="flex justify-end gap-3 mt-4">
 					<button
 						onClick={() => onSetIsAlertOpen(false)}
@@ -30,11 +28,11 @@ export default function ConfirmationAlert({
 					</button>
 					<button
 						onClick={() => {
-							onHandleCommitToTask();
+							onHandleTaskCommitment();
 							onSetIsAlertOpen(false);
 						}}
 						type="button"
-						className="label-text bg-secondary w-full rounded py-3 text-lightest "
+						className="label-text  bg-secondary w-full rounded py-3 text-lightest "
 					>
 						Commit
 					</button>
@@ -43,4 +41,3 @@ export default function ConfirmationAlert({
 		</div>
 	);
 }
-
