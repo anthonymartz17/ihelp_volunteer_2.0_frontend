@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Login() {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState("amartinez@pursuit.org");
+	const [email, setEmail] = useState("kroberts@pursuit.org");
 	const [password, setPassword] = useState("@Bc12345");
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
@@ -15,7 +15,8 @@ export default function Login() {
 		e.preventDefault();
 		setIsLoading(true);
 		try {
-			await login(email, password);
+			// await login(email, password);
+			await login("amartinez@pursuit.org", password);
 			navigate("/account");
 		} catch (error) {
 			setError(error.message);
