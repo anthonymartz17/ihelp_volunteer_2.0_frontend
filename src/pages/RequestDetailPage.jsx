@@ -263,7 +263,7 @@ export default function RequestDetailPage() {
 												if (!isPendingCommitment) selectTask(idx);
 											}}
 											className={`flex cursor-pointer items-center gap-2 ${
-												task.task_status_id !== 1 || selectedTask
+												task.task_status_id == 2 || selectedTask
 													? "opacity-40 pointer-events-none"
 													: ""
 											}`}
