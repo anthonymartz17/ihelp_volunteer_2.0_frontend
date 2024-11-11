@@ -57,7 +57,7 @@ export default function AppRoutes() {
 					),
 				},
 				{
-					path: "quest/request/:id/task/:id",
+					path: "quest/tasks/:id",
 					element: isLoggedIn ? (
 						<SimpleLayout>
 							<QuestPage />

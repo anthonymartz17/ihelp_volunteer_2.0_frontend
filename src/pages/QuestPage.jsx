@@ -48,6 +48,7 @@ const buttonText = {
 };
 export default function QuestPage() {
 	const { currentUser } = useAuth();
+	console.log(useParams(), "params");
 	const { id } = useParams();
 	const { quest, updateQuest, isLoading, error } = useQuest(id);
 	const [currentStep, setCurrentStep] = useState(quest.task_progress_id);

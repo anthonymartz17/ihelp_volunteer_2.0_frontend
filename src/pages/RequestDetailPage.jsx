@@ -293,9 +293,7 @@ export default function RequestDetailPage() {
 							<div className="mb-[15em] mt-10">
 								<button
 									onClick={() =>
-										navigate(
-											`/account/quest/request/${requestDetail.id}/task/${selectedTask.id}`
-										)
+										navigate(`/account/quest/tasks/${selectedTask.id}`)
 									}
 									className="subtitle-heading mb-2  bg-primary  w-full card-shadow rounded-lg py-3 text-lightest"
 								>

@@ -50,6 +50,7 @@ export default function Commitments() {
 		currentUser.accessToken
 	);
 	const [isPending, setIsPending] = useState(true);
+	const [isQuestActive, setIsQuestActive] = useState(false);
 
 	function swithBtn(option) {
 		if (option === "Pending") {
@@ -72,10 +73,26 @@ export default function Commitments() {
 				.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
 		);
 	}
+	function handleNavigation(task) {
+		const quest = `/account/quest/tasks/${task.task_id}`;
+		const requestDetail = `/account/requests/${
+			task.request_id
+		}?committed=${true}`;
+		const inProgress = 3;
+		if (task.task_status_id === inProgress) {
+			navigate(quest);
+		} else {
+			navigate(requestDetail);
+		}
+	}
 
 	useEffect(() => {
 		if (tasks) {
 			filterTasks();
+			const inProgress = 3;
+			setIsQuestActive(
+				tasks.some((task) => task.task_status_id === inProgress)
+			);
 		}
 	}, [isPending, tasks]);
 
@@ -83,12 +100,14 @@ export default function Commitments() {
 		<div className="p-4  h-[100%] min-h-[80vh] relative mt-8">
 			<div className="mb-10 flex justify-between items-center">
 				<h1 className="subtitle-heading text-lightest">Commitments</h1>
-				<Link
-					to="/account"
-					className="label-text mb-2  bg-secondarylight  px-4 card-shadow rounded-lg py-2 text-lightest"
-				>
-					Find tasks
-				</Link>
+				{!isQuestActive && (
+					<Link
+						to="/account"
+						className="label-text mb-2  bg-secondarylight  px-4 card-shadow rounded-lg py-2 text-lightest"
+					>
+						Find tasks
+					</Link>
+				)}
 			</div>
 
 			{isLoading && (
@@ -100,11 +119,17 @@ export default function Commitments() {
 			{!isLoading && !error && (
 				<>
 					<div className="mb-4">
-						<SwitchToggleButton
-							option1={"Pending"}
-							option2={"Completed"}
-							onSwitchBtn={swithBtn}
-						/>
+						{isQuestActive ? (
+							<p className="text-center px-2 py-1 text-sm text-secondary bg-light rounded-md">
+								You have an active quest
+							</p>
+						) : (
+							<SwitchToggleButton
+								option1={"Pending"}
+								option2={"Completed"}
+								onSwitchBtn={swithBtn}
+							/>
+						)}
 					</div>
 
 					<div className="mb-[10em]">
@@ -129,14 +154,14 @@ export default function Commitments() {
 							<tbody className="text-lightest  body-text">
 								{filteredTasks.map((task) => (
 									<tr
-										onClick={() =>
-											navigate(
-												`/account/requests/${task.request_id}?committed=${true}`
-											)
-										}
+										onClick={() => handleNavigation(task)}
 										key={task.task_id}
-										className={`even:bg-lightest even:bg-opacity-20 ${
-											task.task_status_id === 3 ? "animate-pulse" : ""
+										className={`even:bg-lightest even:bg-opacity-20  relative ${
+											task.task_status_id === 3 ? "active-quest" : ""
+										} ${
+											isQuestActive && task.task_status_id !== 3
+												? "pointer-events-none"
+												: ""
 										}`}
 									>
 										<td className="p-2">
