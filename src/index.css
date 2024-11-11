@@ -162,7 +162,7 @@ input[type="range"] {
 
 	70% {
 		transform: translate(var(--translate-x, 0)) scale(1);
-		box-shadow: 0 0 0 20px rgba(255, 157, 142, 0), #b24f3f 0px 4px 0px;
+		box-shadow: 0 0 0 30px rgba(255, 157, 142, 0), #b24f3f 0px 4px 0px;
 	}
 
 	100% {

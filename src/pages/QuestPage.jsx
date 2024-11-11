@@ -81,25 +81,19 @@ export default function QuestPage() {
 			)}
 			{error && <ServerError />}
 			{!isLoading && !error && (
-				<div>
+				<div className="relative">
+					<div className="px-4 label-text absolute top-0 ">
+						<p className="flex items-center gap-2 mb-1">
+							<img className="w-6" src={coin} alt="coin" />
+							<span className=" text-lightest">{quest.point_earnings} Pts</span>
+						</p>
+						<p className="flex items-center gap-2">
+							<img className="w-6" src={clockIcon} alt="clock" />
+							<span className=" text-lightest">{quest.hours_needed} Hrs</span>
+						</p>
+					</div>
 					<div className="flex mb-5 justify-center item-center">
 						<div className="pl-3 flex flex-col items-center justify-center relative">
-							<div className=" mt-4 absolute top-10">
-								<h3 className="mb-2 label-text xs text-light">Rewards</h3>
-
-								<p className="body-text flex items-center gap-2 mb-1">
-									<img className="w-6" src={coin} alt="coin" />
-									<span className="body-text text-lightest">
-										{quest.point_earnings} Pts
-									</span>
-								</p>
-								<p className="body-text flex items-center gap-2">
-									<img className="w-6" src={clockIcon} alt="clock" />
-									<span className="body-text text-lightest">
-										{quest.hours_needed} Hrs
-									</span>
-								</p>
-							</div>
 							<AvatarFrame
 								bgColor="primarylight"
 								avatar={quest.volunteer_avatar_url}
@@ -109,9 +103,10 @@ export default function QuestPage() {
 						<ul className="flex flex-col-reverse gap-2 w-[55%] justify-center ">
 							{taskProgress.map((quest) => (
 								<li
+									onClick={() => console.log("circle")}
 									key={quest.id}
 									className={`bg-secondary  ${
-										quest.id > currentStep && "opacity-30 "
+										quest.id > currentStep && "opacity-30 z-0 "
 									} rounded-full p-4 mb-4 w-20 h-20 flex cilinder-shadow flex-col items-center justify-center relative
 							${quest.id === 2 && "translate-x-16"}
 							${quest.id === 4 && "translate-x-16"}
@@ -122,12 +117,12 @@ export default function QuestPage() {
 								>
 									{currentStep === quest.id && quest.title && (
 										<div
-											onClick={() => console.log("clickable")}
-											className=" -top-14 px-1 py-3 w-40 text-center bg-light input-shadow rounded-md body-text text-dark z-[9999] fixed left-[-90%] after:absolute after:right-1/4 after:top-full after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-lightest after:-translate-x-1/2 after:input-shadow"
+											className=" -top-14 px-1 py-3 w-40 text-center z-[999] bg-light input-shadow rounded-md body-text text-dark  absolute left-[-90%] after:absolute after:right-1/4 after:top-full after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-lightest after:-translate-x-1/2 after:input-shadow"
 										>
 											{quest.title}
 										</div>
 									)}
+
 									<img
 										src={quest.icon}
 										alt=""
