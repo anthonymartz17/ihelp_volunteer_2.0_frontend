@@ -55,11 +55,12 @@ const buttonText = {
 };
 export default function QuestPage() {
 	const { id } = useParams();
-	const { quest, isLoading, error } = useQuest(id);
+	const { quest, updateQuest, isLoading, error } = useQuest(id);
 	const [currentStep, setCurrentStep] = useState(quest.task_progress_id);
 
 	function handleNextStep() {
 		setCurrentStep((prevStep) => prevStep + 1);
+		updateQuest(id, currentUser.accessToken);
 	}
 	useEffect(() => {
 		if (!isLoading) {

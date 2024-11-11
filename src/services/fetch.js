@@ -147,3 +147,20 @@ export async function fetchQuest(taskId, token) {
 		throw error;
 	}
 }
+export async function updateQuestProgress(taskId, token) {
+	try {
+		const response = await fetch(`${baseURL}/quest/tasks/${taskId}/progress`, {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}

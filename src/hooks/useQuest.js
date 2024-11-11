@@ -1,11 +1,22 @@
 import { useState, useEffect } from "react";
 import { fetchQuest } from "../services/fetch";
 import { useAuth } from "../context/authContext";
+import { updateQuestProgress } from "../services/fetch";
+
 export function useQuest(taskId) {
 	const { currentUser } = useAuth();
 	const [quest, setQuest] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	async function updateQuest(taskId, token) {
+		try {
+			const data = await updateQuestProgress(taskId, token);
+			setQuest((prev) => ({ ...prev, ...data }));
+		} catch (err) {
+			setError(err);
+		}
+	}
 
 	useEffect(() => {
 		async function loadQuest() {
@@ -23,5 +34,5 @@ export function useQuest(taskId) {
 		loadQuest();
 	}, []);
 
-	return { quest, setQuest, isLoading, error };
+	return { quest, setQuest, updateQuest, isLoading, error };
 }
