@@ -10,7 +10,7 @@ import clockIcon from "../assets/icons/hours_icon_light.svg";
 import blopShape from "../assets/graphics/bottom_blob_shape.svg";
 import CelebrationModal from "../componets/UI/CelebrationModal";
 import AvatarFrame from "../componets/UI/AvatarFrame";
-
+import { useAuth } from "../context/authContext";
 import { useQuest } from "../hooks/useQuest";
 import ServerError from "../componets/UI/ServerError";
 
@@ -40,13 +40,6 @@ const taskProgress = [
 	},
 ];
 
-const currentUser = {
-	id: 10,
-	username: "user123",
-	avatar_url:
-		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-};
-
 const buttonText = {
 	1: "Start",
 	2: "Arrived",
@@ -54,6 +47,7 @@ const buttonText = {
 	4: "Complete Task",
 };
 export default function QuestPage() {
+	const { currentUser } = useAuth();
 	const { id } = useParams();
 	const { quest, updateQuest, isLoading, error } = useQuest(id);
 	const [currentStep, setCurrentStep] = useState(quest.task_progress_id);
@@ -154,7 +148,7 @@ export default function QuestPage() {
 							</button>
 						</div>
 					)}
-					{currentStep === 5 && <CelebrationModal />}
+					{currentStep === 5 && <CelebrationModal quest={quest} />}
 				</div>
 			)}
 		</div>

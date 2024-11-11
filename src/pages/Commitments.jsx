@@ -58,19 +58,24 @@ export default function Commitments() {
 			setIsPending(false);
 		}
 	}
-
-	useEffect(() => {
+	function filterTasks() {
 		const CompletedStatus = 4;
-		if (tasks) {
-			setFilteredTasks(
-				tasks.filter((task) => {
+		setFilteredTasks(
+			tasks
+				.filter((task) => {
 					if (isPending) {
 						return task.task_status_id !== CompletedStatus;
 					} else {
 						return task.task_status_id === CompletedStatus;
 					}
 				})
-			);
+				.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
+		);
+	}
+
+	useEffect(() => {
+		if (tasks) {
+			filterTasks();
 		}
 	}, [isPending, tasks]);
 

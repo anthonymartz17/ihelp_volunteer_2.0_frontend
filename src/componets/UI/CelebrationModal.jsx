@@ -6,14 +6,7 @@ import conffetti1 from "../../assets/graphics/conffetti_single.svg";
 import coin from "../../assets/icons/coin.svg";
 import hourGlass from "../../assets/icons/time_icon.svg";
 
-const currentUser = {
-	id: 10,
-	username: "Kevin",
-	avatar_url:
-		"https://icons.iconarchive.com/icons/iconarchive/robot-avatar/512/Green-1-Robot-Avatar-icon.png",
-};
-
-export default function CelebrationModal({ hours = 1, points = 55 }) {
+export default function CelebrationModal({ quest }) {
 	const celebration = useRef(null);
 
 	useEffect(() => {
@@ -30,22 +23,22 @@ export default function CelebrationModal({ hours = 1, points = 55 }) {
 			className="z-20  fixed bottom-0 left-0  top-0 right-0 bg-black  bg-opacity-75 p-4 flex items-center justify-center"
 		>
 			<div className="relative card-shadow bg-lightest rounded-lg p-4 w-full max-w-md mx-auto flex flex-col items-center justify-center">
-				<p className="text-5xl mb-5 font-bold leading-tight text-dark mt-5 ">
+				<p className="text-5xl mb-1 font-bold leading-tight text-dark mt-5 ">
 					Thank you for the help,
-					<span> {currentUser.username}</span>!
+					<span> {quest.volunteer_username.split(" ")[0]}</span>!
 				</p>
 				<p className="my-4 body-text text-dark">
 					Keep up the great work. You've earned the following!
 				</p>
-				<div className="flex w-full   items-center justify-between gap-3 mb-10">
+				<div className="flex w-full   items-center justify-between gap-3 mb-16">
 					<div>
 						<img src={coin} alt="" className="w-8 inline-block mr-2" />
-						<span>{points} points</span>
+						<span>{quest.point_earnings} Points</span>
 					</div>
 
 					<div>
 						<img src={hourGlass} alt="" className="w-6 inline-block mr-2" />
-						<span>{hours} hours</span>
+						<span>{quest.hours_needed} Hours</span>
 					</div>
 				</div>
 
