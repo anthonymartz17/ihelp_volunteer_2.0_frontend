@@ -7,6 +7,8 @@ import {
 import { useState, useEffect } from "react";
 import { formatDate, formatMilitaryToStandardTime } from "../utils/formatters";
 
+import socket from "../services/socket";
+
 //icons and graphics
 import errandIcon from "../assets/icons/errand_icon_dark.svg";
 import cleaningIcon from "../assets/icons/cleaning_icon_dark.svg";
@@ -117,9 +119,19 @@ export default function RequestDetailPage() {
 		try {
 			if (isPendingCommitment) {
 				await uncommit(selectedTask.id, currentUser.accessToken);
+				socket.emit("taskUncommitted", {
+					taskId: selectedTask.id,
+					volunteerId: currentUser.id,
+					requestId: id,
+				});
 				// setAlertMessage("Task committed successfully!");
 			} else {
 				await commit(selectedTask.id, currentUser.accessToken);
+				socket.emit("taskCommitted", {
+					taskId: selectedTask.id,
+					volunteerId: currentUser.id,
+					requestId: id,
+				});
 				// setAlertMessage("Task committed successfully!");
 			}
 

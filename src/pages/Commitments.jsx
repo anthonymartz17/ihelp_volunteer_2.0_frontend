@@ -132,9 +132,9 @@ export default function Commitments() {
 						)}
 					</div>
 
-					<div className="mb-[10em]">
+					<div className="mb-[10em] overflow-auto max-h-[40vh]">
 						<table className="text-sm  text-left rtl:text-right text-gray-500 dark:text-gray-400 w-full">
-							<thead className="label-text text-lightest bg-tertiary sticky top-0">
+							<thead className="label-text text-lightest bg-tertiary z-10 sticky top-0">
 								<tr>
 									<th scope="col" className="px-6 py-3 w-1/3">
 										Type
