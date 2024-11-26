@@ -16,7 +16,7 @@ export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 	return (
 		<>
 			<div
-				className={`bg-secondary md:hidden text-lightest  flex flex-col rounded-t-3xl fixed   top-40 left-0 right-0  h-full duration-300 z-10 w-full transform ${
+				className={`bg-secondary  text-lightest  flex flex-col rounded-t-3xl fixed   top-40 left-0 right-0  h-full duration-300 z-10 w-full transform ${
 					isOpen ? "translate-y-0 shadow-left" : "translate-y-full"
 				} transition-transform px-2`}
 			>
@@ -51,7 +51,7 @@ export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 			{/* backdrop   */}
 			<div
 				onClick={() => onSetIsOpen(false)}
-				className={`md:hidden mobile_menu_backdrop ${isOpen ? "open" : ""}`}
+				className={`mobile_menu_backdrop ${isOpen ? "open" : ""}`}
 			></div>
 		</>
 	);

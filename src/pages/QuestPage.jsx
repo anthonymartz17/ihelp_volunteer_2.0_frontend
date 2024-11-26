@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import startIcon from "../assets/icons/start_icon.svg";
+import onMyWayIcon from "../assets/icons/onmyway_icon.svg";
+import locationIcon from "../assets/icons/location_icon.svg";
 import workingIcon from "../assets/icons/working_icon.svg";
 import completeIcon from "../assets/icons/completed_icon.svg";
-import locationIcon from "../assets/icons/location_icon.svg";
-import onMyWayIcon from "../assets/icons/onmyway_icon.svg";
 import coin from "../assets/icons/coin.svg";
 import clockIcon from "../assets/icons/hours_icon_light.svg";
 import blopShape from "../assets/graphics/bottom_blob_shape.svg";

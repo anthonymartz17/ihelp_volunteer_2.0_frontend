@@ -20,7 +20,7 @@ export default function RequestsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<div className="relative bg-primary h-[100%] min-h-[85vh]">
+		<div className="relative bg-primary h-[100%] min-h-[85vh] ">
 			<div className="flex justify-between items-center  px-4 pb-2  mt-8">
 				<h1 className="title-heading text-lightest ">Requests</h1>
 				{!isLoading && !error && (

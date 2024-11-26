@@ -17,7 +17,7 @@ export default function WithHeaderLayout({ children }) {
 	}
 
 	return (
-		<div className={`${getBgColor()} layout-with-header`}>
+		<div className={`${getBgColor()} layout-with-header max-w-[480px] relative`}>
 			<header>
 				<Header />
 			</header>

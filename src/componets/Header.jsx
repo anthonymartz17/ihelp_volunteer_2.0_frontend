@@ -9,7 +9,7 @@ export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<header className="text-light py-4 px-2  flex justify-between items-center  ">
+		<header className="text-light py-4 px-2  flex justify-between items-center">
 			<Link to="/">
 				<img src={logo} alt="ihelp logo" className="w-24" />
 			</Link>

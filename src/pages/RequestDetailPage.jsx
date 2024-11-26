@@ -118,6 +118,7 @@ export default function RequestDetailPage() {
 	async function handleTaskCommitment() {
 		try {
 			if (isPendingCommitment) {
+
 				await uncommit(selectedTask.id, currentUser.accessToken);
 				socket.emit("taskUncommitted", {
 					taskId: selectedTask.id,
@@ -127,6 +128,7 @@ export default function RequestDetailPage() {
 				// setAlertMessage("Task committed successfully!");
 			} else {
 				await commit(selectedTask.id, currentUser.accessToken);
+
 				socket.emit("taskCommitted", {
 					taskId: selectedTask.id,
 					volunteerId: currentUser.id,
