@@ -42,7 +42,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 	return (
 		<>
 			<nav
-				className={`z-30 bg-tertiary flex flex-col fixed top-0 right-0  h-full duration-300  w-3/4 transform ${
+				className={`z-30 bg-tertiary flex flex-col fixed top-0 right-0  h-full duration-300  w-3/4 lg:w-1/4 transform ${
 					isOpen ? "translate-x-90 shadow-left" : "translate-x-full"
 				} transition-transform`}
 			>
@@ -60,7 +60,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 						<li key={index}>
 							<Link
 								to={item.link}
-								className="flex items-center py-3 gap-3 mb-3 label-text"
+								className="flex items-center py-3 gap-3 mb-3 label-text hover:text-secondary "
 								onClick={() => onSetIsOpen(false)}
 							>
 								<img className="w-6" src={item.icon} alt={item.title} />
@@ -74,7 +74,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 					<button
 						onClick={() => logout()}
 						type="button"
-						className="label-text bg-secondary w-full rounded py-3 text-lightest"
+						className="label-text bg-secondary w-full rounded py-3 text-lightest max-w-[300px]"
 					>
 						Log out
 					</button>
@@ -82,9 +82,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 			</nav>
 			<div
 				onClick={() => onSetIsOpen(false)}
-				className={`md:hidden mobile_menu_backdrop z-20 ${
-					isOpen ? "open" : ""
-				}`}
+				className={` mobile_menu_backdrop z-20 ${isOpen ? "open" : ""}`}
 			></div>
 		</>
 	);

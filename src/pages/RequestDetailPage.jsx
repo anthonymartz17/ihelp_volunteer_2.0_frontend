@@ -173,8 +173,8 @@ export default function RequestDetailPage() {
 			)}
 			{errorRequestDetail && <ServerError />}
 			{!isLoadingRequestDetail && !errorRequestDetail && (
-				<div>
-					<div className="bg-light  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
+				<div className="lg:flex  lg:justify-center lg:mx-10">
+					<div className="bg-light flex-1  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
 						<div className="flex justify-between items-center rounded-lg ">
 							<div className="flex justify-center items-center gap-2 ">
 								<img
@@ -218,6 +218,8 @@ export default function RequestDetailPage() {
 							<p className="body-text">{requestDetail.description}</p>
 						</div>
 					</div>
+					<div className="flex-1">
+
 					<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
 
 					<ul className="px-4 ">
@@ -334,6 +336,7 @@ export default function RequestDetailPage() {
 							</button>
 						)}
 					</div>
+					</div>
 				</div>
 			)}
 			{isAlertOpen && (
@@ -349,7 +352,7 @@ export default function RequestDetailPage() {
 			<img
 				src={blobShape}
 				alt="graphic blob"
-				className=" w-full translate-y-20 absolute bottom-0 left-0"
+				className=" w-full translate-y-20 absolute bottom-0 left-0 md:hidden"
 			/>
 		</div>
 	);
