@@ -17,15 +17,11 @@ export default function WithHeaderLayout({ children }) {
 	}
 
 	return (
-		<div
-			className={`${getBgColor()} layout-with-header relative  lg:flex lg:justify-center`}
-		>
-			<div className="max-w-[1500px]">
-				<header>
-					<Header />
-				</header>
-				<main>{children}</main>
-			</div>
+		<div className={`${getBgColor()} layout-with-header overflow-y-auto`}>
+			<header>
+				<Header />
+			</header>
+			<main>{children}</main>
 		</div>
 	);
 }

@@ -128,102 +128,106 @@ export default function LeaderboardPage() {
 		}
 	}, [leaderboardVolunteers]);
 	return (
-		<div className="mt-10 h-[100%]  flex flex-col ">
-			<h1 className="title-heading text-lightest px-4  mb-4">Leaderboard </h1>
+		<div className="mt-10  grid grid-rows-[3em,1fr]  ">
+			<h1 className="title-heading text-lightest px-4">Leaderboard </h1>
 
-			{isLoading && (
-				<div className="flex justify-center pt-40 h-screen">
-					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
-				</div>
-			)}
-			{error && <ServerError />}
-
-			{!isLoading && !error && (
-				<div className="leaderboard-container">
-					<div className="flex items-center px-4 mb-3">
-						<SwitchToggleButton
-							option1={"Points"}
-							option2={"Hours"}
-							onSwitchBtn={switchBtn}
-						/>
+			<div>
+				{isLoading && (
+					<div className="flex justify-center pt-40 h-screen">
+						<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-light"></div>
 					</div>
+				)}
+				{error && <ServerError />}
 
-					<ul className="flex gap-4 items-end justify-between px-4 min-h-[15em] ">
-						{topThree.map((player, idx) => {
-							const heightClass =
-								idx === 1 ? "h-[100%]" : idx === 2 ? "h-[85%]" : "h-[80%]";
-							const customPadding =
-								idx === 1 ? "pt-0" : idx === 2 ? "pt-4" : "pt-8";
+				{!isLoading && !error && (
+					<div className="leaderboard-container">
+						<div className="flex items-center px-4 mb-3">
+							<SwitchToggleButton
+								option1={"Points"}
+								option2={"Hours"}
+								onSwitchBtn={switchBtn}
+							/>
+						</div>
 
-							return (
-								<li
-									key={player.id}
-									className={`relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center gap-1 h-full ${customPadding}`}
-								>
-									<AvatarFrame
-										avatar={player.avatar_url}
-										size={20}
-										bgColor="secondarylight"
-									/>
-									<div>
-										<p className="body-text text-lightest">{player.username}</p>
-										<p className="subtitle-heading text-light px-2">
-											{ranking === "Points"
-												? player.total_points
-												: player.total_hours}
+						<ul className="flex gap-4 items-end justify-between px-4 min-h-[15em] ">
+							{topThree.map((player, idx) => {
+								const heightClass =
+									idx === 1 ? "h-[100%]" : idx === 2 ? "h-[85%]" : "h-[80%]";
+								const customPadding =
+									idx === 1 ? "pt-0" : idx === 2 ? "pt-4" : "pt-8";
 
-											{ranking === "Points" ? " Pts" : " Hrs"}
-										</p>
-									</div>
-									<div className="h-full w-[100%] grid relative">
-										<div
-											className={`absolute bottom-0 bg-dark w-[100%] border-light border-[1px] border-opacity-40 bg-opacity-55 text-lightest grid justify-center items-center rounded-t-lg text-2xl ${heightClass}`}
-										>
-											{player.ranking}
-										</div>
-									</div>
-								</li>
-							);
-						})}
-					</ul>
-
-					<div className=" overflow-y-scroll max-h-[40vh]  rounded-t-3xl bg-tertiary border-t-[1px] px-6 text-lightest pt-5 ">
-						<ul className="flex flex-col gap-4">
-							{leaderboardVolunteers.map(
-								(leader, idx) =>
-									idx > 2 && (
-										<li
-											key={leader.id}
-											className="flex justify-between items-center    border-b-2 border-light border-opacity-50 py-1 pb-3"
-										>
-											<p className="text-xl label-text  numbers-shadow flex-auto">
-												{idx + 1}
+								return (
+									<li
+										key={player.id}
+										className={`relative overflow-hidden w-[30%] text-center flex flex-col justify-center items-center gap-1 h-full ${customPadding}`}
+									>
+										<AvatarFrame
+											avatar={player.avatar_url}
+											size={20}
+											bgColor="secondarylight"
+										/>
+										<div>
+											<p className="body-text text-lightest">
+												{player.username}
 											</p>
-											<div className="flex justify-between items-center gap-4 w-[90%]">
-												<img
-													className="bg-tertiary  rounded-full   p-2 w-10 border-[1px]"
-													src={leader.avatar_url}
-													alt={`${leader.username}'avatar picture`}
-												/>
+											<p className="subtitle-heading text-light px-2">
+												{ranking === "Points"
+													? player.total_points
+													: player.total_hours}
 
-												<p className="body-text text-lightest">
-													{leader.username}
-												</p>
-												<p className="label-text">
-													{ranking === "Points"
-														? leader.total_points
-														: leader.total_hours}
-
-													{ranking === "Points" ? " Pts" : " Hrs"}
-												</p>
+												{ranking === "Points" ? " Pts" : " Hrs"}
+											</p>
+										</div>
+										<div className="h-full w-[100%] grid relative">
+											<div
+												className={`absolute bottom-0 bg-dark w-[100%] border-light border-[1px] border-opacity-40 bg-opacity-55 text-lightest grid justify-center items-center rounded-t-lg text-2xl ${heightClass}`}
+											>
+												{player.ranking}
 											</div>
-										</li>
-									)
-							)}
+										</div>
+									</li>
+								);
+							})}
 						</ul>
+
+						<div className="overflow-y-scroll max-h-[40vh]  rounded-t-3xl bg-tertiary border-t-[1px] px-6 text-lightest pt-5 ">
+							<ul className="flex flex-col gap-4">
+								{leaderboardVolunteers.map(
+									(leader, idx) =>
+										idx > 2 && (
+											<li
+												key={leader.id}
+												className="flex justify-between items-center border-b-2 border-light border-opacity-50 py-1 pb-3"
+											>
+												<p className="text-xl label-text  numbers-shadow flex-auto">
+													{idx + 1}
+												</p>
+												<div className="flex justify-between items-center gap-4 w-[90%]">
+													<img
+														className="bg-tertiary rounded-full p-2 w-10 border-[1px]"
+														src={leader.avatar_url}
+														alt={`${leader.username}'avatar picture`}
+													/>
+
+													<p className="body-text text-lightest">
+														{leader.username}
+													</p>
+													<p className="label-text">
+														{ranking === "Points"
+															? leader.total_points
+															: leader.total_hours}
+
+														{ranking === "Points" ? " Pts" : " Hrs"}
+													</p>
+												</div>
+											</li>
+										)
+								)}
+							</ul>
+						</div>
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</div>
 	);
 }

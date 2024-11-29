@@ -20,7 +20,7 @@ export default function RequestsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<div className="relative bg-primary h-[100%] min-h-[85vh] md:h-[100vh] lg:mx-15 ">
+		<div className="relative  bg-primary h-[100%] min-h-[85vh] ">
 			<div className="flex justify-between items-center  px-4 pb-2  mt-8">
 				<h1 className="title-heading text-lightest ">Requests</h1>
 				{!isLoading && !error && (
@@ -40,7 +40,7 @@ export default function RequestsPage() {
 			)}
 			{error && <ServerError />}
 			{!isLoading && !error && (
-				<ul className="mb-[10em]   overflow-y-auto rounded-lg p-4 h-[80vh] md:h-auto md:grid  md:grid-cols-2 lg:grid-cols-3 gap-4">
+				<ul className="mb-[10em]   overflow-y-auto rounded-lg p-4 h-[80vh] gap-4">
 					{requests.map((request, index) => (
 						<li key={request.id} className="mb-4">
 							<RequestCard request={request} index={index} />
@@ -50,11 +50,11 @@ export default function RequestsPage() {
 			)}
 			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
 
-			{/* <img
+			<img
 				src={blobShape}
 				alt="graphic blob"
-				className="absolute  bottom-[-5em]  left-0 right-0 md:hidden"
-			/> */}
+				className="absolute  bottom-[-5em]  left-0 right-0 "
+			/>
 		</div>
 	);
 }

@@ -144,8 +144,8 @@ export default function ProfilePage() {
 						<ul
 							className={` mb-3 grid grid-cols-3 gap-4 justify-between ${
 								!showAllBadges
-									? "max-h-[100px] overflow-hidden"
-									: "max-h-[220px] overflow-y-auto"
+									? "max-h-[8em]   overflow-hidden"
+									: "max-h-[20em] overflow-y-auto"
 							}`}
 						>
 							{badgelist.map((badge) => {
@@ -197,7 +197,7 @@ export default function ProfilePage() {
 													alt={`${reward.reward_name} reward`}
 												/>
 												<img
-													className="w-26 h-24 object-contain absolute top-0 -left-2" // Adjust the size here
+													className="w-20 h-24 object-contain absolute top-0 left-3"
 													src={reward.reward_icon_url}
 													alt={`${reward.reward_name} reward`}
 												/>
@@ -215,7 +215,7 @@ export default function ProfilePage() {
 			<img
 				src={BottomBlopShape}
 				alt="blop shape"
-				className="absolute  bottom-[-10em]  left-0 right-0"
+				className="absolute  bottom-[-10em]  left-0 right-0 "
 			/>
 		</div>
 	);

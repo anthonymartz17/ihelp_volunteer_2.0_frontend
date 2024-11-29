@@ -42,7 +42,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 	return (
 		<>
 			<nav
-				className={`z-30 bg-tertiary flex flex-col fixed top-0 right-0  h-full duration-300  w-3/4 lg:w-1/4 transform ${
+				className={`z-30 bg-tertiary flex flex-col absolute top-0 right-0  h-full duration-300  w-3/4  transform ${
 					isOpen ? "translate-x-90 shadow-left" : "translate-x-full"
 				} transition-transform`}
 			>

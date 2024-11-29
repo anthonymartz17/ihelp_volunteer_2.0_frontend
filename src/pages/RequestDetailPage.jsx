@@ -118,7 +118,6 @@ export default function RequestDetailPage() {
 	async function handleTaskCommitment() {
 		try {
 			if (isPendingCommitment) {
-
 				await uncommit(selectedTask.id, currentUser.accessToken);
 				socket.emit("taskUncommitted", {
 					taskId: selectedTask.id,
@@ -173,7 +172,7 @@ export default function RequestDetailPage() {
 			)}
 			{errorRequestDetail && <ServerError />}
 			{!isLoadingRequestDetail && !errorRequestDetail && (
-				<div className="lg:flex  lg:justify-center lg:mx-10">
+				<div>
 					<div className="bg-light flex-1  rounded-lg p-3 py-6 mx-4 flex flex-col gap-5 mb-6">
 						<div className="flex justify-between items-center rounded-lg ">
 							<div className="flex justify-center items-center gap-2 ">
@@ -219,123 +218,124 @@ export default function RequestDetailPage() {
 						</div>
 					</div>
 					<div className="flex-1">
+						<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
 
-					<h2 className="subtitle-heading text-lightest m-4">Tasks</h2>
-
-					<ul className="px-4 ">
-						{requestDetail.tasks.map((task, idx) => {
-							return (
-								<li key={task.id} className="mb-4 relative ">
-									{selectedAvatarId && selectedAvatarId === task.id && (
-										<div
-											onClick={() => toggleUsername()}
-											className="absolute -top-8 flex  gap-2 pl-2 right-6 bg-dark  rounded-lg border-2 border-lightest "
-										>
-											<p className="text-lightest">{task.volunteer_username}</p>
-											<span className="material-symbols-outlined bg-light   text-dark">
-												cancel
-											</span>
-										</div>
-									)}
-									{task.volunteer_avatar_url && (
-										<img
-											id={task.id}
-											onClick={() => toggleUsername(task.id)}
-											src={task.volunteer_avatar_url}
-											alt=""
-											className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"
-										/>
-									)}
-									{task.volunteer_id === currentUser.id ? (
-										<div
-											onClick={() => {
-												if (!isPendingCommitment) selectTask(idx);
-											}}
-											className="flex cursor-pointer items-center gap-2 "
-										>
-											<p className="text-3xl label-text  numbers-shadow">
-												{idx + 1}
-											</p>
+						<ul className="px-4 ">
+							{requestDetail.tasks.map((task, idx) => {
+								return (
+									<li key={task.id} className="mb-4 relative ">
+										{selectedAvatarId && selectedAvatarId === task.id && (
 											<div
-												className={`card-shadow rounded-lg p-2 flex justify-between   gap-1 body-text w-[100%] ${
-													task.volunteer_id === currentUser.id
-														? "bg-dark text-lightest"
-														: "bg-light text-dark"
+												onClick={() => toggleUsername()}
+												className="absolute -top-8 flex  gap-2 pl-2 right-6 bg-dark  rounded-lg border-2 border-lightest "
+											>
+												<p className="text-lightest">
+													{task.volunteer_username}
+												</p>
+												<span className="material-symbols-outlined bg-light   text-dark">
+													cancel
+												</span>
+											</div>
+										)}
+										{task.volunteer_avatar_url && (
+											<img
+												id={task.id}
+												onClick={() => toggleUsername(task.id)}
+												src={task.volunteer_avatar_url}
+												alt=""
+												className="w-8 rounded-full bg-dark p-1 border-2 border-lightest absolute -top-3 -right-2 z-10"
+											/>
+										)}
+										{task.volunteer_id === currentUser.id ? (
+											<div
+												onClick={() => {
+													if (!isPendingCommitment) selectTask(idx);
+												}}
+												className="flex cursor-pointer items-center gap-2 "
+											>
+												<p className="text-3xl label-text  numbers-shadow">
+													{idx + 1}
+												</p>
+												<div
+													className={`card-shadow rounded-lg p-2 flex justify-between   gap-1 body-text w-[100%] ${
+														task.volunteer_id === currentUser.id
+															? "bg-dark text-lightest"
+															: "bg-light text-dark"
+													}`}
+												>
+													<p className="">{task.description}</p>
+													<p className="body-text flex items-center gap-1  w-[20%]">
+														<img className="w-4" src={coin} alt="coin" />
+
+														<span className="body-text text-sm label-text">
+															{task.points} Pts
+														</span>
+													</p>
+												</div>
+											</div>
+										) : (
+											<div
+												onClick={() => {
+													if (!isPendingCommitment) selectTask(idx);
+												}}
+												className={`flex cursor-pointer items-center gap-2 ${
+													task.task_status_id == 2 || selectedTask
+														? "opacity-40 pointer-events-none"
+														: ""
 												}`}
 											>
-												<p className="">{task.description}</p>
-												<p className="body-text flex items-center gap-1  w-[20%]">
-													<img className="w-4" src={coin} alt="coin" />
-
-													<span className="body-text text-sm label-text">
-														{task.points} Pts
-													</span>
+												<p className="text-3xl label-text  numbers-shadow">
+													{idx + 1}
 												</p>
+												<div className="bg-light card-shadow rounded-lg p-2 flex justify-between  gap-1 body-text w-[100%]">
+													<p className="">{task.description}</p>
+													<p className="body-text flex items-center gap-1  w-[20%]">
+														<img className="w-4" src={coin} alt="coin" />
+
+														<span className="body-text text-sm label-text">
+															{task.points} Pts
+														</span>
+													</p>
+												</div>
 											</div>
-										</div>
-									) : (
-										<div
-											onClick={() => {
-												if (!isPendingCommitment) selectTask(idx);
-											}}
-											className={`flex cursor-pointer items-center gap-2 ${
-												task.task_status_id == 2 || selectedTask
-													? "opacity-40 pointer-events-none"
-													: ""
-											}`}
-										>
-											<p className="text-3xl label-text  numbers-shadow">
-												{idx + 1}
-											</p>
-											<div className="bg-light card-shadow rounded-lg p-2 flex justify-between  gap-1 body-text w-[100%]">
-												<p className="">{task.description}</p>
-												<p className="body-text flex items-center gap-1  w-[20%]">
-													<img className="w-4" src={coin} alt="coin" />
+										)}
+									</li>
+								);
+							})}
+						</ul>
 
-													<span className="body-text text-sm label-text">
-														{task.points} Pts
-													</span>
-												</p>
-											</div>
-										</div>
-									)}
-								</li>
-							);
-						})}
-					</ul>
+						<div className="mx-4 ">
+							{isPendingCommitment ? (
+								<div className="mb-[15em] mt-10">
+									<button
+										onClick={() =>
+											navigate(`/account/quest/tasks/${selectedTask.id}`)
+										}
+										className="subtitle-heading mb-2  bg-primary  w-full card-shadow rounded-lg py-3 text-lightest"
+									>
+										Start Quest
+									</button>
 
-					<div className="mx-4 ">
-						{isPendingCommitment ? (
-							<div className="mb-[15em] mt-10">
+									<button
+										onClick={() => tryUncommitTask()}
+										className="subtitle-heading bg-dark bg-opacity-70 w-full card-shadow rounded-lg py-3 text-lightest"
+									>
+										Uncommit
+									</button>
+								</div>
+							) : (
 								<button
-									onClick={() =>
-										navigate(`/account/quest/tasks/${selectedTask.id}`)
-									}
-									className="subtitle-heading mb-2  bg-primary  w-full card-shadow rounded-lg py-3 text-lightest"
+									onClick={() => tryCommitToTask()}
+									className={`subtitle-heading mb-[15em]  w-full card-shadow rounded-lg py-3 text-lightest ${
+										!selectedTask
+											? "opacity-40 pointer-events-none bg-dark"
+											: "bg-primary"
+									} `}
 								>
-									Start Quest
+									Commit
 								</button>
-
-								<button
-									onClick={() => tryUncommitTask()}
-									className="subtitle-heading bg-dark bg-opacity-70 w-full card-shadow rounded-lg py-3 text-lightest"
-								>
-									Uncommit
-								</button>
-							</div>
-						) : (
-							<button
-								onClick={() => tryCommitToTask()}
-								className={`subtitle-heading mb-[15em]  w-full card-shadow rounded-lg py-3 text-lightest ${
-									!selectedTask
-										? "opacity-40 pointer-events-none bg-dark"
-										: "bg-primary"
-								} `}
-							>
-								Commit
-							</button>
-						)}
-					</div>
+							)}
+						</div>
 					</div>
 				</div>
 			)}
@@ -352,7 +352,7 @@ export default function RequestDetailPage() {
 			<img
 				src={blobShape}
 				alt="graphic blob"
-				className=" w-full translate-y-20 absolute bottom-0 left-0 md:hidden"
+				className=" w-full translate-y-20 absolute bottom-0 left-0"
 			/>
 		</div>
 	);

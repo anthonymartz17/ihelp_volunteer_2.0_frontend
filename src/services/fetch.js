@@ -1,4 +1,5 @@
-const baseURL = import.meta.env.VITE_IHELP_API_URL;
+// const baseURL = import.meta.env.VITE_IHELP_API_URL;
+const baseURL = import.meta.env.VITE_IHELP_SERVER + "/volunteers-webapp";
 
 export async function fetchOpenRequests(token) {
 	try {
