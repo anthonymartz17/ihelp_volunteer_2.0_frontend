@@ -27,7 +27,7 @@ export default function Login() {
 
 	return (
 		<div className="bg-lightest h-screen">
-			<div className="px-4  h-[30%] bg-primary relative">
+			<div className="px-4  h-[30%] bg-primary relative ">
 				<div className="pt-4">
 					<img src={Logo} alt="logo" className="w-24" />
 				</div>
@@ -49,7 +49,7 @@ export default function Login() {
 				</svg>
 			</div>
 
-			<section className="h-[70%] mt-4 relative">
+			<section className="h-[70%] mt-4 relative   mx-auto">
 				<form className="p-4 flex flex-col gap-4" onSubmit={handleSubmit}>
 					<div>
 						<label className="label-text text-dark" htmlFor="email">

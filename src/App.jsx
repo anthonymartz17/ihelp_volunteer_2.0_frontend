@@ -6,7 +6,11 @@ import "./App.css";
 function App() {
 	return (
 		<AuthContextProvider>
-			<AppRoutes />
+			<div className="desktop-view">
+				<div className="phone-view">
+					<AppRoutes />
+				</div>
+			</div>
 		</AuthContextProvider>
 	);
 }
