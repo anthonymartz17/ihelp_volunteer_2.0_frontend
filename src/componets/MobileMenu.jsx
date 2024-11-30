@@ -49,7 +49,7 @@ export default function MobileMenuUser({ isOpen, onSetIsOpen }) {
 				<div className="flex justify-between px-4 py-4">
 					<span
 						onClick={() => onSetIsOpen(false)}
-						className="material-symbols-outlined"
+						className="material-symbols-outlined cursor-pointer"
 					>
 						close
 					</span>

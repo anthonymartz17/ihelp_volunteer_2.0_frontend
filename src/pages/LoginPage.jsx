@@ -77,7 +77,7 @@ export default function Login() {
 							className="bg-light w-full p-3 rounded-lg outline-none text-dark body-text mt-2 input-shadow"
 						/>
 					</div>
-					<button className="label-text bg-secondary w-full rounded-lg py-3 text-lightest">
+					<button className="label-text bg-secondary w-full rounded-lg py-3 text-lightest active-step">
 						{isLoading ? (
 							<span className="flex justify-center items-center">
 								<svg
