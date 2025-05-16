@@ -11,7 +11,7 @@ function App() {
 				<img
 					src={logoColorfull}
 					alt=""
-					className="w-40 absolute top-5 left-40"
+					className="w-40 absolute top-5 left-40 hidden lg:block"
 				/>
 				<div className="bg-dark p-8 text-lightest hidden lg:block">
 					<div className="max-w-3xl mx-auto space-y-6">
