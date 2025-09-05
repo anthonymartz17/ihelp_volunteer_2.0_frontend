@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import AppRoutes from "./router/router";
 import AuthContextProvider from "./context/authContext";
 import "./App.css";
@@ -32,12 +32,15 @@ function App() {
 						</p>
 
 						<div className="flex gap-4 pt-4">
-							<button className="bg-lightest text-primary px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
-								Organization Portal
-							</button>
-							{/* <button className="border-2 border-lightest px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition">
-								Learn More
-							</button> */}
+							<a
+								href="https://ihelp-org-v2.netlify.app/login"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<button className="bg-lightest text-primary px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+									Organization Portal
+								</button>
+							</a>
 						</div>
 					</div>
 				</div>
