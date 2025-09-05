@@ -106,16 +106,16 @@ export default function AppRoutes() {
 						<LoginPage />
 					),
 				},
-				{
-					path: "help",
-					element: isLoggedIn ? (
-						<WithHeaderLayout>
-							<HelpPage />
-						</WithHeaderLayout>
-					) : (
-						<LoginPage />
-					),
-				},
+				// {
+				// 	path: "help",
+				// 	element: isLoggedIn ? (
+				// 		<WithHeaderLayout>
+				// 			<HelpPage />
+				// 		</WithHeaderLayout>
+				// 	) : (
+				// 		<LoginPage />
+				// 	),
+				// },
 			],
 		},
 		{

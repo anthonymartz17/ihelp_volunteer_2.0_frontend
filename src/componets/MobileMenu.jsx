@@ -24,11 +24,11 @@ const menuItems = [
 		link: "/account/commitments",
 		icon: commitmentsIcon,
 	},
-	{
-		title: "Help",
-		link: "/account/help",
-		icon: helpIcon,
-	},
+	// {
+	// 	title: "Help",
+	// 	link: "/account/help",
+	// 	icon: helpIcon,
+	// },
 	{
 		title: "Leaderboard",
 		link: "/account/leaderboard",
