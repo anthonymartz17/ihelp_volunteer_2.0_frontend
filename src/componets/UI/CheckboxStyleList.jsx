@@ -5,24 +5,27 @@ import technologyIcon from "../../assets/icons/technology_icon_dark.svg";
 import petCareIcon from "../../assets/icons/pet_care_icon_dark.svg";
 import variousIcon from "../../assets/icons/various_icon_dark.svg";
 import mealPrep from "../../assets/icons/mealprep_icon_dark.svg";
+import gardening from "../../assets/icons/gardening_icon_dark.svg";
+import checkMark from "../../assets/icons/check.svg";
 
 const categoryIcons = {
-	1: errandIcon,
-	2: cleaningIcon,
+	1: variousIcon,
+	2: errandIcon,
 	3: technologyIcon,
-	4: petCareIcon,
-	5: variousIcon,
-	6: mealPrep,
+	4: cleaningIcon,
+	5: petCareIcon,
+	6: gardening,
+	7: mealPrep,
 };
 
 const categories = [
 	{
 		category_id: 1,
-		name: "errands",
+		name: "various",
 	},
 	{
 		category_id: 2,
-		name: "cleaning",
+		name: "errands",
 	},
 	{
 		category_id: 3,
@@ -30,36 +33,40 @@ const categories = [
 	},
 	{
 		category_id: 4,
-		name: "pet care",
+		name: "cleaning",
 	},
 	{
 		category_id: 5,
-		name: "various",
+		name: "pet care",
 	},
 	{
 		category_id: 6,
+		name: "gardening",
+	},
+	{
+		category_id: 7,
 		name: "mealPrep",
 	},
 ];
 
-export default function CheckboxStyleList() {
-	const [selectedCategories, setSelectedCategories] = useState(new Set());
-
+export default function CheckboxStyleList({
+	onSetSelectedCategories,
+	selectedCategories,
+}) {
 	function handleCategoryChange(categoryId) {
-		setSelectedCategories((prev) => {
-			const newSet = new Set(prev);
-			if (newSet.has(categoryId)) {
-				newSet.delete(categoryId);
+
+		onSetSelectedCategories((prev) => {
+			const updatedSelectedCategories = new Set(prev);
+			if (updatedSelectedCategories.has(categoryId)) {
+				updatedSelectedCategories.delete(categoryId);
 			} else {
-				newSet.add(categoryId);
+				updatedSelectedCategories.add(categoryId);
 			}
-			return newSet;
+			return updatedSelectedCategories;
 		});
 	}
 
-	useEffect(() => {
-		console.log(Array.from(selectedCategories));
-	}, [selectedCategories]);
+	// useEffect(() => {}, [selectedCategories]);
 	return (
 		<ul className="bg-lightest bg-opacity-50 w-full text-dark grid grid-cols-3 gap-1 gap-y-3 p-2 rounded-lg">
 			{categories.map((category) => (
@@ -69,13 +76,22 @@ export default function CheckboxStyleList() {
 				>
 					<label
 						htmlFor={category.category_id}
-						className="bg-lightest relative w-[100%] text-center flex items-center gap-2 p-1 rounded-md input-shadow"
+						className="bg-lightest relative w-[100%] text-center flex items-center gap-2 p-1 rounded-md input-shadow cursor-pointer"
 					>
+
+						{selectedCategories.has(category.category_id) && (
+							<img
+								src={checkMark}
+								alt={`check mark icon`}
+								className="w-4 absolute top-0 right-0"
+							/>
+						)}
 						<img
 							src={categoryIcons[category.category_id]}
 							alt={`${category.name} icon`}
 							className="w-8"
 						/>
+
 						<span className="body-text-regular">{category.name}</span>
 
 						<input

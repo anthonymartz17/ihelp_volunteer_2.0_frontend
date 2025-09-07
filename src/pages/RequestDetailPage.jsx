@@ -150,7 +150,6 @@ export default function RequestDetailPage() {
 			);
 			if (taskSelected) {
 				setSelectedTask(taskSelected);
-				console.log(selectedTask, "selectedTask");
 			}
 		}
 	}, [requestDetail?.tasks]);

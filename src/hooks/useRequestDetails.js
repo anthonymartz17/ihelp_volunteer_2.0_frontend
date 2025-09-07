@@ -22,7 +22,6 @@ export function useRequestDetail(requestId) {
 
 		if (requestId) {
       loadRequestDetail();
-      console.log(requestDetail,'dfd');
 		}
 	}, [requestId]);
 
