@@ -17,7 +17,25 @@ task status:
 
 export default function RequestsPage() {
 	const { requests, isLoading, error } = useRequests();
+	const [filteredRequests, setFilteredRequests] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
+
+	function filterRequests(categories) {
+
+		setFilteredRequests(() => {
+			const updated =
+				categories.size === 0
+					? requests
+					: requests.filter((item) => categories.has(item.category_id));
+			return updated;
+		});
+	}
+
+	useEffect(() => {
+		if (!isLoading && !error && requests) {
+			setFilteredRequests(requests);
+		}
+	}, [requests, isLoading, error]);
 
 	return (
 		<div className="relative  bg-primary h-[100%] min-h-[85vh] ">
@@ -41,14 +59,18 @@ export default function RequestsPage() {
 			{error && <ServerError />}
 			{!isLoading && !error && (
 				<ul className="mb-[10em]   overflow-y-auto rounded-lg p-4 h-[80vh] gap-4">
-					{requests.map((request, index) => (
+					{filteredRequests.map((request, index) => (
 						<li key={request.id} className="mb-4">
 							<RequestCard request={request} index={index} />
 						</li>
 					))}
 				</ul>
 			)}
-			<FiltersMenu isOpen={isOpen} onSetIsOpen={setIsOpen} />
+			<FiltersMenu
+				isOpen={isOpen}
+				onSetIsOpen={setIsOpen}
+				onFilterRequests={filterRequests}
+			/>
 
 			<img
 				src={blobShape}

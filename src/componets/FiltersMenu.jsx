@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SwitchToggleButton from "./UI/switchTogglerButton";
 import CheckboxStyleList from "./UI/CheckboxStyleList";
+import SwitchToggleButton from "./UI/switchTogglerButton";
 import userIcon from "../assets/icons/user.svg";
 import requestsIcon from "../assets/icons/requests.svg";
 import commitmentsIcon from "../assets/icons/commitments.svg";
@@ -10,9 +10,14 @@ import leaderboardIcon from "../assets/icons/leaderboard.svg";
 import RangeSlider from "./UI/RangeSlider";
 import BottomBlopShape from "../assets/graphics/bottom_blob_shape.svg";
 
-export default function FiltersMenu({ isOpen, onSetIsOpen }) {
+export default function FiltersMenu({ isOpen, onSetIsOpen, onFilterRequests }) {
 	const navigate = useNavigate();
+	const [selectedCategories, setSelectedCategories] = useState(new Set());
 
+
+	function filterRequests() {
+		onFilterRequests(selectedCategories);
+	}
 	return (
 		<>
 			<div
@@ -20,9 +25,29 @@ export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 					isOpen ? "translate-y-0 shadow-left" : "translate-y-full"
 				} transition-transform px-2`}
 			>
-				<div className="flex justify-end items-center py-4 mt-2 mb-4">
+				<div
+					className={`flex  ${
+						selectedCategories.size === 0 ? "justify-end" : "justify-between"
+					}  items-center py-4 mt-2 mb-4`}
+				>
+					{selectedCategories.size !== 0 && (
+						<button
+							onClick={() => {
+								const cleared = new Set();
+								setSelectedCategories(cleared);
+								onFilterRequests(cleared);
+								onSetIsOpen(false);
+							}}
+							className=" text-dark flex justify-center items-center bg-light w-[100px] rounded-lg p-3 input-shadow label-text"
+						>
+							Clear filter
+						</button>
+					)}
 					<button
-						onClick={() => onSetIsOpen(false)}
+						onClick={() => {
+							filterRequests();
+							onSetIsOpen(false);
+						}}
 						className=" text-dark flex justify-center items-center bg-light w-[100px] rounded-lg p-3 input-shadow label-text"
 					>
 						Apply
@@ -30,15 +55,17 @@ export default function FiltersMenu({ isOpen, onSetIsOpen }) {
 				</div>
 
 				<div className="flex flex-col gap-4">
-					<SwitchToggleButton
+					{/* <SwitchToggleButton
 						option1={"Single task"}
 						option2={"Multiple tasks"}
-					/>
+					/> */}
 
-					<div>{/* <RangeSlider min={10} max={200} step={40} /> */}</div>
 					<div>
 						<p className="text-center subtitle-heading mb-2">Category</p>
-						<CheckboxStyleList />
+						<CheckboxStyleList
+							onSetSelectedCategories={setSelectedCategories}
+							selectedCategories={selectedCategories}
+						/>
 					</div>
 				</div>
 				<img
