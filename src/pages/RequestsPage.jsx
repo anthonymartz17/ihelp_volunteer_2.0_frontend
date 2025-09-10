@@ -21,7 +21,6 @@ export default function RequestsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	function filterRequests(categories) {
-
 		setFilteredRequests(() => {
 			const updated =
 				categories.size === 0
@@ -58,13 +57,21 @@ export default function RequestsPage() {
 			)}
 			{error && <ServerError />}
 			{!isLoading && !error && (
-				<ul className="mb-[10em]   overflow-y-auto rounded-lg p-4 h-[80vh] gap-4">
-					{filteredRequests.map((request, index) => (
-						<li key={request.id} className="mb-4">
-							<RequestCard request={request} index={index} />
-						</li>
-					))}
-				</ul>
+				<div className="mb-[10em] overflow-y-auto rounded-lg p-4 h-[80vh]">
+					{filteredRequests.length === 0 ? (
+						<p className="text-center text-lightest subtitle-heading mt-10">
+							No requests found. Try adjusting your filters.
+						</p>
+					) : (
+						<ul className="gap-4">
+							{filteredRequests.map((request, index) => (
+								<li key={request.id} className="mb-4">
+									<RequestCard request={request} index={index} />
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
 			)}
 			<FiltersMenu
 				isOpen={isOpen}
